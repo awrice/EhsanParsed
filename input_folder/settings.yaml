@@ -1,0 +1,6 @@
+input_folder=../input_folder
+output_folder=../my_output_folder
+rawAquaticDataset=../input_folder/rawAquatic
+rawClimateDataset=../input_folder/rawClimate
+manuallyCorrectedDataset=../input_folder/manuallyCorrected
+fieldNotesDataset=../input_folder/fieldNotes
