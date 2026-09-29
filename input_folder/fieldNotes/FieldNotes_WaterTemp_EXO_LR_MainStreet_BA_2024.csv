@@ -1,0 +1,5 @@
+Event Number,Combined Time,Begin: End time,SiteCode,Method,QC_status
+B1,Begin time,2024-01-11 14:20:00,LR_MainStreet_BA,"Site Visit, Equipment Inspection, General Field Note, Stage Reading, Equipment Adjustment, Equipment Calibration",0
+N1,End time,2024-01-11 14:40:00,LR_MainStreet_BA,"Site Visit, Equipment Inspection, General Field Note, Stage Reading, Equipment Adjustment, Equipment Calibration",0
+B2,Begin time,2024-04-04 13:50:00,LR_MainStreet_BA,"Site Visit, Stage Reading, Equipment Cleaning, EXO Specific Conductance Calibration, EXO pH Calibration, EXO DO Cal with bubbler, General Field Note",0
+N2,End time,2024-04-04 14:10:00,LR_MainStreet_BA,"Site Visit, Stage Reading, Equipment Cleaning, EXO Specific Conductance Calibration, EXO pH Calibration, EXO DO Cal with bubbler, General Field Note",0

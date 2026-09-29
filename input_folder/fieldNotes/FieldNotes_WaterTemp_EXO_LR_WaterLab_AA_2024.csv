@@ -1,0 +1,26 @@
+Event Number,Combined Time,Begin: End time,SiteCode,Method,QC_status
+B2,Begin time,2024-02-01 16:17:00,LR_WaterLab_AA,DO Sparge,0
+N2,End time,2024-02-01 17:03:00,LR_WaterLab_AA,DO Sparge,0
+N3,End time,2024-02-01 17:03:00,LR_WaterLab_AA,EXO DO Cal with bubbler,
+B3,Begin time,2024-02-01 17:03:00,LR_WaterLab_AA,EXO DO Cal with bubbler,
+N1,End time,2024-02-01 17:08:00,LR_WaterLab_AA,"Site Visit, Equipment Deployment, Equipment Retrieval, EXO pH Calibration, EXO Specific Conductance Calibration, EXO pH tip replacement",
+B4,Begin time,2024-02-02 16:40:00,LR_WaterLab_AA,"Site Visit, Survey Water Surface Elevation",0
+N4,End time,2024-02-02 16:48:00,LR_WaterLab_AA,"Site Visit, Survey Water Surface Elevation",0
+B6,Begin time,2024-02-29 12:39:00,LR_WaterLab_AA,WSE survey,
+B7,Begin time,2024-02-29 13:28:00,LR_WaterLab_AA,ADCP Discharge,0
+N7,End time,2024-02-29 13:37:00,LR_WaterLab_AA,ADCP Discharge,0
+B8,Begin time,2024-02-29 13:43:00,LR_WaterLab_AA,WSE survey,0
+N8,End time,2024-02-29 13:47:00,LR_WaterLab_AA,WSE survey,0
+N5,End time,2024-02-29 13:47:00,LR_WaterLab_AA,Site Visit,
+B9,Begin time,2024-04-19 10:43:00,LR_WaterLab_AA,Site Visit,
+B10,Begin time,2024-04-19 10:55:00,LR_WaterLab_AA,ADCP Discharge,0
+N10,End time,2024-04-19 11:10:00,LR_WaterLab_AA,ADCP Discharge,0
+B11,Begin time,2024-04-19 11:16:00,LR_WaterLab_AA,WSE survey,0
+N11,End time,2024-04-19 11:21:00,LR_WaterLab_AA,WSE survey,0
+B13,Begin time,2024-05-07 16:27:00,LR_WaterLab_AA,ADCP Discharge,0
+N13,End time,2024-05-07 16:41:00,LR_WaterLab_AA,ADCP Discharge,0
+B14,Begin time,2024-05-07 16:48:00,LR_WaterLab_AA,WSE survey,0
+N12,End time,2024-05-07 16:50:00,LR_WaterLab_AA,"Site Visit, WSE survey",0
+N14,End time,2024-05-07 16:50:00,LR_WaterLab_AA,WSE survey,0
+B16,Begin time,2024-05-22 10:39:00,LR_WaterLab_AA,WSE survey,0
+N16,End time,2024-05-22 11:05:00,LR_WaterLab_AA,WSE survey,0

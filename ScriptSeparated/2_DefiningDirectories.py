@@ -145,18 +145,3 @@ Plots_Dir = f"{Variable}_{site}_{year}"
 folder_path = os.path.join(Plots_folder, Plots_Dir)
 os.makedirs(folder_path, exist_ok=True)
 Plots_Dir
-
-
-#%% 3. Importing datasets
-## 3.1. Importing the Aquatic Raw Dataset (RawAquaticDataset) =====================================================================================
-
-os.chdir(Raw_aquatic_folder)
-# Read the file into a DataFrame
-RawAquaticDataset = pd.read_csv(f'RawAquatic_{site}_{year}.csv', sep=',', comment='#', parse_dates=['LocalDateTime'],
-                        index_col='LocalDateTime', na_values='-9999')
-
-# Sort and filter the DataFrame
-RawAquaticDataset.sort_index(inplace=True)
-RawAquaticDataset = RawAquaticDataset[start_date:end_date]
-RawAquaticDataset.head(2)
-

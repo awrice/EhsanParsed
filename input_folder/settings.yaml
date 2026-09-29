@@ -1,6 +1,23 @@
-input_folder=../input_folder
-output_folder=../my_output_folder
-rawAquaticDataset=../input_folder/rawAquatic
-rawClimateDataset=../input_folder/rawClimate
-manuallyCorrectedDataset=../input_folder/manuallyCorrected
-fieldNotesDataset=../input_folder/fieldNotes
+input_folder: ../input_folder
+output_folder: ../my_output_folder
+rawAquaticDataset: ../input_folder/rawAquatic
+rawClimateDataset: ../input_folder/rawClimate
+manuallyCorrectedDataset: ../input_folder/manuallyCorrected
+fieldNotesDataset: ../input_folder/fieldNotes
+
+# Field Notes filename: "FieldNotes_<Variable>_<site>_<year>.csv"
+# Manually Corrected filename: "QC_data_<Variable>_<site>_<year>.csv"
+# Aquatic data filename: "RawAquatic_<Aquatic_site>_<year>.csv"
+# Climate data filename: "DataSetClimate_<Climate_site>_<year>.csv"
+Variable: TurbMed
+Site: LR_WaterLab_AA
+ClimateSite: LR_GC_C
+Year: 2021
+
+# See AnomalyExtractor.check_field_notes(...)
+CalibrationList:
+- Cal
+- CAL
+- Calibration
+- calibration
+- CALIBRATION

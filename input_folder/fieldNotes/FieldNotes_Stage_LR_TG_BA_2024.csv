@@ -1,0 +1,3 @@
+Event Number,Combined Time,Begin: End time,SiteCode,Method,QC_status
+B1,Begin time,2024-04-04 12:20:00,LR_TG_BA,"Site Visit, Equipment Cleaning, EXO Specific Conductance Calibration, EXO pH Calibration, EXO DO Cal with bubbler, Turbidity Sensor Inspection, Equipment Adjustment, Stage Reading",1
+N1,End time,2024-04-04 12:50:00,LR_TG_BA,"Site Visit, Equipment Cleaning, EXO Specific Conductance Calibration, EXO pH Calibration, EXO DO Cal with bubbler, Turbidity Sensor Inspection, Equipment Adjustment, Stage Reading",1

@@ -28,6 +28,9 @@ from plotly.subplots import make_subplots
 from dash import Dash, dcc, html, Input, Output, State, dash_table, callback_context
 from dash.exceptions import PreventUpdate
 
+#%% 3. Importing datasets
+## 3.1. Importing the Aquatic Raw Dataset (RawAquaticDataset) =====================================================================================
+
 os.chdir(Raw_aquatic_folder)
 # Read the file into a DataFrame
 RawAquaticDataset = pd.read_csv(f'RawAquatic_{site}_{year}.csv', sep=',', comment='#', parse_dates=['LocalDateTime'],

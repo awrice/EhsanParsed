@@ -1,0 +1,23 @@
+Event Number,Combined Time,Begin: End time,SiteCode,Method,QC_status
+B1,Begin time,2021-03-19 09:20:00,LR_TG_BA,Site Visit,0
+N1,End time,2021-03-19 10:10:00,LR_TG_BA,Site Visit,0
+B2,Begin time,2021-03-22 12:05:00,LR_TG_BA,"Site Visit, EXO pH tip replacement",0
+N2,End time,2021-03-22 12:25:00,LR_TG_BA,"Site Visit, EXO pH tip replacement",0
+B3,Begin time,2021-04-23 12:10:00,LR_TG_BA,"Site Visit, River dredging, Change Desiccant, Check color desiccant, Stage Reading, EXO DO Cal with bubbler, EXO pH Calibration, EXO Specific Conductance Calibration, Precipitate Removal - Injection",0
+N3,End time,2021-04-23 12:40:00,LR_TG_BA,"Site Visit, River dredging, Change Desiccant, Check color desiccant, Stage Reading, EXO DO Cal with bubbler, EXO pH Calibration, EXO Specific Conductance Calibration, Precipitate Removal - Injection",0
+B4,Begin time,2021-05-20 12:20:00,LR_TG_BA,"Stage Reading, Equipment Cleaning, Aquatic Housing Cleaning, nan, Microplastic Sampling",0
+N4,End time,2021-05-20 12:50:00,LR_TG_BA,"Stage Reading, Equipment Cleaning, Aquatic Housing Cleaning, nan, Microplastic Sampling",0
+B5,Begin time,2021-06-16 13:10:00,LR_TG_BA,"Site Visit, Benchmark, WSE survey, Stage Reading, Equipment Cleaning, Turbidity Sensor Inspection, Precipitate Removal - Injection, Change Desiccant, Aquatic Housing Cleaning",1
+N5,End time,2021-06-16 14:10:00,LR_TG_BA,"Site Visit, Benchmark, WSE survey, Stage Reading, Equipment Cleaning, Turbidity Sensor Inspection, Precipitate Removal - Injection, Change Desiccant, Aquatic Housing Cleaning",1
+B6,Begin time,2021-07-12 13:05:00,LR_TG_BA,"Site Visit, Benchmark, WSE survey, Stage Reading, EXO DO Cal with bubbler, EXO pH Calibration, EXO Specific Conductance Calibration, Turbidity Sensor Inspection, Precipitate Removal - Injection, Aquatic Housing Cleaning",0
+N6,End time,2021-07-12 13:40:00,LR_TG_BA,"Site Visit, Benchmark, WSE survey, Stage Reading, EXO DO Cal with bubbler, EXO pH Calibration, EXO Specific Conductance Calibration, Turbidity Sensor Inspection, Precipitate Removal - Injection, Aquatic Housing Cleaning",0
+B7,Begin time,2021-07-20 11:40:00,LR_TG_BA,"Site Visit, Water Sampling, General Field Note, Equipment Deployment, Equipment Retrieval, Logger Constant Change, Stage Reading, Survey Water Surface Elevation",0
+N7,End time,2021-07-20 12:25:00,LR_TG_BA,"Site Visit, Water Sampling, General Field Note, Equipment Deployment, Equipment Retrieval, Logger Constant Change, Stage Reading, Survey Water Surface Elevation",0
+B8,Begin time,2021-08-06 11:50:00,LR_TG_BA,"Site Visit, General Field Note",1
+N8,End time,2021-08-06 12:40:00,LR_TG_BA,"Site Visit, General Field Note",1
+B9,Begin time,2021-09-17 10:10:00,LR_TG_BA,"Site Visit, Equipment Adjustment, River dredging, Equipment Cleaning, Precipitate Removal - Injection, Change Desiccant, Stage Reading, EXO Specific Conductance Calibration, EXO pH Calibration, EXO DO Cal with bubbler",1
+N9,End time,2021-09-17 10:40:00,LR_TG_BA,"Site Visit, Equipment Adjustment, River dredging, Equipment Cleaning, Precipitate Removal - Injection, Change Desiccant, Stage Reading, EXO Specific Conductance Calibration, EXO pH Calibration, EXO DO Cal with bubbler",1
+B10,Begin time,2021-10-14 12:50:00,LR_TG_BA,"Site Visit, Equipment Cleaning, Stage Reading, Precipitate Removal - Injection, Logger Constant Change, Change Desiccant, Check color desiccant, Minimum Stage Reading",1
+N10,End time,2021-10-14 13:25:00,LR_TG_BA,"Site Visit, Equipment Cleaning, Stage Reading, Precipitate Removal - Injection, Logger Constant Change, Change Desiccant, Check color desiccant, Minimum Stage Reading",1
+B11,Begin time,2021-11-23 12:20:00,LR_TG_BA,"Site Visit, EXO DO Cal with bubbler, EXO pH Calibration, EXO Specific Conductance Calibration, Equipment Cleaning, General Field Note, Stage Reading, Precipitate Removal - Injection, Water Sampling",0
+N11,End time,2021-11-23 12:50:00,LR_TG_BA,"Site Visit, EXO DO Cal with bubbler, EXO pH Calibration, EXO Specific Conductance Calibration, Equipment Cleaning, General Field Note, Stage Reading, Precipitate Removal - Injection, Water Sampling",0

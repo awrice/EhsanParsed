@@ -1,0 +1,13 @@
+Event Number,Combined Time,Begin: End time,SiteCode,Method,QC_status
+B1,Begin time,2020-07-02 13:40:00,LR_MainStreet_BA,"Site Visit, Change Desiccant, Check color desiccant, Precipitate Removal - Injection, Equipment Cleaning, EXO pH Calibration, EXO Specific Conductance Calibration, General Field Note, Minimum Stage Reading, Stage Reading",0
+N1,End time,2020-07-02 14:10:00,LR_MainStreet_BA,"Site Visit, Change Desiccant, Check color desiccant, Precipitate Removal - Injection, Equipment Cleaning, EXO pH Calibration, EXO Specific Conductance Calibration, General Field Note, Minimum Stage Reading, Stage Reading",0
+B2,Begin time,2020-07-31 11:50:00,LR_MainStreet_BA,"Site Visit, Site clean-up, Stage Reading, Benchmark, Survey Water Surface Elevation, Flowtracker Discharge, Precipitate Removal - Injection, General Sonde Calibration",1
+N2,End time,2020-07-31 12:40:00,LR_MainStreet_BA,"Site Visit, Site clean-up, Stage Reading, Benchmark, Survey Water Surface Elevation, Flowtracker Discharge, Precipitate Removal - Injection, General Sonde Calibration",1
+B3,Begin time,2020-08-18 10:10:00,LR_MainStreet_BA,"Site Visit, Logger Constant Change, General Field Note, Stage Reading",0
+N3,End time,2020-08-18 10:20:00,LR_MainStreet_BA,"Site Visit, Logger Constant Change, General Field Note, Stage Reading",0
+B4,Begin time,2020-10-09 14:25:00,LR_MainStreet_BA,"Site Visit, Survey Water Surface Elevation, Benchmark, General Sonde Calibration, Equipment Cleaning, General Field Note, Stage Reading, Precipitate Removal - Injection, Change Desiccant",0
+N4,End time,2020-10-09 14:40:00,LR_MainStreet_BA,"Site Visit, Survey Water Surface Elevation, Benchmark, General Sonde Calibration, Equipment Cleaning, General Field Note, Stage Reading, Precipitate Removal - Injection, Change Desiccant",0
+B5,Begin time,2020-11-06 14:50:00,LR_MainStreet_BA,"Site Visit, Survey Water Surface Elevation, Benchmark, Stage Reading, General Sonde Calibration, Equipment Cleaning, Precipitate Removal - Injection, Change Desiccant, General Field Note",0
+N5,End time,2020-11-06 15:25:00,LR_MainStreet_BA,"Site Visit, Survey Water Surface Elevation, Benchmark, Stage Reading, General Sonde Calibration, Equipment Cleaning, Precipitate Removal - Injection, Change Desiccant, General Field Note",0
+B6,Begin time,2020-12-11 14:20:00,LR_MainStreet_BA,"Survey Water Surface Elevation, Benchmark, General Sonde Calibration, Stage Reading, Precipitate Removal - Injection, Equipment Cleaning",0
+N6,End time,2020-12-11 15:20:00,LR_MainStreet_BA,"Survey Water Surface Elevation, Benchmark, General Sonde Calibration, Stage Reading, Precipitate Removal - Injection, Equipment Cleaning",0

@@ -1,0 +1,29 @@
+Event Number,Combined Time,Begin: End time,SiteCode,Method,QC_status
+B1,Begin time,2021-01-11 17:40:00,LR_WaterLab_AA,"Site Visit, Stage Reading",0
+N1,End time,2021-01-11 17:50:00,LR_WaterLab_AA,"Site Visit, Stage Reading",0
+B2,Begin time,2021-01-13 16:10:00,LR_WaterLab_AA,"Site Visit, Logger Constant Change, EXO DO Cal with bubbler, EXO pH Calibration, EXO Specific Conductance Calibration, Equipment Cleaning, Stage Reading, Precipitate Removal - Injection",0
+N2,End time,2021-01-13 16:40:00,LR_WaterLab_AA,"Site Visit, Logger Constant Change, EXO DO Cal with bubbler, EXO pH Calibration, EXO Specific Conductance Calibration, Equipment Cleaning, Stage Reading, Precipitate Removal - Injection",0
+B3,Begin time,2021-02-09 12:50:00,LR_WaterLab_AA,"Site Visit, Change Desiccant, Survey Water Surface Elevation, Benchmark, Stage Reading, Equipment Deployment, Equipment Retrieval, General Sonde Calibration, Equipment Cleaning, Logger Constant Change, nan",0
+N3,End time,2021-02-09 13:50:00,LR_WaterLab_AA,"Site Visit, Change Desiccant, Survey Water Surface Elevation, Benchmark, Stage Reading, Equipment Deployment, Equipment Retrieval, General Sonde Calibration, Equipment Cleaning, Logger Constant Change, nan",0
+B4,Begin time,2021-03-12 09:50:00,LR_WaterLab_AA,"Stage Reading, Site Visit, Flowtracker Discharge, General Sonde Calibration, Change Desiccant, Equipment Cleaning",0
+N4,End time,2021-03-12 10:40:00,LR_WaterLab_AA,"Stage Reading, Site Visit, Flowtracker Discharge, General Sonde Calibration, Change Desiccant, Equipment Cleaning",0
+B5,Begin time,2021-04-22 13:10:00,LR_WaterLab_AA,"Stage Reading, Equipment Cleaning, General Sonde Calibration, Site Visit, General Field Note, Survey Water Surface Elevation",0
+N5,End time,2021-04-22 14:10:00,LR_WaterLab_AA,"Stage Reading, Equipment Cleaning, General Sonde Calibration, Site Visit, General Field Note, Survey Water Surface Elevation",0
+B6,Begin time,2021-05-18 08:50:00,LR_WaterLab_AA,"Equipment Cleaning, EXO pH tip replacement, General Sonde Calibration, Benchmark, WSE survey, Aquatic Housing Cleaning, Stage Reading",0
+N6,End time,2021-05-18 10:40:00,LR_WaterLab_AA,"Equipment Cleaning, EXO pH tip replacement, General Sonde Calibration, Benchmark, WSE survey, Aquatic Housing Cleaning, Stage Reading",0
+B7,Begin time,2021-07-08 09:20:00,LR_WaterLab_AA,"WSE survey, Site Visit, Benchmark, Stage Reading, Equipment Cleaning, EXO Specific Conductance Calibration, EXO DO Cal with bubbler, EXO pH Calibration, Equipment Adjustment, Precipitate Removal - Injection, Aquatic Housing Cleaning",0
+N7,End time,2021-07-08 10:40:00,LR_WaterLab_AA,"WSE survey, Site Visit, Benchmark, Stage Reading, Equipment Cleaning, EXO Specific Conductance Calibration, EXO DO Cal with bubbler, EXO pH Calibration, Equipment Adjustment, Precipitate Removal - Injection, Aquatic Housing Cleaning",0
+B8,Begin time,2021-08-10 10:40:00,LR_WaterLab_AA,"Site Visit, Benchmark, WSE survey, Stage Reading, Equipment Cleaning, Precipitate Removal - Injection, EXO Specific Conductance Calibration, Aquatic Housing Cleaning, EXO pH Calibration, EXO DO Cal with bubbler, Change Desiccant, General Field Note",0
+N8,End time,2021-08-10 15:10:00,LR_WaterLab_AA,"Site Visit, Benchmark, WSE survey, Stage Reading, Equipment Cleaning, Precipitate Removal - Injection, EXO Specific Conductance Calibration, Aquatic Housing Cleaning, EXO pH Calibration, EXO DO Cal with bubbler, Change Desiccant, General Field Note",0
+B9,Begin time,2021-08-11 10:40:00,LR_WaterLab_AA,"Site Visit, Equipment Cleaning, Equipment Inspection, Change Desiccant, Stage Reading",0
+N9,End time,2021-08-11 15:10:00,LR_WaterLab_AA,"Site Visit, Equipment Cleaning, Equipment Inspection, Change Desiccant, Stage Reading",0
+B10,Begin time,2021-08-16 14:20:00,LR_WaterLab_AA,"Site Visit, Stage Reading, Equipment Retrieval, Equipment Deployment",0
+N10,End time,2021-08-16 15:20:00,LR_WaterLab_AA,"Site Visit, Stage Reading, Equipment Retrieval, Equipment Deployment",0
+B11,Begin time,2021-08-17 10:20:00,LR_WaterLab_AA,"Site Visit, Equipment Deployment, Equipment Retrieval",0
+N11,End time,2021-08-17 12:50:00,LR_WaterLab_AA,"Site Visit, Equipment Deployment, Equipment Retrieval",0
+B12,Begin time,2021-09-15 11:20:00,LR_WaterLab_AA,"Site Visit, Change Desiccant, Equipment Cleaning, Stage Reading, Precipitate Removal - Injection, EXO Specific Conductance Calibration, EXO pH Calibration, Survey Water Surface Elevation",0
+N12,End time,2021-09-15 11:40:00,LR_WaterLab_AA,"Site Visit, Change Desiccant, Equipment Cleaning, Stage Reading, Precipitate Removal - Injection, EXO Specific Conductance Calibration, EXO pH Calibration, Survey Water Surface Elevation",0
+B13,Begin time,2021-10-18 15:10:00,LR_WaterLab_AA,"Site Visit, Benchmark, WSE survey, Stage Reading, Equipment Cleaning, Aquatic Housing Cleaning, Equipment Calibration, Change Desiccant, Check color desiccant",0
+N13,End time,2021-10-18 15:40:00,LR_WaterLab_AA,"Site Visit, Benchmark, WSE survey, Stage Reading, Equipment Cleaning, Aquatic Housing Cleaning, Equipment Calibration, Change Desiccant, Check color desiccant",0
+B14,Begin time,2021-12-01 13:40:00,LR_WaterLab_AA,"Site Visit, Benchmark, WSE survey, Stage Reading, Equipment Cleaning, EXO Specific Conductance Calibration, EXO pH Calibration, Aquatic Housing Cleaning, EXO DO Cal with bubbler",0
+N14,End time,2021-12-01 14:10:00,LR_WaterLab_AA,"Site Visit, Benchmark, WSE survey, Stage Reading, Equipment Cleaning, EXO Specific Conductance Calibration, EXO pH Calibration, Aquatic Housing Cleaning, EXO DO Cal with bubbler",0
