@@ -5,7 +5,7 @@ import dataManager as dM
 class DirectoryManager:
     def __init__(self, settings, replace_folder=True, verbose=True):
         self.verbose = verbose
-        if self.verbose: print(" -- Preprocessing -- ")
+        if self.verbose: print("\033[92m -- Preprocessing -- \033[0m")
         # Get the current working directory and assign it to 'scripts_data_folder'
         self.settings = settings
         self.input_folder = self.settings.settings['input_folder']

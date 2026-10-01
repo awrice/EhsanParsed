@@ -4,7 +4,7 @@ import re
 
 class AnomalyExtractor:
     def __init__(self, dataManager, verbose=True):
-        if verbose: print(" -- Anomaly Extraction --")
+        if verbose: print("\033[92m -- Anomaly Extraction -- \033[0m")
         self.dataManager = dataManager
         self.dataframe = dataManager.get_main()
         self.variable_of_interest = dataManager.settings.settings["Variable"]
@@ -16,7 +16,7 @@ class AnomalyExtractor:
     I have changed the names of the columns from the original paper (because the original names were confusing). Preceeding underscores have been added to the names to denote these are analysis columns, not data columns. The key is given below:
      - RawQCColumn -> _ManualChangeAmt
      - AnomalyIndex -> _IsAnomaly
-     - Ind_1 -> _fieldNoteFlag
+     - Ind_1 -> _FieldNoteFlag
      - Cal_Counter -> _Cal_Counter
      - CalStartTime -> _CalStartTime
      - CalEndTime -> _CalEndTime
@@ -32,14 +32,15 @@ class AnomalyExtractor:
         raw_col = f'{self.variable_of_interest}'
 
         # These columns are titled "RawQCColumn" and "AnomalyIndex" in Ehsan's paper -— I think those names are confusing so I changed them
-        self.dataframe['_ManualChangeAmt'] = abs(self.dataframe[qc_col] - self.dataframe[raw_col])
+        self.dataframe['_ManualChangeAmt'] = self.dataframe[qc_col] - self.dataframe[raw_col]
         self.dataframe['_IsAnomaly'] = (self.dataframe[qc_col] != self.dataframe[raw_col])
 
     # Section 3.2.3
     # Checks against all the field notes and labels each row with a flag whether or not there was a field visit going on at the time of this data being gathered. 
     # This function is equivilant to update_ind1_based_on_events() in Ehsan's paper (which is an absolutely awful name -- I tried to improve it to have anything to do with what the function was actually doing.)
-    # - Adds a new column to the main dataset (get_main) in out DataManger object called _fieldNoteFlag
-    # - this _fieldNoteFlag (equivilant to ind_1) is set to 
+    # There was an error in Ehsan's code -- his code did not ever produce a 1 -- every value in this column was either 0 or 2. To get his exact results, you'll need to adjust the logic to always appending 2 to the flags array.
+    # - Adds a new column to the main dataset (get_main) in out DataManger object called _FieldNoteFlag
+    # - this _FieldNoteFlag (equivilant to ind_1) is set to 
     #    - 0 for rows that are outside any field visit
     #    - 1 for any rows that occur during a regular site visit
     #    - 2 for any rows that occur during a visit where calibration keywords (from the YAML config) appear in the ‘Method’ column text of the field notes. 
@@ -51,7 +52,8 @@ class AnomalyExtractor:
         
         # Main dataframe timestamps
         timestamps = self.dataframe.index
-        calibration_list_regex =  "|".join(map(re.escape, self.dataManager.settings.settings["CalibrationList"]))
+        calibration_list = self.dataManager.settings.settings["CalibrationList"]
+        calibration_list_regex = r'\b(?:' + '|'.join(re.escape(keyword) for keyword in calibration_list) + r')\b'
         
         flags = []
 
@@ -65,19 +67,22 @@ class AnomalyExtractor:
                 continue
 
             # Check for matching calibration keywords
-            is_calibration = matching_notes["Method"].fillna("").str.contains(calibration_list_regex, case=False, regex=True).any()
-            if is_calibration: flags.append(2)
-            else: flags.append(1)
+            contains_calib_words = matching_notes["Method"].fillna("").str.contains(calibration_list_regex, regex=True, case=False)
+
+            if contains_calib_words.any():
+                flags.append(2)
+            else:
+                flags.append(2) # should be 1
 
         # For calibration, identification is ignored for water temperature by design because for the sensors used in this study water temperature is not calibrated in the field. The value of this field is set to 1 for all temperature rows that occur during a site visit
-        if self.variable_of_interest == "T":
+        if self.variable_of_interest == "WaterTemp_EXO":
             flags = [1 if x == 2 else x for x in flags]
 
         # Now we have assembled the column, we need to concatenate it
-        self.dataframe["_fieldNoteFlag"] = flags
+        self.dataframe["_FieldNoteFlag"] = flags
 
     # Section 3.2.3
-    # This function is run to specifically identify calibration events, their numbering, start time, and end time. Since the next function assesses the ranges of the time series that are affected by the calibration events, knowing the calibration event numbers is useful. This function scans the ’_fieldNoteFlag’ column in self.dataframe to find contiguous calibration windows (‘_fieldNoteFlag = 2’), numbers them in order, and annotates their start and end rows, adding new columns called ‘Cal_Counter’, ‘CalStartTime’, and ‘CalEndTime’. If the variable is water temperature, this function is skipped.
+    # This function is run to specifically identify calibration events, their numbering, start time, and end time. Since the next function assesses the ranges of the time series that are affected by the calibration events, knowing the calibration event numbers is useful. This function scans the ’_FieldNoteFlag’ column in self.dataframe to find contiguous calibration windows (‘_FieldNoteFlag = 2’), numbers them in order, and annotates their start and end rows, adding new columns called ‘Cal_Counter’, ‘CalStartTime’, and ‘CalEndTime’. If the variable is water temperature, this function is skipped.
     def process_calibration_events(self):
         if self.verbose: print("Processing Calibration Events...")
         if self.variable_of_interest == "WaterTemp_EXO": return
@@ -93,7 +98,7 @@ class AnomalyExtractor:
 
         # Iterate through each row in the DataFrame
         for i in range(len(self.dataframe)):
-            if self.dataframe.iloc[i]['_fieldNoteFlag'] == 2: # If it's a calibration event
+            if self.dataframe.iloc[i]['_FieldNoteFlag'] == 2: # If it's a calibration event
                 if not inside_event:
                     # Entering a new calibration event
                     cal_counter += 1
@@ -104,7 +109,7 @@ class AnomalyExtractor:
                 cal_counter_list.append(cal_counter)
                 
                 # Check if it's the end of the calibration event (next row is not a calibration event)
-                if i + 1 < len(self.dataframe) and self.dataframe.iloc[i + 1]['_fieldNoteFlag'] != 2:
+                if i + 1 < len(self.dataframe) and self.dataframe.iloc[i + 1]['_FieldNoteFlag'] != 2:
                     cal_end_annotations[i] = f'Ending time of CalN{cal_counter}'
                     inside_event = False  # Exit the calibration event
             else:
@@ -118,21 +123,71 @@ class AnomalyExtractor:
         self.dataframe['_CalEndTime'] = cal_end_annotations
 
     # Section 3.2.3
-    # After calibration events are processed, the script then identifies ranges of data points that are affected by each calibration as a third step. This step detects periods outside of the calibration windows (the time period when the field crew was actually at the station) that are likely influenced by the calibration performed by the field crew. The deviation between raw and QC data (‘RawQCColumn’) and its time-step-to-time-step change (calculated in a column called ‘iMinePrei’) is analyzed. For non–water temperature variables, each timestamp with ‘Ind_1 = 0’ is labeled as ‘CS’ for “constant shift” and saved in a new column called ‘CorrectionTypeCal’ when the deviation is nonzero (‘RawQCColumn’ ≠ 0) and flat (‘iMinePrei = 0’). Timestamps are labeled as‘LDC’ for “linear drift correction” and saved in the ‘CorrectionTypeCal’ column whenthe deviation is nonzero and changing (‘iMinePrei’ ≠ 0). Consecutive labeled rows aregrouped into a new column called ‘AffectedbyCal’ events, each assigned an incrementingID called ‘AffectedbyCal_Counter’, with start/end markers added in new columns in thedata frame called ‘AffectedCalStartTime’ and ‘AffectedCalEndTime’, respectively.
+    # After calibration events are processed, we must identify ranges of data points that are affected by each calibration. This step detects periods outside of the calibration windows (the time period when the field crew was actually at the station) that are likely influenced by the calibration performed by the field crew. The deviation between raw and QC data ('_ManualChangeAmt') and its time-step-to-time-step change (calculated in a column called '_ChangeTrends') is analyzed. For non–water temperature variables, each timestamp with '_FieldNoteFlag = 0' is labeled as ‘CS’ for “constant shift” and saved in a new column called ‘_CorrectionTypeCal’ when the deviation is nonzero ('_ManualChangeAmt' ≠ 0) and flat ('_ChangeTrends = 0’). Timestamps are labeled as ‘LDC’ for “linear drift correction” and saved in the ‘_CorrectionTypeCal’ column whenthe deviation is nonzero and changing ('_ChangeTrends ≠ 0'). Consecutive labeled rows aregrouped into a new column called ‘AffectedbyCal’ events, each assigned an incrementingID called ‘_AffectedbyCal_Counter’, with start/end markers added in new columns in the dataframe called ‘_AffectedCalStartTime’ and ‘_AffectedCalEndTime’, respectively.
     def calculate_manual_change_trends(self):
         if self.verbose: print("Calculating Manual Change Trends...")
+
         self.dataframe['_ChangeTrends'] = self.dataframe['_ManualChangeAmt'].diff()
-        self.dataframe = self.dataframe.reset_index(drop=False)
+        # self.dataframe = self.dataframe.reset_index(drop=False)
         self.dataframe['_CorrectionTypeCal'] = self.dataframe.apply(AnomalyExtractor.classify_calibration_row, axis=1)
 
         # Propagate classification to the previous row
         for i in range(1, len(self.dataframe)):
             if self.dataframe.at[i, '_CorrectionTypeCal'] in ['CS', 'LDC']:
                 self.dataframe.at[i - 1, '_CorrectionTypeCal'] = self.dataframe.at[i, '_CorrectionTypeCal']
+        
 
-        # self.dataframe[(self.dataframe.index.month == 7) & (self.dataframe.index.day == 31)].to_csv("../my_output_folder/combinedData.csv")
-        self.dataframe[(self.dataframe['_IsAnomaly']) == True].to_csv("../my_output_folder/combinedData.csv")
+        #####
+        self.dataframe = self.dataframe.reset_index(drop=True)
+        self.dataframe['_AffectedbyCal_Counter'] = 0
+        counter = 0
+        propagate = False
 
+        for i in range(len(self.dataframe)):
+            if pd.notna(self.dataframe.iloc[i]['_CorrectionTypeCal']):
+                if not propagate:
+                    counter += 1
+                self.dataframe.at[i, '_AffectedbyCal_Counter'] = counter
+                propagate = True
+            else:
+                propagate = False
+
+
+
+        #####
+        self.dataframe['_AffectedCalEndTime'] = None
+        return
+
+        affected_groups = self.dataframe['_AffectedbyCal_Counter'].unique()
+        affected_groups = [g for g in affected_groups if g != 0]
+
+        for group in affected_groups:
+            group_rows = self.dataframe[self.dataframe['_AffectedbyCal_Counter'] == group]
+            if not group_rows.empty:
+                start_index = group_rows.index[0]
+                end_index = group_rows.index[-1]
+                self.dataframe.at[start_index, '_AffectedCalStartTime'] = f'Starting time of Affected Cal {group}'
+                self.dataframe.at[end_index, '_AffectedCalEndTime'] = f'Ending time of Affected Cal {group}'
+
+
+        #####
+        affected_df = self.dataframe[self.dataframe['_AffectedbyCal_Counter'] > 0]
+        
+        affected_events = affected_df.groupby('_AffectedbyCal_Counter').agg({
+            '_AffectedCalStartTime': 'first',
+            '_AffectedCalEndTime': 'first',
+            '_CorrectionTypeCal': lambda x: ', '.join(map(str, x.unique()))}).reset_index()
+
+        affected_events['Start time'] = affected_events['_AffectedCalStartTime'].map(
+            lambda x: self.dataframe.loc[self.dataframe['_AffectedCalStartTime'] == x, 'LocalDateTime'].values[0] 
+            if pd.notna(x) else None)
+
+        affected_events['End time'] = affected_events['_AffectedCalEndTime'].map(
+            lambda x: self.dataframe.loc[self.dataframe['_AffectedCalEndTime'] == x, 'LocalDateTime'].values[0] 
+            if pd.notna(x) else None)
+
+        affected_events.rename(columns={'_CorrectionTypeCal': 'Correction Type'}, inplace=True)
+        affected_events = affected_events[['Start time', 'End time', 'Correction Type', '_AffectedbyCal_Counter']]
 
 
     """
@@ -154,7 +209,7 @@ class AnomalyExtractor:
     # Classifies each row into 'CS' or 'LDC'.
     @staticmethod
     def classify_calibration_row(row):
-        if row['_fieldNoteFlag'] == 0:
+        if row['_FieldNoteFlag'] == 0:
             # This data wasn't taken during a field visit
             if row['_ChangeTrends'] == 0 and AnomalyExtractor.is_valid_numeric(row['_ManualChangeAmt']): 
                 # This data 

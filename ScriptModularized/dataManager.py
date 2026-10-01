@@ -2,6 +2,7 @@ import pandas as pd
 import directoryManager
 import yaml
 
+# Setting object holds all required settings to run the analysis
 class Settings:
     def __init__(self, settingsYaml):
         with open(settingsYaml, 'r') as f:
@@ -10,6 +11,50 @@ class Settings:
     def __str__(self):
         return "[Settings: " + str(self.settings) + "]"
 
+# This class represents a dataframe containing input data needed for the analysis we are performing. The dataframe will be validated against this object to see if they are ready for analysis
+class InputDataframe:
+    INDEX_NAME = "LocalDateTime"
+    REQUIRED_COLUMNS = {
+        "BattVolt", "EXOVolt", "ODO", "Stage", "pH", "SpCond", "WaterTemp_EXO", "TurbMed", "AirTemp_EE08_avg", "ODO_QC1", "QualifierCode"
+    }
+
+    def __init__(self, df: pd.DataFrame):
+        self._validate_columns(df)
+        self._df = df
+
+    @classmethod
+    def _validate_columns(cls, df):
+        if df.index.name != cls.INDEX_NAME:
+            raise ValueError(f"DataFrame index must be named '{cls.INDEX_NAME}', but was '{df.index.name}'")
+
+        missing = cls.REQUIRED_COLUMNS - set(df.columns)
+        if missing: raise ValueError(f"DataFrame is missing required columns: {sorted(missing)}")
+
+    # these methods make the InputDataframe behave like a pandas DataFrame
+    def __getattr__(self, name):
+        """
+        If InputDataFrame doesn't have this attribute,
+        get it from the underlying DataFrame.
+        """
+        return getattr(self._df, name)
+    def __getitem__(self, key):
+        return self._df[key]
+    def __setitem__(self, key, value):
+        self._df[key] = value
+    def __len__(self):
+        return len(self._df)
+
+
+    @property
+    def df(self):
+        return self._df
+
+    def replace(self, df: pd.DataFrame):
+        self._validate_columns(df)
+        self._df = df
+
+    def remove_unneeded_columns(self):
+        self._df = self._df.drop(columns=[col for col in self._df.columns if col not in self.REQUIRED_COLUMNS])
 
 class DataManager:
     def __init__(self, directoryManager, settings):
@@ -38,6 +83,14 @@ class DataManager:
 
     def get_main(self):
         return self.dataframes[self.main_dataset_name]
+
+    # exports a dataframe to a CSV file (if dataframe name is not given, exports main)
+    def export_to_csv(self, filename, name=None):
+        if name is None:
+            name = self.main_dataset_name
+        if name not in self.dataframes:
+            raise ValueError("Dataframe not found")
+        self.dataframes[name].to_csv(filename)
 
     # fieldNotes should be a FieldNotes object
     def add_field_notes(self, fieldNotes):
@@ -81,6 +134,22 @@ class DataManager:
         df = df.sort_index()
         self.dataframes[name] = df
 
+    # Removes a column from a dataframe
+    def remove_column(self, name, column_name):
+        if name not in self.dataframes:
+            raise ValueError(f"Dataframe {name} not found")
+        if column_name not in self.dataframes[name].columns:
+            raise ValueError(f"Column {column_name} not found")
+        self.dataframes[name].drop(columns=[column_name], inplace=True)
+
+    # makes sure a dataframe is ready as an input dataframe -- if name=None, just use the main dataset name
+    def validate_as_input(self, name=None, removeUnneededColumns=True):
+        if name is None: name = self.main_dataset_name
+        if name not in self.dataframes:
+            raise ValueError(f"Dataframe {name} not found")
+        self.dataframes[name] = InputDataframe(self.dataframes[name])
+        if removeUnneededColumns:
+            self.dataframes[name].remove_unneeded_columns()
 
 
 class FieldNotes:

@@ -9,8 +9,8 @@ def preprocess() -> dM.DataManager:
     # Preprocessing #
     dirMan = dirM.DirectoryManager(settings)
     dataMan = dirMan.get_data_manager()
+    dataMan.validate_as_input()
     return dataMan
-
 
 def anomaly_extraction(dataMan):
     # Extracting Anomalies #
@@ -20,6 +20,8 @@ def anomaly_extraction(dataMan):
     extractor.check_field_notes()
     extractor.process_calibration_events()
     extractor.calculate_manual_change_trends()
+
+    dataMan.export_to_csv('/Users/a02523625/Documents/HorsburghRA/EhsanData/Results/MEtest2.csv')
 
 
 if __name__ == "__main__":

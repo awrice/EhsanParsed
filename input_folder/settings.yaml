@@ -9,10 +9,10 @@ fieldNotesDataset: ../input_folder/fieldNotes
 # Manually Corrected filename: "QC_data_<Variable>_<site>_<year>.csv"
 # Aquatic data filename: "RawAquatic_<Aquatic_site>_<year>.csv"
 # Climate data filename: "DataSetClimate_<Climate_site>_<year>.csv"
-Variable: TurbMed
-Site: LR_WaterLab_AA
+Variable: ODO
+Site: BSF_CONF_BA
 ClimateSite: LR_GC_C
-Year: 2021
+Year: 2020
 
 # See AnomalyExtractor.check_field_notes(...)
 CalibrationList:
