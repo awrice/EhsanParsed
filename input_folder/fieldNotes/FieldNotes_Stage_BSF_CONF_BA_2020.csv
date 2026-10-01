@@ -1,0 +1,75 @@
+Event Number,Combined Time,Begin: End time,SiteCode,Method,QC_status
+B1,Begin time,2020-06-30 15:50:00,BSF_CONF_BA,"Site Visit, Stage Reading",1
+N1,End time,2020-06-30 16:10:00,BSF_CONF_BA,"Site Visit, Stage Reading",1
+B2,Begin time,2020-07-02 11:10:00,BSF_CONF_BA,"Site Visit, Minimum Stage Reading, Equipment Adjustment, River dredging, Change Desiccant, Check color desiccant, Precipitate Removal - Injection, Equipment Cleaning, EXO pH Calibration, EXO Specific Conductance Calibration, Stage Reading",1
+B3,Begin time,2020-07-02 11:20:00,BSF_CONF_BA,EXO DO Cal with bubbler,1
+B4,Begin time,2020-07-02 11:50:00,BSF_CONF_BA,Stage Reading,1
+N3,End time,2020-07-02 11:50:00,BSF_CONF_BA,EXO DO Cal with bubbler,1
+B5,Begin time,2020-07-02 12:10:00,BSF_CONF_BA,Site Visit,1
+N2,End time,2020-07-02 12:10:00,BSF_CONF_BA,"Site Visit, Minimum Stage Reading, Equipment Adjustment, River dredging, Change Desiccant, Check color desiccant, Precipitate Removal - Injection, Equipment Cleaning, EXO pH Calibration, EXO Specific Conductance Calibration, Stage Reading",1
+N4,End time,2020-07-02 12:10:00,BSF_CONF_BA,Stage Reading,1
+N5,End time,2020-07-02 12:40:00,BSF_CONF_BA,Site Visit,1
+B6,Begin time,2020-07-07 15:20:00,BSF_CONF_BA,"Site Visit, Logger Constant Change, Stage Reading",0
+B7,Begin time,2020-07-07 15:40:00,BSF_CONF_BA,Stage Reading,0
+N7,End time,2020-07-07 15:50:00,BSF_CONF_BA,Stage Reading,0
+N6,End time,2020-07-07 15:50:00,BSF_CONF_BA,"Site Visit, Logger Constant Change, Stage Reading",0
+B8,Begin time,2020-07-23 15:40:00,BSF_CONF_BA,Site Visit,0
+N9,End time,2020-07-23 16:40:00,BSF_CONF_BA,Stage Reading,0
+B9,Begin time,2020-07-23 16:40:00,BSF_CONF_BA,Stage Reading,0
+N8,End time,2020-07-23 17:10:00,BSF_CONF_BA,Site Visit,0
+B10,Begin time,2020-07-30 14:10:00,BSF_CONF_BA,"Site Visit, Stage Reading",1
+B11,Begin time,2020-07-30 14:20:00,BSF_CONF_BA,Benchmark,1
+B12,Begin time,2020-07-30 14:40:00,BSF_CONF_BA,"Survey Water Surface Elevation, Flowtracker Discharge, Stage Reading",1
+N11,End time,2020-07-30 14:50:00,BSF_CONF_BA,Benchmark,1
+N12,End time,2020-07-30 14:50:00,BSF_CONF_BA,"Survey Water Surface Elevation, Flowtracker Discharge, Stage Reading",1
+B13,Begin time,2020-07-30 14:50:00,BSF_CONF_BA,General Sonde Calibration,1
+B14,Begin time,2020-07-30 15:10:00,BSF_CONF_BA,Stage Reading,1
+N14,End time,2020-07-30 15:20:00,BSF_CONF_BA,Stage Reading,1
+B15,Begin time,2020-07-30 15:20:00,BSF_CONF_BA,Stage Reading,1
+B16,Begin time,2020-07-30 15:40:00,BSF_CONF_BA,"Precipitate Removal - Injection, Stage Reading",1
+N15,End time,2020-07-30 15:40:00,BSF_CONF_BA,Stage Reading,1
+N16,End time,2020-07-30 15:50:00,BSF_CONF_BA,"Precipitate Removal - Injection, Stage Reading",1
+N13,End time,2020-07-30 15:50:00,BSF_CONF_BA,General Sonde Calibration,1
+N10,End time,2020-07-30 16:10:00,BSF_CONF_BA,"Site Visit, Stage Reading",1
+B17,Begin time,2020-08-21 12:50:00,BSF_CONF_BA,"Site Visit, Infrastructure cleaning, Minimum Stage Reading, Stage Reading",0
+N17,End time,2020-08-21 13:10:00,BSF_CONF_BA,"Site Visit, Infrastructure cleaning, Minimum Stage Reading, Stage Reading",0
+B18,Begin time,2020-08-21 13:50:00,BSF_CONF_BA,"Site Visit, Infrastructure Installation",0
+N18,End time,2020-08-21 14:20:00,BSF_CONF_BA,"Site Visit, Infrastructure Installation",0
+B19,Begin time,2020-08-21 15:10:00,BSF_CONF_BA,"Site Visit, Check color desiccant, General Field Note, Logger Constant Change, Stage Reading",0
+B20,Begin time,2020-08-21 15:40:00,BSF_CONF_BA,Stage Reading,0
+N19,End time,2020-08-21 15:50:00,BSF_CONF_BA,"Site Visit, Check color desiccant, General Field Note, Logger Constant Change, Stage Reading",0
+N20,End time,2020-08-21 15:50:00,BSF_CONF_BA,Stage Reading,0
+N21,End time,2020-08-22 11:50:00,BSF_CONF_BA,"Site Visit, Stage Reading",
+B21,Begin time,2020-08-22 11:50:00,BSF_CONF_BA,"Site Visit, Stage Reading",
+B22,Begin time,2020-08-28 15:20:00,BSF_CONF_BA,Site Visit,0
+B23,Begin time,2020-08-28 15:40:00,BSF_CONF_BA,"Flowtracker Discharge, Stage Reading, Site Visit, Hach Discharge",0
+B24,Begin time,2020-08-28 16:10:00,BSF_CONF_BA,Stage Reading,0
+N23,End time,2020-08-28 16:20:00,BSF_CONF_BA,"Flowtracker Discharge, Stage Reading, Site Visit, Hach Discharge",0
+N24,End time,2020-08-28 16:20:00,BSF_CONF_BA,Stage Reading,0
+B25,Begin time,2020-08-28 16:40:00,BSF_CONF_BA,Stage Reading,0
+N25,End time,2020-08-28 16:50:00,BSF_CONF_BA,Stage Reading,0
+N22,End time,2020-08-28 16:50:00,BSF_CONF_BA,Site Visit,0
+B26,Begin time,2020-09-04 14:50:00,BSF_CONF_BA,"Site Visit, Stage Reading",0
+B27,Begin time,2020-09-04 15:10:00,BSF_CONF_BA,"Benchmark, Survey Water Surface Elevation, Precipitate Removal - Injection, Equipment Cleaning, General Sonde Calibration",0
+N26,End time,2020-09-04 15:10:00,BSF_CONF_BA,"Site Visit, Stage Reading",0
+N27,End time,2020-09-04 15:20:00,BSF_CONF_BA,"Benchmark, Survey Water Surface Elevation, Precipitate Removal - Injection, Equipment Cleaning, General Sonde Calibration",0
+B28,Begin time,2020-09-04 15:40:00,BSF_CONF_BA,"Benchmark, Survey Water Surface Elevation, Check color desiccant, Stage Reading",0
+N28,End time,2020-09-04 15:50:00,BSF_CONF_BA,"Benchmark, Survey Water Surface Elevation, Check color desiccant, Stage Reading",0
+B29,Begin time,2020-09-25 16:40:00,BSF_CONF_BA,"Site Visit, Stage Reading",1
+N29,End time,2020-09-25 16:50:00,BSF_CONF_BA,"Site Visit, Stage Reading",1
+B30,Begin time,2020-09-28 11:10:00,BSF_CONF_BA,"Site Visit, Stage Reading",1
+N30,End time,2020-09-28 11:20:00,BSF_CONF_BA,"Site Visit, Stage Reading",1
+B31,Begin time,2020-09-30 16:40:00,BSF_CONF_BA,"Site Visit, Stage Reading",1
+N31,End time,2020-09-30 16:50:00,BSF_CONF_BA,"Site Visit, Stage Reading",1
+B32,Begin time,2020-10-02 15:20:00,BSF_CONF_BA,"Site Visit, Stage Reading, Benchmark, Survey Water Surface Elevation, Precipitate Removal - Injection, Equipment Cleaning, General Sonde Calibration",0
+B33,Begin time,2020-10-02 15:50:00,BSF_CONF_BA,"Benchmark, Survey Water Surface Elevation, Stage Reading",0
+N33,End time,2020-10-02 16:10:00,BSF_CONF_BA,"Benchmark, Survey Water Surface Elevation, Stage Reading",0
+N32,End time,2020-10-02 16:10:00,BSF_CONF_BA,"Site Visit, Stage Reading, Benchmark, Survey Water Surface Elevation, Precipitate Removal - Injection, Equipment Cleaning, General Sonde Calibration",0
+B34,Begin time,2020-12-04 13:50:00,BSF_CONF_BA,"Site Visit, General Sonde Calibration, Equipment Cleaning, Stage Reading",1
+B35,Begin time,2020-12-04 14:10:00,BSF_CONF_BA,"Survey Water Surface Elevation, Benchmark, Precipitate Removal - Injection",1
+N35,End time,2020-12-04 14:20:00,BSF_CONF_BA,"Survey Water Surface Elevation, Benchmark, Precipitate Removal - Injection",1
+B36,Begin time,2020-12-04 14:50:00,BSF_CONF_BA,Stage Reading,1
+N36,End time,2020-12-04 15:10:00,BSF_CONF_BA,Stage Reading,1
+N34,End time,2020-12-04 15:10:00,BSF_CONF_BA,"Site Visit, General Sonde Calibration, Equipment Cleaning, Stage Reading",1
+B37,Begin time,2020-12-08 15:50:00,BSF_CONF_BA,Site Visit,0
+N37,End time,2020-12-08 16:10:00,BSF_CONF_BA,Site Visit,0

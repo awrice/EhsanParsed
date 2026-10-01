@@ -1,0 +1,139 @@
+Event Number,Combined Time,Begin: End time,SiteCode,Method,QC_status
+B1,Begin time,2021-01-11 17:10:00,LR_MainStreet_BA,"Site Visit, Equipment Cleaning, Stage Reading",1
+N1,End time,2021-01-11 17:20:00,LR_MainStreet_BA,"Site Visit, Equipment Cleaning, Stage Reading",1
+B2,Begin time,2021-01-14 11:50:00,LR_MainStreet_BA,"Site Visit, EXO DO Cal with bubbler, EXO pH Calibration, EXO Specific Conductance Calibration, Change Desiccant, Check color desiccant",1
+B3,Begin time,2021-01-14 12:10:00,LR_MainStreet_BA,Stage Reading,1
+B4,Begin time,2021-01-14 12:20:00,LR_MainStreet_BA,"Precipitate Removal - Injection, Equipment Adjustment",1
+N3,End time,2021-01-14 12:20:00,LR_MainStreet_BA,Stage Reading,1
+N4,End time,2021-01-14 12:40:00,LR_MainStreet_BA,"Precipitate Removal - Injection, Equipment Adjustment",1
+B5,Begin time,2021-01-14 13:10:00,LR_MainStreet_BA,General Field Note,1
+N5,End time,2021-01-14 13:20:00,LR_MainStreet_BA,General Field Note,1
+N2,End time,2021-01-14 13:20:00,LR_MainStreet_BA,"Site Visit, EXO DO Cal with bubbler, EXO pH Calibration, EXO Specific Conductance Calibration, Change Desiccant, Check color desiccant",1
+B6,Begin time,2021-03-01 11:10:00,LR_MainStreet_BA,"Stage Reading, Equipment Cleaning, Site Visit",1
+B7,Begin time,2021-03-01 11:20:00,LR_MainStreet_BA,"General Sonde Calibration, Equipment Adjustment, Stage Reading, Survey Water Surface Elevation, Logger Constant Change",1
+B8,Begin time,2021-03-01 11:40:00,LR_MainStreet_BA,"Check color desiccant, Change Desiccant, Precipitate Removal - Injection, Equipment Cleaning",1
+N7,End time,2021-03-01 11:40:00,LR_MainStreet_BA,"General Sonde Calibration, Equipment Adjustment, Stage Reading, Survey Water Surface Elevation, Logger Constant Change",1
+N6,End time,2021-03-01 11:40:00,LR_MainStreet_BA,"Stage Reading, Equipment Cleaning, Site Visit",1
+N8,End time,2021-03-01 11:50:00,LR_MainStreet_BA,"Check color desiccant, Change Desiccant, Precipitate Removal - Injection, Equipment Cleaning",1
+B9,Begin time,2021-03-01 12:10:00,LR_MainStreet_BA,Survey Water Surface Elevation,0
+N9,End time,2021-03-01 12:20:00,LR_MainStreet_BA,Survey Water Surface Elevation,0
+B10,Begin time,2021-04-22 15:50:00,LR_MainStreet_BA,"Stage Reading, Site Visit, Precipitate Removal - Injection, Equipment Cleaning, General Field Note",1
+N10,End time,2021-04-22 16:10:00,LR_MainStreet_BA,"Stage Reading, Site Visit, Precipitate Removal - Injection, Equipment Cleaning, General Field Note",1
+B11,Begin time,2021-04-22 16:10:00,LR_MainStreet_BA,"Precipitate Removal - Injection, Equipment Cleaning, General Sonde Calibration",1
+B12,Begin time,2021-04-22 16:20:00,LR_MainStreet_BA,Stage Reading,1
+B13,Begin time,2021-04-22 16:40:00,LR_MainStreet_BA,Stage Reading,1
+N12,End time,2021-04-22 16:40:00,LR_MainStreet_BA,Stage Reading,1
+N11,End time,2021-04-22 16:40:00,LR_MainStreet_BA,"Precipitate Removal - Injection, Equipment Cleaning, General Sonde Calibration",1
+N13,End time,2021-04-22 16:50:00,LR_MainStreet_BA,Stage Reading,1
+B14,Begin time,2021-05-14 14:40:00,LR_MainStreet_BA,Stage Reading,1
+N14,End time,2021-05-14 14:50:00,LR_MainStreet_BA,Stage Reading,1
+B15,Begin time,2021-05-14 15:20:00,LR_MainStreet_BA,"Benchmark, WSE survey, Flowtracker Discharge, Stage Reading",1
+B16,Begin time,2021-05-14 15:40:00,LR_MainStreet_BA,Flowtracker Discharge,1
+N15,End time,2021-05-14 15:40:00,LR_MainStreet_BA,"Benchmark, WSE survey, Flowtracker Discharge, Stage Reading",1
+B17,Begin time,2021-05-14 17:50:00,LR_MainStreet_BA,"Benchmark, WSE survey",1
+N16,End time,2021-05-14 17:50:00,LR_MainStreet_BA,Flowtracker Discharge,1
+N17,End time,2021-05-14 18:10:00,LR_MainStreet_BA,"Benchmark, WSE survey",1
+B18,Begin time,2021-05-14 18:10:00,LR_MainStreet_BA,Stage Reading,1
+N18,End time,2021-05-14 18:20:00,LR_MainStreet_BA,Stage Reading,1
+B19,Begin time,2021-06-08 11:20:00,LR_MainStreet_BA,"Site Visit, Turbidity Sensor Inspection, Equipment Retrieval, Equipment Adjustment, General Field Note",0
+B20,Begin time,2021-06-08 11:40:00,LR_MainStreet_BA,Stage Reading,0
+B21,Begin time,2021-06-08 11:50:00,LR_MainStreet_BA,Precipitate Removal - Injection,0
+N20,End time,2021-06-08 11:50:00,LR_MainStreet_BA,Stage Reading,0
+N21,End time,2021-06-08 13:50:00,LR_MainStreet_BA,Precipitate Removal - Injection,0
+B22,Begin time,2021-06-08 14:20:00,LR_MainStreet_BA,General Field Note,0
+N19,End time,2021-06-08 14:50:00,LR_MainStreet_BA,"Site Visit, Turbidity Sensor Inspection, Equipment Retrieval, Equipment Adjustment, General Field Note",0
+N23,End time,2021-06-08 14:50:00,LR_MainStreet_BA,Logger Constant Change,0
+B23,Begin time,2021-06-08 14:50:00,LR_MainStreet_BA,Logger Constant Change,0
+N22,End time,2021-06-08 14:50:00,LR_MainStreet_BA,General Field Note,0
+B24,Begin time,2021-06-15 10:40:00,LR_MainStreet_BA,Site Visit,0
+B25,Begin time,2021-06-15 10:50:00,LR_MainStreet_BA,"Benchmark, WSE survey",0
+N25,End time,2021-06-15 11:10:00,LR_MainStreet_BA,"Benchmark, WSE survey",0
+B26,Begin time,2021-06-15 11:20:00,LR_MainStreet_BA,"Site Visit, Equipment Deployment, General Field Note, Stage Reading",0
+B27,Begin time,2021-06-15 11:40:00,LR_MainStreet_BA,Flowtracker Discharge,0
+B28,Begin time,2021-06-15 12:20:00,LR_MainStreet_BA,Stage Reading,0
+B29,Begin time,2021-06-15 12:40:00,LR_MainStreet_BA,"Benchmark, WSE survey",0
+N28,End time,2021-06-15 12:40:00,LR_MainStreet_BA,Stage Reading,0
+N29,End time,2021-06-15 12:50:00,LR_MainStreet_BA,"Benchmark, WSE survey",0
+B30,Begin time,2021-06-15 12:50:00,LR_MainStreet_BA,Stage Reading,0
+N27,End time,2021-06-15 12:50:00,LR_MainStreet_BA,Flowtracker Discharge,0
+B31,Begin time,2021-06-15 13:10:00,LR_MainStreet_BA,Stage Reading,0
+N30,End time,2021-06-15 13:10:00,LR_MainStreet_BA,Stage Reading,0
+N31,End time,2021-06-15 13:20:00,LR_MainStreet_BA,Stage Reading,0
+N26,End time,2021-06-15 13:20:00,LR_MainStreet_BA,"Site Visit, Equipment Deployment, General Field Note, Stage Reading",0
+N24,End time,2021-06-15 13:40:00,LR_MainStreet_BA,Site Visit,0
+B32,Begin time,2021-07-07 12:10:00,LR_MainStreet_BA,"Site Visit, Benchmark, WSE survey",0
+B33,Begin time,2021-07-07 12:20:00,LR_MainStreet_BA,"Flowtracker Discharge, Stage Reading",0
+B34,Begin time,2021-07-07 12:50:00,LR_MainStreet_BA,Stage Reading,0
+N34,End time,2021-07-07 13:10:00,LR_MainStreet_BA,Stage Reading,0
+B35,Begin time,2021-07-07 13:40:00,LR_MainStreet_BA,Stage Reading,0
+N35,End time,2021-07-07 13:50:00,LR_MainStreet_BA,Stage Reading,0
+B36,Begin time,2021-07-07 13:50:00,LR_MainStreet_BA,"WSE survey, Benchmark, Stage Reading",0
+N33,End time,2021-07-07 14:10:00,LR_MainStreet_BA,"Flowtracker Discharge, Stage Reading",0
+N36,End time,2021-07-07 14:10:00,LR_MainStreet_BA,"WSE survey, Benchmark, Stage Reading",0
+N32,End time,2021-07-07 14:10:00,LR_MainStreet_BA,"Site Visit, Benchmark, WSE survey",0
+B37,Begin time,2021-07-08 12:20:00,LR_MainStreet_BA,Site Visit,0
+B38,Begin time,2021-07-08 13:10:00,LR_MainStreet_BA,"Stage Reading, Benchmark, Equipment Cleaning, WSE survey",0
+N38,End time,2021-07-08 13:10:00,LR_MainStreet_BA,"Stage Reading, Benchmark, Equipment Cleaning, WSE survey",0
+B39,Begin time,2021-07-08 13:20:00,LR_MainStreet_BA,"Equipment Cleaning, Precipitate Removal - Injection, EXO Specific Conductance Calibration, EXO pH Calibration, Aquatic Housing Cleaning",0
+B40,Begin time,2021-07-08 13:40:00,LR_MainStreet_BA,"EXO DO Cal with bubbler, Aquatic Housing Cleaning, Equipment Adjustment",0
+N39,End time,2021-07-08 13:40:00,LR_MainStreet_BA,"Equipment Cleaning, Precipitate Removal - Injection, EXO Specific Conductance Calibration, EXO pH Calibration, Aquatic Housing Cleaning",0
+B41,Begin time,2021-07-08 13:50:00,LR_MainStreet_BA,"Stage Reading, Benchmark, WSE survey",0
+N40,End time,2021-07-08 13:50:00,LR_MainStreet_BA,"EXO DO Cal with bubbler, Aquatic Housing Cleaning, Equipment Adjustment",0
+N41,End time,2021-07-08 14:10:00,LR_MainStreet_BA,"Stage Reading, Benchmark, WSE survey",0
+N37,End time,2021-07-08 14:20:00,LR_MainStreet_BA,Site Visit,0
+B42,Begin time,2021-07-14 15:40:00,LR_MainStreet_BA,"Site Visit, Change Desiccant",1
+N42,End time,2021-07-14 16:10:00,LR_MainStreet_BA,"Site Visit, Change Desiccant",1
+B43,Begin time,2021-07-19 10:20:00,LR_MainStreet_BA,"Site Visit, General Field Note, Benchmark, WSE survey, Stage Reading, Water Sampling",1
+N43,End time,2021-07-19 10:40:00,LR_MainStreet_BA,"Site Visit, General Field Note, Benchmark, WSE survey, Stage Reading, Water Sampling",1
+B44,Begin time,2021-07-26 13:40:00,LR_MainStreet_BA,"Site Visit, Benchmark",1
+N44,End time,2021-07-26 13:50:00,LR_MainStreet_BA,"Site Visit, Benchmark",1
+N45,End time,2021-07-26 13:50:00,LR_MainStreet_BA,WSE survey,
+B45,Begin time,2021-07-26 13:50:00,LR_MainStreet_BA,WSE survey,
+B46,Begin time,2021-07-27 13:20:00,LR_MainStreet_BA,Flowtracker Discharge,1
+B47,Begin time,2021-07-27 15:40:00,LR_MainStreet_BA,"Benchmark, WSE survey",1
+N46,End time,2021-07-27 15:40:00,LR_MainStreet_BA,Flowtracker Discharge,1
+N47,End time,2021-07-27 15:50:00,LR_MainStreet_BA,"Benchmark, WSE survey",1
+B48,Begin time,2021-07-29 14:40:00,LR_MainStreet_BA,"Site Visit, Benchmark, WSE survey, Stage Reading, Aquatic Housing Cleaning",1
+N48,End time,2021-07-29 14:50:00,LR_MainStreet_BA,"Site Visit, Benchmark, WSE survey, Stage Reading, Aquatic Housing Cleaning",1
+B49,Begin time,2021-08-10 11:20:00,LR_MainStreet_BA,"Site Visit, Benchmark, WSE survey",1
+N50,End time,2021-08-10 11:40:00,LR_MainStreet_BA,"Stage Reading, Equipment Cleaning, Precipitate Removal - Injection, EXO Specific Conductance Calibration",1
+B50,Begin time,2021-08-10 11:40:00,LR_MainStreet_BA,"Stage Reading, Equipment Cleaning, Precipitate Removal - Injection, EXO Specific Conductance Calibration",1
+B51,Begin time,2021-08-10 11:50:00,LR_MainStreet_BA,"EXO pH Calibration, Aquatic Housing Cleaning, EXO DO Cal with bubbler",1
+B52,Begin time,2021-08-10 12:10:00,LR_MainStreet_BA,"Stage Reading, Change Desiccant, WSE survey",1
+N51,End time,2021-08-10 12:10:00,LR_MainStreet_BA,"EXO pH Calibration, Aquatic Housing Cleaning, EXO DO Cal with bubbler",1
+N52,End time,2021-08-10 12:20:00,LR_MainStreet_BA,"Stage Reading, Change Desiccant, WSE survey",1
+N49,End time,2021-08-10 12:40:00,LR_MainStreet_BA,"Site Visit, Benchmark, WSE survey",1
+B53,Begin time,2021-08-25 09:50:00,LR_MainStreet_BA,Flowtracker Discharge,1
+N54,End time,2021-08-25 11:40:00,LR_MainStreet_BA,"Benchmark, WSE survey, Stage Reading",1
+N53,End time,2021-08-25 11:40:00,LR_MainStreet_BA,Flowtracker Discharge,1
+B54,Begin time,2021-08-25 11:40:00,LR_MainStreet_BA,"Benchmark, WSE survey, Stage Reading",
+B55,Begin time,2021-09-15 12:50:00,LR_MainStreet_BA,"Site Visit, Equipment Cleaning, Change Desiccant, Stage Reading",0
+B56,Begin time,2021-09-15 13:10:00,LR_MainStreet_BA,"Precipitate Removal - Injection, Equipment Cleaning",0
+B57,Begin time,2021-09-15 13:20:00,LR_MainStreet_BA,"EXO Specific Conductance Calibration, EXO pH Calibration",0
+N57,End time,2021-09-15 13:40:00,LR_MainStreet_BA,"EXO Specific Conductance Calibration, EXO pH Calibration",0
+N56,End time,2021-09-15 13:40:00,LR_MainStreet_BA,"Precipitate Removal - Injection, Equipment Cleaning",0
+B58,Begin time,2021-09-15 13:40:00,LR_MainStreet_BA,"Stage Reading, Logger Constant Change",0
+N58,End time,2021-09-15 13:50:00,LR_MainStreet_BA,"Stage Reading, Logger Constant Change",0
+B59,Begin time,2021-09-15 13:50:00,LR_MainStreet_BA,"Survey Water Surface Elevation, Stage Reading",0
+N59,End time,2021-09-15 14:10:00,LR_MainStreet_BA,"Survey Water Surface Elevation, Stage Reading",0
+N55,End time,2021-09-15 14:10:00,LR_MainStreet_BA,"Site Visit, Equipment Cleaning, Change Desiccant, Stage Reading",0
+B60,Begin time,2021-09-29 12:20:00,LR_MainStreet_BA,"Site Visit, Stage Reading, Water Sampling",0
+N60,End time,2021-09-29 12:40:00,LR_MainStreet_BA,"Site Visit, Stage Reading, Water Sampling",0
+B61,Begin time,2021-10-20 12:10:00,LR_MainStreet_BA,"Site Visit, General Field Note, Benchmark, WSE survey, Stage Reading, Equipment Cleaning",1
+B62,Begin time,2021-10-20 12:20:00,LR_MainStreet_BA,Equipment Calibration,1
+B63,Begin time,2021-10-20 12:40:00,LR_MainStreet_BA,Benchmark,1
+N62,End time,2021-10-20 12:50:00,LR_MainStreet_BA,Equipment Calibration,1
+N64,End time,2021-10-20 12:50:00,LR_MainStreet_BA,"WSE survey, Benchmark",1
+N63,End time,2021-10-20 12:50:00,LR_MainStreet_BA,Benchmark,1
+B64,Begin time,2021-10-20 12:50:00,LR_MainStreet_BA,"WSE survey, Benchmark",1
+N61,End time,2021-10-20 13:20:00,LR_MainStreet_BA,"Site Visit, General Field Note, Benchmark, WSE survey, Stage Reading, Equipment Cleaning",1
+B65,Begin time,2021-10-29 16:40:00,LR_MainStreet_BA,"Site Visit, Stage Reading, General Field Note",1
+N65,End time,2021-10-29 16:50:00,LR_MainStreet_BA,"Site Visit, Stage Reading, General Field Note",1
+B66,Begin time,2021-11-12 11:50:00,LR_MainStreet_BA,Site Visit,1
+B67,Begin time,2021-11-12 12:10:00,LR_MainStreet_BA,"Benchmark, WSE survey, Stage Reading, Equipment Cleaning, Equipment Calibration",1
+B68,Begin time,2021-11-12 12:20:00,LR_MainStreet_BA,"Aquatic Housing Cleaning, Equipment Cleaning, Change Desiccant",1
+N67,End time,2021-11-12 12:20:00,LR_MainStreet_BA,"Benchmark, WSE survey, Stage Reading, Equipment Cleaning, Equipment Calibration",1
+N68,End time,2021-11-12 12:40:00,LR_MainStreet_BA,"Aquatic Housing Cleaning, Equipment Cleaning, Change Desiccant",1
+B69,Begin time,2021-11-12 12:50:00,LR_MainStreet_BA,"Equipment Cleaning, Benchmark, WSE survey, Stage Reading",1
+N69,End time,2021-11-12 13:10:00,LR_MainStreet_BA,"Equipment Cleaning, Benchmark, WSE survey, Stage Reading",1
+N66,End time,2021-11-12 13:10:00,LR_MainStreet_BA,Site Visit,1

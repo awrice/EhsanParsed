@@ -1,0 +1,127 @@
+Event Number,Combined Time,Begin: End time,SiteCode,Method,QC_status
+B1,Begin time,2022-01-17 11:50:00,BSF_CONF_BA,Site Visit,1
+B2,Begin time,2022-01-17 12:10:00,BSF_CONF_BA,"Benchmark, WSE survey, Stage Reading, General Field Note, Equipment Cleaning",1
+B3,Begin time,2022-01-17 12:20:00,BSF_CONF_BA,"Equipment Cleaning, Change Desiccant",1
+N2,End time,2022-01-17 12:20:00,BSF_CONF_BA,"Benchmark, WSE survey, Stage Reading, General Field Note, Equipment Cleaning",1
+N3,End time,2022-01-17 12:40:00,BSF_CONF_BA,"Equipment Cleaning, Change Desiccant",1
+N1,End time,2022-01-17 12:40:00,BSF_CONF_BA,Site Visit,1
+B4,Begin time,2022-01-17 12:40:00,BSF_CONF_BA,"Benchmark, WSE survey",1
+N4,End time,2022-01-17 12:50:00,BSF_CONF_BA,"Benchmark, WSE survey",1
+B5,Begin time,2022-03-08 13:20:00,BSF_CONF_BA,Site Visit,1
+B6,Begin time,2022-03-08 13:40:00,BSF_CONF_BA,Equipment Cleaning,1
+B7,Begin time,2022-03-08 14:10:00,BSF_CONF_BA,EXO Specific Conductance Calibration,1
+N6,End time,2022-03-08 14:20:00,BSF_CONF_BA,Equipment Cleaning,1
+B8,Begin time,2022-03-08 14:20:00,BSF_CONF_BA,"EXO pH tip replacement, Site Visit, Equipment Adjustment, Logger Constant Change, General Field Note, Stage Reading, EXO pH Calibration",1
+B9,Begin time,2022-03-08 14:40:00,BSF_CONF_BA,EXO DO Cal with bubbler,1
+N8,End time,2022-03-08 14:40:00,BSF_CONF_BA,"EXO pH tip replacement, Site Visit, Equipment Adjustment, Logger Constant Change, General Field Note, Stage Reading, EXO pH Calibration",1
+N7,End time,2022-03-08 14:40:00,BSF_CONF_BA,EXO Specific Conductance Calibration,1
+N9,End time,2022-03-08 14:50:00,BSF_CONF_BA,EXO DO Cal with bubbler,1
+N5,End time,2022-03-08 15:50:00,BSF_CONF_BA,Site Visit,1
+B10,Begin time,2022-03-31 11:20:00,BSF_CONF_BA,Site Visit,1
+B11,Begin time,2022-03-31 11:40:00,BSF_CONF_BA,"Benchmark, WSE survey",1
+N11,End time,2022-03-31 11:50:00,BSF_CONF_BA,"Benchmark, WSE survey",1
+B12,Begin time,2022-03-31 11:50:00,BSF_CONF_BA,"Stage Reading, Flowtracker Discharge, Site Visit, Equipment Adjustment",1
+N12,End time,2022-03-31 11:50:00,BSF_CONF_BA,"Stage Reading, Flowtracker Discharge, Site Visit, Equipment Adjustment",1
+N10,End time,2022-03-31 13:10:00,BSF_CONF_BA,Site Visit,1
+B13,Begin time,2022-04-12 12:10:00,BSF_CONF_BA,"Site Visit, WSE survey, Benchmark, Stage Reading, Equipment Cleaning",1
+B14,Begin time,2022-04-12 12:20:00,BSF_CONF_BA,Equipment Cleaning,1
+N13,End time,2022-04-12 12:20:00,BSF_CONF_BA,"Site Visit, WSE survey, Benchmark, Stage Reading, Equipment Cleaning",1
+N15,End time,2022-04-12 12:40:00,BSF_CONF_BA,"EXO Specific Conductance Calibration, EXO pH Calibration, Aquatic Housing Cleaning, EXO DO Cal with bubbler",1
+B15,Begin time,2022-04-12 12:40:00,BSF_CONF_BA,"EXO Specific Conductance Calibration, EXO pH Calibration, Aquatic Housing Cleaning, EXO DO Cal with bubbler",1
+B16,Begin time,2022-04-12 12:50:00,BSF_CONF_BA,"Stage Reading, Benchmark, WSE survey",1
+N14,End time,2022-04-12 12:50:00,BSF_CONF_BA,Equipment Cleaning,1
+N16,End time,2022-04-12 13:10:00,BSF_CONF_BA,"Stage Reading, Benchmark, WSE survey",1
+B17,Begin time,2022-04-14 14:20:00,BSF_CONF_BA,"Site Visit, Stage Reading",1
+N17,End time,2022-04-14 14:40:00,BSF_CONF_BA,"Site Visit, Stage Reading",1
+B18,Begin time,2022-04-18 16:10:00,BSF_CONF_BA,Site Visit,1
+B19,Begin time,2022-04-18 16:20:00,BSF_CONF_BA,Stage Reading,1
+N19,End time,2022-04-18 16:40:00,BSF_CONF_BA,Stage Reading,1
+N18,End time,2022-04-18 16:40:00,BSF_CONF_BA,Site Visit,1
+B20,Begin time,2022-04-26 11:50:00,BSF_CONF_BA,"Stage Reading, WSE survey, Benchmark",1
+N20,End time,2022-04-26 12:10:00,BSF_CONF_BA,"Stage Reading, WSE survey, Benchmark",1
+B21,Begin time,2022-05-17 13:10:00,BSF_CONF_BA,"Site Visit, Stage Reading, Flowtracker Discharge",1
+B22,Begin time,2022-05-17 14:10:00,BSF_CONF_BA,Stage Reading,1
+N21,End time,2022-05-17 14:20:00,BSF_CONF_BA,"Site Visit, Stage Reading, Flowtracker Discharge",1
+N22,End time,2022-05-17 14:20:00,BSF_CONF_BA,Stage Reading,1
+B23,Begin time,2022-05-19 11:20:00,BSF_CONF_BA,Site Visit,1
+B24,Begin time,2022-05-19 11:40:00,BSF_CONF_BA,"Benchmark, WSE survey",1
+N23,End time,2022-05-19 11:40:00,BSF_CONF_BA,Site Visit,1
+N24,End time,2022-05-19 11:50:00,BSF_CONF_BA,"Benchmark, WSE survey",1
+B25,Begin time,2022-05-19 12:10:00,BSF_CONF_BA,ADCP Discharge,1
+B26,Begin time,2022-05-19 12:20:00,BSF_CONF_BA,"Stage Reading, WSE survey, Benchmark",1
+N26,End time,2022-05-19 12:40:00,BSF_CONF_BA,"Stage Reading, WSE survey, Benchmark",1
+N25,End time,2022-05-19 12:40:00,BSF_CONF_BA,ADCP Discharge,1
+B27,Begin time,2022-05-20 11:40:00,BSF_CONF_BA,"Site Visit, Equipment Cleaning, Equipment Adjustment, Stage Reading",1
+B28,Begin time,2022-05-20 11:50:00,BSF_CONF_BA,Stage Reading,1
+N27,End time,2022-05-20 12:10:00,BSF_CONF_BA,"Site Visit, Equipment Cleaning, Equipment Adjustment, Stage Reading",1
+N28,End time,2022-05-20 12:10:00,BSF_CONF_BA,Stage Reading,1
+B29,Begin time,2022-05-24 10:20:00,BSF_CONF_BA,"Site Visit, Benchmark, WSE survey, Stage Reading",1
+N29,End time,2022-05-24 10:40:00,BSF_CONF_BA,"Site Visit, Benchmark, WSE survey, Stage Reading",1
+B30,Begin time,2022-05-24 11:50:00,BSF_CONF_BA,"WSE survey, Stage Reading, Benchmark",1
+N30,End time,2022-05-24 12:10:00,BSF_CONF_BA,"WSE survey, Stage Reading, Benchmark",1
+B31,Begin time,2022-05-25 12:20:00,BSF_CONF_BA,"Site Visit, Change Desiccant",1
+B32,Begin time,2022-05-25 12:40:00,BSF_CONF_BA,"Benchmark, Aquatic Housing Cleaning, WSE survey, Stage Reading, Equipment Calibration, Equipment Cleaning",1
+N32,End time,2022-05-25 12:40:00,BSF_CONF_BA,"Benchmark, Aquatic Housing Cleaning, WSE survey, Stage Reading, Equipment Calibration, Equipment Cleaning",1
+B33,Begin time,2022-05-25 12:50:00,BSF_CONF_BA,"Equipment Cleaning, Precipitate Removal - Injection",1
+B34,Begin time,2022-05-25 13:10:00,BSF_CONF_BA,"WSE survey, Stage Reading",1
+N31,End time,2022-05-25 13:20:00,BSF_CONF_BA,"Site Visit, Change Desiccant",1
+N33,End time,2022-05-25 13:20:00,BSF_CONF_BA,"Equipment Cleaning, Precipitate Removal - Injection",1
+N34,End time,2022-05-25 13:20:00,BSF_CONF_BA,"WSE survey, Stage Reading",1
+N35,End time,2022-05-25 13:20:00,BSF_CONF_BA,Benchmark,
+B35,Begin time,2022-05-25 13:20:00,BSF_CONF_BA,Benchmark,
+B36,Begin time,2022-06-16 11:20:00,BSF_CONF_BA,"Site Visit, Stage Reading, Aquatic Housing Cleaning, Change Desiccant, Equipment Cleaning",1
+B37,Begin time,2022-06-16 11:40:00,BSF_CONF_BA,"Equipment Cleaning, EXO pH tip replacement",1
+B38,Begin time,2022-06-16 11:50:00,BSF_CONF_BA,"EXO DO Cal with bubbler, EXO Specific Conductance Calibration, Stage Reading",1
+N37,End time,2022-06-16 11:50:00,BSF_CONF_BA,"Equipment Cleaning, EXO pH tip replacement",1
+N36,End time,2022-06-16 12:10:00,BSF_CONF_BA,"Site Visit, Stage Reading, Aquatic Housing Cleaning, Change Desiccant, Equipment Cleaning",1
+N38,End time,2022-06-16 12:10:00,BSF_CONF_BA,"EXO DO Cal with bubbler, EXO Specific Conductance Calibration, Stage Reading",1
+B39,Begin time,2022-07-28 11:50:00,BSF_CONF_BA,"Site Visit, Stage Reading, Flowtracker Discharge",1
+B40,Begin time,2022-07-28 12:20:00,BSF_CONF_BA,"Stage Reading, Equipment Calibration, Equipment Cleaning, Aquatic Housing Cleaning",1
+N39,End time,2022-07-28 12:40:00,BSF_CONF_BA,"Site Visit, Stage Reading, Flowtracker Discharge",1
+N40,End time,2022-07-28 12:40:00,BSF_CONF_BA,"Stage Reading, Equipment Calibration, Equipment Cleaning, Aquatic Housing Cleaning",1
+B41,Begin time,2022-08-18 16:40:00,BSF_CONF_BA,"Change Desiccant, Site Visit, General Field Note, Stage Reading",1
+N41,End time,2022-08-18 16:50:00,BSF_CONF_BA,"Change Desiccant, Site Visit, General Field Note, Stage Reading",1
+B42,Begin time,2022-08-22 10:50:00,BSF_CONF_BA,"Site Visit, Change Desiccant, Check color desiccant, Stage Reading, Aquatic Housing Cleaning, Turbidity Sensor Inspection, EXO DO Cal with bubbler, EXO pH Calibration, EXO Specific Conductance Calibration",0
+B43,Begin time,2022-08-22 11:10:00,BSF_CONF_BA,Precipitate Removal - Injection,0
+N43,End time,2022-08-22 11:20:00,BSF_CONF_BA,Precipitate Removal - Injection,0
+B44,Begin time,2022-08-22 11:20:00,BSF_CONF_BA,Stage Reading,0
+N44,End time,2022-08-22 11:40:00,BSF_CONF_BA,Stage Reading,0
+N42,End time,2022-08-22 11:40:00,BSF_CONF_BA,"Site Visit, Change Desiccant, Check color desiccant, Stage Reading, Aquatic Housing Cleaning, Turbidity Sensor Inspection, EXO DO Cal with bubbler, EXO pH Calibration, EXO Specific Conductance Calibration",0
+B45,Begin time,2022-10-04 14:10:00,BSF_CONF_BA,Site Visit,0
+B46,Begin time,2022-10-04 14:20:00,BSF_CONF_BA,"Benchmark, WSE survey",0
+N46,End time,2022-10-04 14:20:00,BSF_CONF_BA,"Benchmark, WSE survey",0
+B47,Begin time,2022-10-04 14:40:00,BSF_CONF_BA,Flowtracker Discharge,0
+B48,Begin time,2022-10-04 15:20:00,BSF_CONF_BA,"WSE survey, TOSP, Benchmark",0
+N47,End time,2022-10-04 15:40:00,BSF_CONF_BA,Flowtracker Discharge,0
+N48,End time,2022-10-04 15:40:00,BSF_CONF_BA,"WSE survey, TOSP, Benchmark",0
+N45,End time,2022-10-04 15:40:00,BSF_CONF_BA,Site Visit,0
+B49,Begin time,2022-10-18 14:20:00,BSF_CONF_BA,Site Visit,1
+B50,Begin time,2022-10-18 14:40:00,BSF_CONF_BA,"Benchmark, WSE survey, Stage Reading, TOSP, Equipment Cleaning, EXO DO Cal with bubbler, EXO pH Calibration, EXO Specific Conductance Calibration",1
+N50,End time,2022-10-18 14:40:00,BSF_CONF_BA,"Benchmark, WSE survey, Stage Reading, TOSP, Equipment Cleaning, EXO DO Cal with bubbler, EXO pH Calibration, EXO Specific Conductance Calibration",1
+B51,Begin time,2022-10-18 14:50:00,BSF_CONF_BA,"WSE survey, Stage Reading",1
+B52,Begin time,2022-10-18 15:10:00,BSF_CONF_BA,Benchmark,1
+N52,End time,2022-10-18 15:10:00,BSF_CONF_BA,Benchmark,1
+N51,End time,2022-10-18 15:10:00,BSF_CONF_BA,"WSE survey, Stage Reading",1
+N49,End time,2022-10-18 15:20:00,BSF_CONF_BA,Site Visit,1
+B53,Begin time,2022-10-24 14:50:00,BSF_CONF_BA,"Site Visit, Stage Reading",0
+N53,End time,2022-10-24 14:50:00,BSF_CONF_BA,"Site Visit, Stage Reading",0
+B54,Begin time,2022-11-03 13:20:00,BSF_CONF_BA,Flowtracker Discharge,1
+B55,Begin time,2022-11-03 13:40:00,BSF_CONF_BA,"Site Visit, Stage Reading",1
+B56,Begin time,2022-11-03 14:50:00,BSF_CONF_BA,Stage Reading,1
+N55,End time,2022-11-03 15:10:00,BSF_CONF_BA,"Site Visit, Stage Reading",1
+N56,End time,2022-11-03 15:10:00,BSF_CONF_BA,Stage Reading,1
+N54,End time,2022-11-03 15:10:00,BSF_CONF_BA,Flowtracker Discharge,1
+B57,Begin time,2022-11-17 14:50:00,BSF_CONF_BA,"Site Visit, Benchmark, WSE survey, Stage Reading, Change Desiccant, Equipment Calibration, Equipment Cleaning",1
+B58,Begin time,2022-11-17 15:10:00,BSF_CONF_BA,Aquatic Housing Cleaning,1
+B59,Begin time,2022-11-17 15:20:00,BSF_CONF_BA,"WSE survey, Stage Reading, Benchmark",1
+N58,End time,2022-11-17 15:20:00,BSF_CONF_BA,Aquatic Housing Cleaning,1
+N59,End time,2022-11-17 15:40:00,BSF_CONF_BA,"WSE survey, Stage Reading, Benchmark",1
+N57,End time,2022-11-17 15:40:00,BSF_CONF_BA,"Site Visit, Benchmark, WSE survey, Stage Reading, Change Desiccant, Equipment Calibration, Equipment Cleaning",1
+B60,Begin time,2022-12-06 13:50:00,BSF_CONF_BA,"Site Visit, Stage Reading, Benchmark, WSE survey, Equipment Cleaning",1
+B61,Begin time,2022-12-06 14:10:00,BSF_CONF_BA,"Equipment Cleaning, Equipment Calibration",1
+B62,Begin time,2022-12-06 14:20:00,BSF_CONF_BA,"Change Desiccant, Aquatic Housing Cleaning, Equipment Adjustment",1
+N61,End time,2022-12-06 14:20:00,BSF_CONF_BA,"Equipment Cleaning, Equipment Calibration",1
+B63,Begin time,2022-12-06 14:40:00,BSF_CONF_BA,"Stage Reading, WSE survey, Benchmark",1
+N62,End time,2022-12-06 14:40:00,BSF_CONF_BA,"Change Desiccant, Aquatic Housing Cleaning, Equipment Adjustment",1
+N63,End time,2022-12-06 14:50:00,BSF_CONF_BA,"Stage Reading, WSE survey, Benchmark",1
+N60,End time,2022-12-06 14:50:00,BSF_CONF_BA,"Site Visit, Stage Reading, Benchmark, WSE survey, Equipment Cleaning",1

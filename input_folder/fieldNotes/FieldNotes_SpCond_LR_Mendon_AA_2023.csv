@@ -1,0 +1,211 @@
+Event Number,Combined Time,Begin: End time,SiteCode,Method,QC_status
+B1,Begin time,2023-01-12 14:50:00,LR_Mendon_AA,"Site Visit, Benchmark, TOSP, WSE survey, Stage Reading, Change Desiccant, Equipment Calibration, Equipment Cleaning",1
+B2,Begin time,2023-01-12 15:10:00,LR_Mendon_AA,"Equipment Cleaning, Aquatic Housing Cleaning",1
+B3,Begin time,2023-01-12 15:20:00,LR_Mendon_AA,"Stage Reading, WSE survey, Benchmark",1
+N2,End time,2023-01-12 15:20:00,LR_Mendon_AA,"Equipment Cleaning, Aquatic Housing Cleaning",1
+N3,End time,2023-01-12 15:40:00,LR_Mendon_AA,"Stage Reading, WSE survey, Benchmark",1
+N1,End time,2023-01-12 15:40:00,LR_Mendon_AA,"Site Visit, Benchmark, TOSP, WSE survey, Stage Reading, Change Desiccant, Equipment Calibration, Equipment Cleaning",1
+B4,Begin time,2023-01-17 10:20:00,LR_Mendon_AA,"Site Visit, Stage Reading, Equipment Deployment, Equipment Retrieval",0
+N4,End time,2023-01-17 10:40:00,LR_Mendon_AA,"Site Visit, Stage Reading, Equipment Deployment, Equipment Retrieval",0
+B5,Begin time,2023-02-16 13:50:00,LR_Mendon_AA,"Site Visit, General Field Note",1
+N5,End time,2023-02-16 14:20:00,LR_Mendon_AA,"Site Visit, General Field Note",1
+B6,Begin time,2023-03-02 12:50:00,LR_Mendon_AA,"Site Visit, Benchmark, WSE survey",1
+B7,Begin time,2023-03-02 13:10:00,LR_Mendon_AA,"Precipitate Removal - Injection, Equipment Adjustment, Equipment Cleaning",1
+B8,Begin time,2023-03-02 13:20:00,LR_Mendon_AA,"Stage Reading, Equipment Cleaning",1
+N7,End time,2023-03-02 13:40:00,LR_Mendon_AA,"Precipitate Removal - Injection, Equipment Adjustment, Equipment Cleaning",1
+N8,End time,2023-03-02 13:40:00,LR_Mendon_AA,"Stage Reading, Equipment Cleaning",1
+B9,Begin time,2023-03-02 13:50:00,LR_Mendon_AA,"Equipment Cleaning, General Field Note, EXO Specific Conductance Calibration",1
+N9,End time,2023-03-02 14:10:00,LR_Mendon_AA,"Equipment Cleaning, General Field Note, EXO Specific Conductance Calibration",1
+B10,Begin time,2023-03-02 14:10:00,LR_Mendon_AA,EXO pH Calibration,1
+B11,Begin time,2023-03-02 14:20:00,LR_Mendon_AA,EXO DO Cal with bubbler,1
+B12,Begin time,2023-03-02 14:40:00,LR_Mendon_AA,"General Field Note, WSE survey, Stage Reading, Benchmark",1
+N11,End time,2023-03-02 14:40:00,LR_Mendon_AA,EXO DO Cal with bubbler,1
+N10,End time,2023-03-02 14:40:00,LR_Mendon_AA,EXO pH Calibration,1
+N12,End time,2023-03-02 14:50:00,LR_Mendon_AA,"General Field Note, WSE survey, Stage Reading, Benchmark",1
+N6,End time,2023-03-02 14:50:00,LR_Mendon_AA,"Site Visit, Benchmark, WSE survey",1
+B13,Begin time,2023-03-14 16:40:00,LR_Mendon_AA,"Site Visit, Benchmark",1
+N13,End time,2023-03-14 16:50:00,LR_Mendon_AA,"Site Visit, Benchmark",1
+B14,Begin time,2023-03-30 14:10:00,LR_Mendon_AA,"Site Visit, General Field Note, Equipment Adjustment, Aquatic Housing Cleaning, Stage Reading",1
+B15,Begin time,2023-03-30 14:20:00,LR_Mendon_AA,"Equipment Cleaning, EXO Specific Conductance Calibration, EXO pH Calibration",1
+B16,Begin time,2023-03-30 14:40:00,LR_Mendon_AA,"EXO DO Cal with bubbler, Change Desiccant, Check color desiccant",1
+N16,End time,2023-03-30 14:40:00,LR_Mendon_AA,"EXO DO Cal with bubbler, Change Desiccant, Check color desiccant",1
+B17,Begin time,2023-03-30 14:50:00,LR_Mendon_AA,"Equipment Cleaning, Turbidity Sensor Inspection, Precipitate Removal - Injection, Infrastructure Installation",1
+N15,End time,2023-03-30 14:50:00,LR_Mendon_AA,"Equipment Cleaning, EXO Specific Conductance Calibration, EXO pH Calibration",1
+B18,Begin time,2023-03-30 15:10:00,LR_Mendon_AA,Stage Reading,1
+N17,End time,2023-03-30 15:10:00,LR_Mendon_AA,"Equipment Cleaning, Turbidity Sensor Inspection, Precipitate Removal - Injection, Infrastructure Installation",1
+N18,End time,2023-03-30 15:20:00,LR_Mendon_AA,Stage Reading,1
+N14,End time,2023-03-30 16:40:00,LR_Mendon_AA,"Site Visit, General Field Note, Equipment Adjustment, Aquatic Housing Cleaning, Stage Reading",1
+B19,Begin time,2023-04-25 12:40:00,LR_Mendon_AA,Benchmark,1
+B20,Begin time,2023-04-25 12:50:00,LR_Mendon_AA,"WSE survey, Stage Reading, Precipitate Removal - Injection, Turbidity Sensor Inspection, Equipment Cleaning",1
+N19,End time,2023-04-25 12:50:00,LR_Mendon_AA,Benchmark,1
+B21,Begin time,2023-04-25 13:10:00,LR_Mendon_AA,EXO Specific Conductance Calibration,1
+N21,End time,2023-04-25 13:20:00,LR_Mendon_AA,EXO Specific Conductance Calibration,1
+N20,End time,2023-04-25 13:20:00,LR_Mendon_AA,"WSE survey, Stage Reading, Precipitate Removal - Injection, Turbidity Sensor Inspection, Equipment Cleaning",1
+B22,Begin time,2023-04-25 13:20:00,LR_Mendon_AA,"EXO pH Calibration, EXO DO Cal with bubbler, Benchmark",1
+B23,Begin time,2023-04-25 13:40:00,LR_Mendon_AA,"ADCP Discharge, WSE survey, Stage Reading",1
+N22,End time,2023-04-25 13:40:00,LR_Mendon_AA,"EXO pH Calibration, EXO DO Cal with bubbler, Benchmark",1
+N23,End time,2023-04-25 14:40:00,LR_Mendon_AA,"ADCP Discharge, WSE survey, Stage Reading",1
+B24,Begin time,2023-05-04 11:50:00,LR_Mendon_AA,"Site Visit, ADCP Discharge",1
+B25,Begin time,2023-05-04 12:20:00,LR_Mendon_AA,Stage Reading,1
+N24,End time,2023-05-04 12:40:00,LR_Mendon_AA,"Site Visit, ADCP Discharge",1
+N25,End time,2023-05-04 12:40:00,LR_Mendon_AA,Stage Reading,1
+B26,Begin time,2023-05-08 10:50:00,LR_Mendon_AA,"Site Visit, Benchmark, WSE survey, Stage Reading, ADCP Discharge",1
+N26,End time,2023-05-08 11:10:00,LR_Mendon_AA,"Site Visit, Benchmark, WSE survey, Stage Reading, ADCP Discharge",1
+B27,Begin time,2023-05-08 11:40:00,LR_Mendon_AA,Benchmark,1
+N27,End time,2023-05-08 11:50:00,LR_Mendon_AA,Benchmark,1
+B28,Begin time,2023-05-09 11:10:00,LR_Mendon_AA,"Site Visit, Benchmark",1
+B29,Begin time,2023-05-09 11:20:00,LR_Mendon_AA,"WSE survey, ADCP Discharge",1
+N29,End time,2023-05-09 11:20:00,LR_Mendon_AA,"WSE survey, ADCP Discharge",1
+B30,Begin time,2023-05-09 12:10:00,LR_Mendon_AA,"Benchmark, WSE survey",1
+N28,End time,2023-05-09 12:20:00,LR_Mendon_AA,"Site Visit, Benchmark",1
+N30,End time,2023-05-09 12:20:00,LR_Mendon_AA,"Benchmark, WSE survey",1
+B31,Begin time,2023-05-11 09:50:00,LR_Mendon_AA,"Site Visit, ADCP Discharge",1
+N31,End time,2023-05-11 11:10:00,LR_Mendon_AA,"Site Visit, ADCP Discharge",1
+B32,Begin time,2023-05-26 10:10:00,LR_Mendon_AA,Site Visit,1
+B33,Begin time,2023-05-26 10:20:00,LR_Mendon_AA,"Benchmark, WSE survey, Stage Reading, ADCP Discharge",1
+N33,End time,2023-05-26 10:40:00,LR_Mendon_AA,"Benchmark, WSE survey, Stage Reading, ADCP Discharge",1
+B34,Begin time,2023-05-26 11:20:00,LR_Mendon_AA,"Benchmark, WSE survey",1
+N32,End time,2023-05-26 11:40:00,LR_Mendon_AA,Site Visit,1
+N34,End time,2023-05-26 11:40:00,LR_Mendon_AA,"Benchmark, WSE survey",1
+B35,Begin time,2023-05-30 10:20:00,LR_Mendon_AA,"Site Visit, Benchmark, WSE survey, ADCP Discharge",1
+B36,Begin time,2023-05-30 10:50:00,LR_Mendon_AA,"Benchmark, WSE survey, Change Desiccant, Check color desiccant, Stage Reading, Equipment Cleaning, EXO Specific Conductance Calibration, EXO pH Calibration, EXO DO Cal with bubbler, Turbidity Sensor Inspection",1
+N36,End time,2023-05-30 11:10:00,LR_Mendon_AA,"Benchmark, WSE survey, Change Desiccant, Check color desiccant, Stage Reading, Equipment Cleaning, EXO Specific Conductance Calibration, EXO pH Calibration, EXO DO Cal with bubbler, Turbidity Sensor Inspection",1
+B37,Begin time,2023-05-30 11:20:00,LR_Mendon_AA,"WSE survey, Benchmark",1
+N35,End time,2023-05-30 11:40:00,LR_Mendon_AA,"Site Visit, Benchmark, WSE survey, ADCP Discharge",1
+N37,End time,2023-05-30 11:40:00,LR_Mendon_AA,"WSE survey, Benchmark",1
+B38,Begin time,2023-05-31 10:10:00,LR_Mendon_AA,"Site Visit, Benchmark, WSE survey",1
+B39,Begin time,2023-05-31 10:20:00,LR_Mendon_AA,ADCP Discharge,1
+N39,End time,2023-05-31 10:40:00,LR_Mendon_AA,ADCP Discharge,1
+B40,Begin time,2023-05-31 10:40:00,LR_Mendon_AA,WSE survey,1
+N40,End time,2023-05-31 10:50:00,LR_Mendon_AA,WSE survey,1
+N38,End time,2023-05-31 10:50:00,LR_Mendon_AA,"Site Visit, Benchmark, WSE survey",1
+B41,Begin time,2023-06-02 10:10:00,LR_Mendon_AA,"Site Visit, Benchmark, WSE survey",1
+N41,End time,2023-06-02 11:20:00,LR_Mendon_AA,"Site Visit, Benchmark, WSE survey",1
+B42,Begin time,2023-06-05 10:20:00,LR_Mendon_AA,"Benchmark, WSE survey, Stage Reading",1
+N42,End time,2023-06-05 10:40:00,LR_Mendon_AA,"Benchmark, WSE survey, Stage Reading",1
+B43,Begin time,2023-06-05 10:40:00,LR_Mendon_AA,ADCP Discharge,1
+B44,Begin time,2023-06-05 11:10:00,LR_Mendon_AA,"Benchmark, WSE survey",1
+N43,End time,2023-06-05 11:10:00,LR_Mendon_AA,ADCP Discharge,1
+N44,End time,2023-06-05 11:20:00,LR_Mendon_AA,"Benchmark, WSE survey",1
+B45,Begin time,2023-06-06 13:40:00,LR_Mendon_AA,Site Visit,1
+B46,Begin time,2023-06-06 13:50:00,LR_Mendon_AA,"Benchmark, WSE survey",1
+B47,Begin time,2023-06-06 14:10:00,LR_Mendon_AA,ADCP Discharge,1
+N46,End time,2023-06-06 14:10:00,LR_Mendon_AA,"Benchmark, WSE survey",1
+B48,Begin time,2023-06-06 14:20:00,LR_Mendon_AA,"Benchmark, WSE survey",1
+N48,End time,2023-06-06 14:40:00,LR_Mendon_AA,"Benchmark, WSE survey",1
+N47,End time,2023-06-06 14:40:00,LR_Mendon_AA,ADCP Discharge,1
+N45,End time,2023-06-06 14:40:00,LR_Mendon_AA,Site Visit,1
+B49,Begin time,2023-06-08 10:10:00,LR_Mendon_AA,"Site Visit, Benchmark, WSE survey, ADCP Discharge, Stage Reading",1
+N49,End time,2023-06-08 10:20:00,LR_Mendon_AA,"Site Visit, Benchmark, WSE survey, ADCP Discharge, Stage Reading",1
+B50,Begin time,2023-06-13 13:20:00,LR_Mendon_AA,"Site Visit, Benchmark, WSE survey, Stage Reading, ADCP Discharge",1
+B51,Begin time,2023-06-13 13:50:00,LR_Mendon_AA,"WSE survey, Benchmark, Stage Reading",1
+N50,End time,2023-06-13 14:10:00,LR_Mendon_AA,"Site Visit, Benchmark, WSE survey, Stage Reading, ADCP Discharge",1
+N51,End time,2023-06-13 14:10:00,LR_Mendon_AA,"WSE survey, Benchmark, Stage Reading",1
+B52,Begin time,2023-06-14 12:10:00,LR_Mendon_AA,Site Visit,0
+B53,Begin time,2023-06-14 12:20:00,LR_Mendon_AA,"Benchmark, WSE survey, Equipment Cleaning, EXO Specific Conductance Calibration, EXO pH Calibration, EXO DO Cal with bubbler, Stage Reading",0
+N53,End time,2023-06-14 12:40:00,LR_Mendon_AA,"Benchmark, WSE survey, Equipment Cleaning, EXO Specific Conductance Calibration, EXO pH Calibration, EXO DO Cal with bubbler, Stage Reading",0
+B54,Begin time,2023-06-14 12:50:00,LR_Mendon_AA,Precipitate Removal - Injection,0
+B55,Begin time,2023-06-14 13:10:00,LR_Mendon_AA,Aquatic Housing Cleaning,0
+N54,End time,2023-06-14 13:20:00,LR_Mendon_AA,Precipitate Removal - Injection,0
+N55,End time,2023-06-14 13:20:00,LR_Mendon_AA,Aquatic Housing Cleaning,0
+B56,Begin time,2023-06-14 13:20:00,LR_Mendon_AA,"Equipment Cleaning, Turbidity Sensor Inspection, Change Desiccant, Check color desiccant, Benchmark, WSE survey, Stage Reading",0
+N52,End time,2023-06-14 13:40:00,LR_Mendon_AA,Site Visit,0
+N56,End time,2023-06-14 13:40:00,LR_Mendon_AA,"Equipment Cleaning, Turbidity Sensor Inspection, Change Desiccant, Check color desiccant, Benchmark, WSE survey, Stage Reading",0
+B57,Begin time,2023-06-20 12:20:00,LR_Mendon_AA,"Site Visit, Benchmark, WSE survey, Stage Reading, ADCP Discharge",0
+B58,Begin time,2023-06-20 12:50:00,LR_Mendon_AA,WSE survey,0
+B59,Begin time,2023-06-20 13:10:00,LR_Mendon_AA,"Stage Reading, Benchmark",0
+N58,End time,2023-06-20 13:10:00,LR_Mendon_AA,WSE survey,0
+N59,End time,2023-06-20 13:20:00,LR_Mendon_AA,"Stage Reading, Benchmark",0
+N57,End time,2023-06-20 13:20:00,LR_Mendon_AA,"Site Visit, Benchmark, WSE survey, Stage Reading, ADCP Discharge",0
+B60,Begin time,2023-06-23 13:10:00,LR_Mendon_AA,"Site Visit, Benchmark",0
+B61,Begin time,2023-06-23 13:20:00,LR_Mendon_AA,"WSE survey, Stage Reading",0
+N61,End time,2023-06-23 13:20:00,LR_Mendon_AA,"WSE survey, Stage Reading",0
+B62,Begin time,2023-06-23 13:40:00,LR_Mendon_AA,ADCP Discharge,0
+B63,Begin time,2023-06-23 13:50:00,LR_Mendon_AA,"Benchmark, WSE survey",0
+N63,End time,2023-06-23 14:10:00,LR_Mendon_AA,"Benchmark, WSE survey",0
+N62,End time,2023-06-23 14:10:00,LR_Mendon_AA,ADCP Discharge,0
+N60,End time,2023-06-23 14:10:00,LR_Mendon_AA,"Site Visit, Benchmark",0
+B64,Begin time,2023-06-28 10:10:00,LR_Mendon_AA,Site Visit,0
+B65,Begin time,2023-06-28 10:20:00,LR_Mendon_AA,"Benchmark, WSE survey, ADCP Discharge, Stage Reading",0
+N65,End time,2023-06-28 10:20:00,LR_Mendon_AA,"Benchmark, WSE survey, ADCP Discharge, Stage Reading",0
+N64,End time,2023-06-28 10:50:00,LR_Mendon_AA,Site Visit,0
+B66,Begin time,2023-07-05 13:10:00,LR_Mendon_AA,"Site Visit, Benchmark, WSE survey",0
+B67,Begin time,2023-07-05 13:20:00,LR_Mendon_AA,"Stage Reading, ADCP Discharge",0
+N67,End time,2023-07-05 13:40:00,LR_Mendon_AA,"Stage Reading, ADCP Discharge",0
+B68,Begin time,2023-07-05 13:40:00,LR_Mendon_AA,"WSE survey, Stage Reading, Benchmark",0
+N66,End time,2023-07-05 13:50:00,LR_Mendon_AA,"Site Visit, Benchmark, WSE survey",0
+N68,End time,2023-07-05 13:50:00,LR_Mendon_AA,"WSE survey, Stage Reading, Benchmark",0
+B69,Begin time,2023-07-10 14:40:00,LR_Mendon_AA,"Site Visit, Benchmark, WSE survey, Stage Reading, ADCP Discharge",0
+B70,Begin time,2023-07-10 14:50:00,LR_Mendon_AA,"Benchmark, TOSP, Stage Reading, WSE survey",0
+N70,End time,2023-07-10 15:10:00,LR_Mendon_AA,"Benchmark, TOSP, Stage Reading, WSE survey",0
+N69,End time,2023-07-10 15:10:00,LR_Mendon_AA,"Site Visit, Benchmark, WSE survey, Stage Reading, ADCP Discharge",0
+B71,Begin time,2023-07-18 10:20:00,LR_Mendon_AA,"Site Visit, Benchmark",0
+N71,End time,2023-07-18 10:40:00,LR_Mendon_AA,"Site Visit, Benchmark",0
+B72,Begin time,2023-07-18 10:40:00,LR_Mendon_AA,"WSE survey, Stage Reading, Equipment Cleaning",0
+N72,End time,2023-07-18 10:40:00,LR_Mendon_AA,"WSE survey, Stage Reading, Equipment Cleaning",0
+B73,Begin time,2023-07-18 10:50:00,LR_Mendon_AA,"EXO Specific Conductance Calibration, Check color desiccant, Equipment Cleaning, Change Desiccant, Precipitate Removal - Injection, EXO pH Calibration, Aquatic Housing Cleaning, EXO DO Cal with bubbler",0
+N73,End time,2023-07-18 11:20:00,LR_Mendon_AA,"EXO Specific Conductance Calibration, Check color desiccant, Equipment Cleaning, Change Desiccant, Precipitate Removal - Injection, EXO pH Calibration, Aquatic Housing Cleaning, EXO DO Cal with bubbler",0
+B74,Begin time,2023-07-18 11:50:00,LR_Mendon_AA,"WSE survey, Stage Reading, Benchmark",0
+N74,End time,2023-07-18 12:10:00,LR_Mendon_AA,"WSE survey, Stage Reading, Benchmark",0
+B75,Begin time,2023-07-25 10:20:00,LR_Mendon_AA,"Site Visit, Turbidity Sensor Inspection, Stage Reading",0
+N75,End time,2023-07-25 10:40:00,LR_Mendon_AA,"Site Visit, Turbidity Sensor Inspection, Stage Reading",0
+B76,Begin time,2023-07-26 09:50:00,LR_Mendon_AA,"Site Visit, Stage Reading",0
+B77,Begin time,2023-07-26 10:10:00,LR_Mendon_AA,ADCP Discharge,0
+B78,Begin time,2023-07-26 10:20:00,LR_Mendon_AA,Stage Reading,0
+N78,End time,2023-07-26 10:40:00,LR_Mendon_AA,Stage Reading,0
+N77,End time,2023-07-26 10:40:00,LR_Mendon_AA,ADCP Discharge,0
+N76,End time,2023-07-26 10:40:00,LR_Mendon_AA,"Site Visit, Stage Reading",0
+B79,Begin time,2023-07-26 10:50:00,LR_Mendon_AA,"Stage Reading, WSE survey",0
+N79,End time,2023-07-26 11:10:00,LR_Mendon_AA,"Stage Reading, WSE survey",0
+B80,Begin time,2023-07-28 15:20:00,LR_Mendon_AA,"Site Visit, Stage Reading",0
+N80,End time,2023-07-28 15:40:00,LR_Mendon_AA,"Site Visit, Stage Reading",0
+B81,Begin time,2023-08-03 10:40:00,LR_Mendon_AA,"Site Visit, Stage Reading, Turbidity Sensor Inspection",1
+N81,End time,2023-08-03 11:50:00,LR_Mendon_AA,"Site Visit, Stage Reading, Turbidity Sensor Inspection",1
+B82,Begin time,2023-08-08 12:50:00,LR_Mendon_AA,"Site Visit, Equipment Adjustment, Equipment Retrieval",0
+B83,Begin time,2023-08-08 13:50:00,LR_Mendon_AA,"Equipment Deployment, Change Desiccant, Equipment Cleaning, Aquatic Housing Cleaning, General Field Note, Stage Reading",0
+N82,End time,2023-08-08 14:10:00,LR_Mendon_AA,"Site Visit, Equipment Adjustment, Equipment Retrieval",0
+N83,End time,2023-08-08 14:10:00,LR_Mendon_AA,"Equipment Deployment, Change Desiccant, Equipment Cleaning, Aquatic Housing Cleaning, General Field Note, Stage Reading",0
+B84,Begin time,2023-08-11 12:10:00,LR_Mendon_AA,"Site Visit, Stage Reading",0
+B85,Begin time,2023-08-11 12:20:00,LR_Mendon_AA,"ADCP Discharge, Stage Reading",0
+N85,End time,2023-08-11 12:40:00,LR_Mendon_AA,"ADCP Discharge, Stage Reading",0
+N84,End time,2023-08-11 12:40:00,LR_Mendon_AA,"Site Visit, Stage Reading",0
+B86,Begin time,2023-08-23 12:10:00,LR_Mendon_AA,"Site Visit, Equipment Deployment",1
+B87,Begin time,2023-08-23 12:40:00,LR_Mendon_AA,Stage Reading,1
+B88,Begin time,2023-08-23 12:50:00,LR_Mendon_AA,"ADCP Discharge, Stage Reading",1
+N87,End time,2023-08-23 12:50:00,LR_Mendon_AA,Stage Reading,1
+N86,End time,2023-08-23 13:10:00,LR_Mendon_AA,"Site Visit, Equipment Deployment",1
+N88,End time,2023-08-23 13:10:00,LR_Mendon_AA,"ADCP Discharge, Stage Reading",1
+B89,Begin time,2023-09-08 14:20:00,LR_Mendon_AA,"Site Visit, Stage Reading, ADCP Discharge",1
+N89,End time,2023-09-08 14:50:00,LR_Mendon_AA,"Site Visit, Stage Reading, ADCP Discharge",1
+B90,Begin time,2023-09-12 09:50:00,LR_Mendon_AA,Stage Reading,0
+N90,End time,2023-09-12 10:10:00,LR_Mendon_AA,Stage Reading,0
+B91,Begin time,2023-09-14 10:10:00,LR_Mendon_AA,Logger Constant Change,0
+N91,End time,2023-09-14 10:20:00,LR_Mendon_AA,Logger Constant Change,0
+B92,Begin time,2023-10-16 10:50:00,LR_Mendon_AA,"Site Visit, Stage Reading, Equipment Inspection",0
+N92,End time,2023-10-16 11:40:00,LR_Mendon_AA,"Site Visit, Stage Reading, Equipment Inspection",0
+B93,Begin time,2023-10-16 11:50:00,LR_Mendon_AA,"Site Visit, Stage Reading",0
+B94,Begin time,2023-10-16 12:10:00,LR_Mendon_AA,Equipment Adjustment,0
+N93,End time,2023-10-16 12:40:00,LR_Mendon_AA,"Site Visit, Stage Reading",0
+N94,End time,2023-10-16 12:40:00,LR_Mendon_AA,Equipment Adjustment,0
+B95,Begin time,2023-11-08 11:20:00,LR_Mendon_AA,Site Visit,0
+B96,Begin time,2023-11-08 11:40:00,LR_Mendon_AA,"Turbidity Sensor Inspection, Stage Reading",0
+N95,End time,2023-11-08 11:50:00,LR_Mendon_AA,Site Visit,0
+N96,End time,2023-11-08 11:50:00,LR_Mendon_AA,"Turbidity Sensor Inspection, Stage Reading",0
+B97,Begin time,2023-11-21 09:50:00,LR_Mendon_AA,WSE survey,0
+N97,End time,2023-11-21 10:10:00,LR_Mendon_AA,WSE survey,0
+N98,End time,2023-11-21 10:10:00,LR_Mendon_AA,Turbidity Sensor Inspection,
+B98,Begin time,2023-11-21 19:50:00,LR_Mendon_AA,Turbidity Sensor Inspection,
+B99,Begin time,2023-11-29 11:50:00,LR_Mendon_AA,"Site Visit, ADCP Discharge, General Field Note, Stage Reading",0
+B100,Begin time,2023-11-29 12:40:00,LR_Mendon_AA,Stage Reading,0
+N99,End time,2023-11-29 12:50:00,LR_Mendon_AA,"Site Visit, ADCP Discharge, General Field Note, Stage Reading",0
+N100,End time,2023-11-29 12:50:00,LR_Mendon_AA,Stage Reading,0
+B101,Begin time,2023-12-14 12:40:00,LR_Mendon_AA,"Site Visit, WSE survey",1
+B102,Begin time,2023-12-14 12:50:00,LR_Mendon_AA,ADCP Discharge,1
+N102,End time,2023-12-14 13:20:00,LR_Mendon_AA,ADCP Discharge,1
+B103,Begin time,2023-12-14 13:20:00,LR_Mendon_AA,WSE survey,1
+N101,End time,2023-12-14 13:40:00,LR_Mendon_AA,"Site Visit, WSE survey",1
+N103,End time,2023-12-14 13:40:00,LR_Mendon_AA,WSE survey,1
+B104,Begin time,2023-12-18 11:20:00,LR_Mendon_AA,"Site Visit, WSE survey, Change Desiccant, Check color desiccant, Equipment Retrieval, Equipment Deployment, Precipitate Removal - Injection, Turbidity Sensor Inspection",1
+B105,Begin time,2023-12-18 11:40:00,LR_Mendon_AA,WSE survey,1
+N105,End time,2023-12-18 11:50:00,LR_Mendon_AA,WSE survey,1
+N104,End time,2023-12-18 11:50:00,LR_Mendon_AA,"Site Visit, WSE survey, Change Desiccant, Check color desiccant, Equipment Retrieval, Equipment Deployment, Precipitate Removal - Injection, Turbidity Sensor Inspection",1

@@ -1,0 +1,57 @@
+Event Number,Combined Time,Begin: End time,SiteCode,Method,QC_status
+B1,Begin time,2020-07-02 13:10:00,LR_WaterLab_AA,"Site Visit, Change Desiccant, Check color desiccant, Precipitate Removal - Injection, Equipment Cleaning, EXO DO Cal with bubbler, EXO pH Calibration, EXO Specific Conductance Calibration, Stage Reading",1
+B2,Begin time,2020-07-02 13:50:00,LR_WaterLab_AA,Stage Reading,1
+N2,End time,2020-07-02 14:10:00,LR_WaterLab_AA,Stage Reading,1
+N1,End time,2020-07-02 14:10:00,LR_WaterLab_AA,"Site Visit, Change Desiccant, Check color desiccant, Precipitate Removal - Injection, Equipment Cleaning, EXO DO Cal with bubbler, EXO pH Calibration, EXO Specific Conductance Calibration, Stage Reading",1
+B3,Begin time,2020-07-09 16:50:00,LR_WaterLab_AA,"Site Visit, Logger Constant Change, Stage Reading",1
+B4,Begin time,2020-07-09 17:10:00,LR_WaterLab_AA,Stage Reading,1
+B5,Begin time,2020-07-09 17:20:00,LR_WaterLab_AA,Stage Reading,1
+N4,End time,2020-07-09 17:20:00,LR_WaterLab_AA,Stage Reading,1
+N5,End time,2020-07-09 17:40:00,LR_WaterLab_AA,Stage Reading,1
+N3,End time,2020-07-09 17:50:00,LR_WaterLab_AA,"Site Visit, Logger Constant Change, Stage Reading",1
+B6,Begin time,2020-07-22 18:10:00,LR_WaterLab_AA,"Stage Reading, Site Visit, General Field Note",1
+N6,End time,2020-07-22 18:40:00,LR_WaterLab_AA,"Stage Reading, Site Visit, General Field Note",1
+B7,Begin time,2020-07-31 13:40:00,LR_WaterLab_AA,"Site Visit, General Field Note, Stage Reading, Benchmark, Survey Water Surface Elevation",1
+B8,Begin time,2020-07-31 13:50:00,LR_WaterLab_AA,"Precipitate Removal - Injection, General Sonde Calibration",1
+N7,End time,2020-07-31 13:50:00,LR_WaterLab_AA,"Site Visit, General Field Note, Stage Reading, Benchmark, Survey Water Surface Elevation",1
+B9,Begin time,2020-07-31 14:20:00,LR_WaterLab_AA,Stage Reading,1
+N8,End time,2020-07-31 14:40:00,LR_WaterLab_AA,"Precipitate Removal - Injection, General Sonde Calibration",1
+N9,End time,2020-07-31 14:40:00,LR_WaterLab_AA,Stage Reading,1
+B10,Begin time,2020-07-31 14:50:00,LR_WaterLab_AA,Survey Water Surface Elevation,1
+B11,Begin time,2020-07-31 15:10:00,LR_WaterLab_AA,"Benchmark, Stage Reading",1
+N10,End time,2020-07-31 15:10:00,LR_WaterLab_AA,Survey Water Surface Elevation,1
+N11,End time,2020-07-31 15:20:00,LR_WaterLab_AA,"Benchmark, Stage Reading",1
+B12,Begin time,2020-07-31 15:40:00,LR_WaterLab_AA,"Benchmark, Survey Water Surface Elevation, Stage Reading",1
+N12,End time,2020-07-31 15:50:00,LR_WaterLab_AA,"Benchmark, Survey Water Surface Elevation, Stage Reading",1
+B13,Begin time,2020-08-06 11:20:00,LR_WaterLab_AA,"Equipment Retrieval, Equipment Deployment, Site Visit, Infrastructure Installation, Stage Reading",1
+N13,End time,2020-08-06 11:40:00,LR_WaterLab_AA,"Equipment Retrieval, Equipment Deployment, Site Visit, Infrastructure Installation, Stage Reading",1
+B14,Begin time,2020-08-17 16:10:00,LR_WaterLab_AA,"Stage Reading, Site Visit, General Field Note",0
+N14,End time,2020-08-17 16:10:00,LR_WaterLab_AA,"Stage Reading, Site Visit, General Field Note",0
+B15,Begin time,2020-08-20 13:40:00,LR_WaterLab_AA,"Site Visit, Stage Reading",1
+N15,End time,2020-08-20 14:10:00,LR_WaterLab_AA,"Site Visit, Stage Reading",1
+B16,Begin time,2020-08-31 15:20:00,LR_WaterLab_AA,"Site Visit, General Field Note, Stage Reading",1
+N16,End time,2020-08-31 15:40:00,LR_WaterLab_AA,"Site Visit, General Field Note, Stage Reading",1
+B17,Begin time,2020-09-04 12:20:00,LR_WaterLab_AA,"Site Visit, Stage Reading, Benchmark, Survey Water Surface Elevation, Precipitate Removal - Injection, General Sonde Calibration, Equipment Cleaning",1
+B18,Begin time,2020-09-04 12:40:00,LR_WaterLab_AA,Change Desiccant,1
+N18,End time,2020-09-04 12:50:00,LR_WaterLab_AA,Change Desiccant,1
+N17,End time,2020-09-04 13:10:00,LR_WaterLab_AA,"Site Visit, Stage Reading, Benchmark, Survey Water Surface Elevation, Precipitate Removal - Injection, General Sonde Calibration, Equipment Cleaning",1
+B19,Begin time,2020-09-21 12:40:00,LR_WaterLab_AA,Attempted Logger Program Update,1
+N19,End time,2020-09-21 12:50:00,LR_WaterLab_AA,Attempted Logger Program Update,1
+B20,Begin time,2020-09-28 11:40:00,LR_WaterLab_AA,"Site Visit, Stage Reading",1
+B21,Begin time,2020-09-28 11:50:00,LR_WaterLab_AA,Stage Reading,1
+N21,End time,2020-09-28 11:50:00,LR_WaterLab_AA,Stage Reading,1
+N20,End time,2020-09-28 12:10:00,LR_WaterLab_AA,"Site Visit, Stage Reading",1
+B22,Begin time,2020-09-30 17:10:00,LR_WaterLab_AA,"Site Visit, Stage Reading",1
+N22,End time,2020-09-30 17:20:00,LR_WaterLab_AA,"Site Visit, Stage Reading",1
+B23,Begin time,2020-10-09 15:50:00,LR_WaterLab_AA,"Site Visit, Survey Water Surface Elevation, Benchmark, Stage Reading, General Sonde Calibration, Equipment Cleaning, Precipitate Removal - Injection, Change Desiccant",1
+B24,Begin time,2020-10-09 16:20:00,LR_WaterLab_AA,"Stage Reading, Survey Water Surface Elevation, Benchmark",1
+N23,End time,2020-10-09 16:40:00,LR_WaterLab_AA,"Site Visit, Survey Water Surface Elevation, Benchmark, Stage Reading, General Sonde Calibration, Equipment Cleaning, Precipitate Removal - Injection, Change Desiccant",1
+N24,End time,2020-10-09 16:40:00,LR_WaterLab_AA,"Stage Reading, Survey Water Surface Elevation, Benchmark",1
+B25,Begin time,2020-11-06 14:50:00,LR_WaterLab_AA,"Site Visit, Survey Water Surface Elevation, Benchmark, Stage Reading, Equipment Cleaning, Precipitate Removal - Injection, General Sonde Calibration, General Field Note",1
+N26,End time,2020-11-06 15:20:00,LR_WaterLab_AA,"Stage Reading, Survey Water Surface Elevation, Benchmark",1
+B26,Begin time,2020-11-06 15:20:00,LR_WaterLab_AA,"Stage Reading, Survey Water Surface Elevation, Benchmark",1
+N25,End time,2020-11-06 15:40:00,LR_WaterLab_AA,"Site Visit, Survey Water Surface Elevation, Benchmark, Stage Reading, Equipment Cleaning, Precipitate Removal - Injection, General Sonde Calibration, General Field Note",1
+B27,Begin time,2020-12-11 15:50:00,LR_WaterLab_AA,"Survey Water Surface Elevation, Benchmark",1
+B28,Begin time,2020-12-11 16:10:00,LR_WaterLab_AA,"General Sonde Calibration, Stage Reading, Precipitate Removal - Injection, Equipment Cleaning, Change Desiccant",1
+N27,End time,2020-12-11 16:20:00,LR_WaterLab_AA,"Survey Water Surface Elevation, Benchmark",1
+N28,End time,2020-12-11 16:40:00,LR_WaterLab_AA,"General Sonde Calibration, Stage Reading, Precipitate Removal - Injection, Equipment Cleaning, Change Desiccant",1

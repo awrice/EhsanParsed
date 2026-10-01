@@ -1,4 +1,4 @@
-LocalDateTime,WaterTemp_EXO_QC1,QualifierCode
+LocalDateTime,WaterTemp_EXO_QC1,QualifierCodef,asmndf,ams.d
 2020-01-01 00:00:00,2.25,
 2020-01-01 00:15:00,2.27,
 2020-01-01 00:30:00,2.29,

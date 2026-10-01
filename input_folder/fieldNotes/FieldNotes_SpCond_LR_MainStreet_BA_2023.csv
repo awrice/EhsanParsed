@@ -1,0 +1,59 @@
+Event Number,Combined Time,Begin: End time,SiteCode,Method,QC_status
+B1,Begin time,2023-01-12 12:20:00,LR_MainStreet_BA,Site Visit,1
+B2,Begin time,2023-01-12 12:40:00,LR_MainStreet_BA,"Stage Reading, Benchmark, WSE survey, Equipment Calibration",1
+B3,Begin time,2023-01-12 12:50:00,LR_MainStreet_BA,"Aquatic Housing Cleaning, Equipment Cleaning",1
+N2,End time,2023-01-12 12:50:00,LR_MainStreet_BA,"Stage Reading, Benchmark, WSE survey, Equipment Calibration",1
+N4,End time,2023-01-12 13:10:00,LR_MainStreet_BA,"Change Desiccant, Benchmark",1
+N3,End time,2023-01-12 13:10:00,LR_MainStreet_BA,"Aquatic Housing Cleaning, Equipment Cleaning",1
+B4,Begin time,2023-01-12 13:10:00,LR_MainStreet_BA,"Change Desiccant, Benchmark",1
+N1,End time,2023-01-12 13:20:00,LR_MainStreet_BA,Site Visit,1
+N5,End time,2023-01-12 13:20:00,LR_MainStreet_BA,"WSE survey, Stage Reading, TOSP",
+B5,Begin time,2023-01-12 13:20:00,LR_MainStreet_BA,"WSE survey, Stage Reading, TOSP",
+B6,Begin time,2023-03-16 14:40:00,LR_MainStreet_BA,"Stage Reading, Site Visit, Benchmark",1
+B7,Begin time,2023-03-16 14:50:00,LR_MainStreet_BA,"WSE survey, Equipment Cleaning, General Field Note, EXO Specific Conductance Calibration",1
+N7,End time,2023-03-16 14:50:00,LR_MainStreet_BA,"WSE survey, Equipment Cleaning, General Field Note, EXO Specific Conductance Calibration",1
+N6,End time,2023-03-16 14:50:00,LR_MainStreet_BA,"Stage Reading, Site Visit, Benchmark",1
+B8,Begin time,2023-03-16 15:10:00,LR_MainStreet_BA,"EXO pH Calibration, EXO DO Cal with bubbler",1
+N8,End time,2023-03-16 15:20:00,LR_MainStreet_BA,"EXO pH Calibration, EXO DO Cal with bubbler",1
+B9,Begin time,2023-03-16 15:40:00,LR_MainStreet_BA,"Stage Reading, Benchmark",1
+N9,End time,2023-03-16 15:50:00,LR_MainStreet_BA,"Stage Reading, Benchmark",1
+B10,Begin time,2023-04-20 14:20:00,LR_MainStreet_BA,"Site Visit, Benchmark, WSE survey, Stage Reading, Equipment Cleaning, Turbidity Sensor Inspection",1
+B11,Begin time,2023-04-20 14:50:00,LR_MainStreet_BA,"EXO pH Calibration, Change Desiccant, EXO DO Cal with bubbler",1
+N11,End time,2023-04-20 15:10:00,LR_MainStreet_BA,"EXO pH Calibration, Change Desiccant, EXO DO Cal with bubbler",1
+B12,Begin time,2023-04-20 15:50:00,LR_MainStreet_BA,"Benchmark, WSE survey, TOSP",1
+B13,Begin time,2023-04-20 16:10:00,LR_MainStreet_BA,ADCP Discharge,1
+N12,End time,2023-04-20 16:10:00,LR_MainStreet_BA,"Benchmark, WSE survey, TOSP",1
+N13,End time,2023-04-20 16:40:00,LR_MainStreet_BA,ADCP Discharge,1
+N10,End time,2023-04-20 16:40:00,LR_MainStreet_BA,"Site Visit, Benchmark, WSE survey, Stage Reading, Equipment Cleaning, Turbidity Sensor Inspection",1
+B14,Begin time,2023-05-09 13:50:00,LR_MainStreet_BA,"Site Visit, ADCP Discharge, Benchmark, WSE survey",1
+N14,End time,2023-05-09 15:40:00,LR_MainStreet_BA,"Site Visit, ADCP Discharge, Benchmark, WSE survey",1
+B15,Begin time,2023-05-11 12:20:00,LR_MainStreet_BA,"Site Visit, ADCP Discharge",1
+N15,End time,2023-05-11 13:10:00,LR_MainStreet_BA,"Site Visit, ADCP Discharge",1
+B16,Begin time,2023-07-11 10:20:00,LR_MainStreet_BA,"Site Visit, Benchmark, WSE survey",0
+N19,End time,2023-07-11 10:20:00,LR_MainStreet_BA,"EXO Specific Conductance Calibration, EXO pH Calibration",0
+N17,End time,2023-07-11 10:20:00,LR_MainStreet_BA,"Change Desiccant, Stage Reading, Equipment Cleaning",0
+N18,End time,2023-07-11 10:20:00,LR_MainStreet_BA,"Turbidity Sensor Inspection, Equipment Cleaning, Precipitate Removal - Injection, Aquatic Housing Cleaning",0
+N20,End time,2023-07-11 10:20:00,LR_MainStreet_BA,"EXO DO Cal with bubbler, Aquatic Housing Cleaning",0
+N21,End time,2023-07-11 10:20:00,LR_MainStreet_BA,"WSE survey, Stage Reading, Benchmark",0
+N16,End time,2023-07-11 10:20:00,LR_MainStreet_BA,"Site Visit, Benchmark, WSE survey",0
+B17,Begin time,2023-07-11 10:40:00,LR_MainStreet_BA,"Change Desiccant, Stage Reading, Equipment Cleaning",
+B18,Begin time,2023-07-11 10:50:00,LR_MainStreet_BA,"Turbidity Sensor Inspection, Equipment Cleaning, Precipitate Removal - Injection, Aquatic Housing Cleaning",
+B19,Begin time,2023-07-11 11:10:00,LR_MainStreet_BA,"EXO Specific Conductance Calibration, EXO pH Calibration",
+B20,Begin time,2023-07-11 11:20:00,LR_MainStreet_BA,"EXO DO Cal with bubbler, Aquatic Housing Cleaning",
+B21,Begin time,2023-07-11 11:40:00,LR_MainStreet_BA,"WSE survey, Stage Reading, Benchmark",
+B22,Begin time,2023-08-01 10:50:00,LR_MainStreet_BA,"Site Visit, Benchmark, WSE survey, Stage Reading, Equipment Cleaning, Precipitate Removal - Injection",0
+B23,Begin time,2023-08-01 11:10:00,LR_MainStreet_BA,"Turbidity Sensor Inspection, General Field Note, Aquatic Housing Cleaning",0
+N22,End time,2023-08-01 11:10:00,LR_MainStreet_BA,"Site Visit, Benchmark, WSE survey, Stage Reading, Equipment Cleaning, Precipitate Removal - Injection",0
+N25,End time,2023-08-01 11:10:00,LR_MainStreet_BA,"General Field Note, EXO pH Calibration, EXO DO Cal with bubbler",0
+N23,End time,2023-08-01 11:10:00,LR_MainStreet_BA,"Turbidity Sensor Inspection, General Field Note, Aquatic Housing Cleaning",0
+N26,End time,2023-08-01 11:10:00,LR_MainStreet_BA,"Benchmark, WSE survey",
+N24,End time,2023-08-01 11:10:00,LR_MainStreet_BA,"Check color desiccant, Change Desiccant, General Field Note",
+B24,Begin time,2023-08-01 11:20:00,LR_MainStreet_BA,"Check color desiccant, Change Desiccant, General Field Note",
+B25,Begin time,2023-08-01 11:50:00,LR_MainStreet_BA,"General Field Note, EXO pH Calibration, EXO DO Cal with bubbler",
+B26,Begin time,2023-08-01 12:20:00,LR_MainStreet_BA,"Benchmark, WSE survey",
+N27,End time,2023-10-10 09:20:00,LR_MainStreet_BA,"EXO Specific Conductance Calibration, EXO pH Calibration",
+N28,End time,2023-10-10 09:20:00,LR_MainStreet_BA,"EXO DO Cal with bubbler, Aquatic Housing Cleaning, Change Desiccant",
+N29,End time,2023-10-10 09:20:00,LR_MainStreet_BA,"Stage Reading, Benchmark, WSE survey",
+B27,Begin time,2023-10-10 09:50:00,LR_MainStreet_BA,"EXO Specific Conductance Calibration, EXO pH Calibration",
+B28,Begin time,2023-10-10 10:10:00,LR_MainStreet_BA,"EXO DO Cal with bubbler, Aquatic Housing Cleaning, Change Desiccant",
+B29,Begin time,2023-10-10 10:20:00,LR_MainStreet_BA,"Stage Reading, Benchmark, WSE survey",

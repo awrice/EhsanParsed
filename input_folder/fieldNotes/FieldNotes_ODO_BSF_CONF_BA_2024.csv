@@ -1,0 +1,25 @@
+Event Number,Combined Time,Begin: End time,SiteCode,Method,QC_status
+B1,Begin time,2024-02-01 14:50:00,BSF_CONF_BA,"Site Visit, EXO DO Cal with bubbler, EXO pH Calibration, EXO Specific Conductance Calibration, General Field Note, Equipment Cleaning, Check color desiccant, Stage Reading",1
+B2,Begin time,2024-02-01 15:10:00,BSF_CONF_BA,DO Sparge,1
+B3,Begin time,2024-02-01 15:40:00,BSF_CONF_BA,Stage Reading,1
+N2,End time,2024-02-01 15:40:00,BSF_CONF_BA,DO Sparge,1
+N3,End time,2024-02-01 15:50:00,BSF_CONF_BA,Stage Reading,1
+N1,End time,2024-02-01 15:50:00,BSF_CONF_BA,"Site Visit, EXO DO Cal with bubbler, EXO pH Calibration, EXO Specific Conductance Calibration, General Field Note, Equipment Cleaning, Check color desiccant, Stage Reading",1
+B4,Begin time,2024-02-02 16:10:00,BSF_CONF_BA,"Site Visit, Stage Reading, Equipment Deployment, Equipment Retrieval, EXO Specific Conductance Calibration, General Field Note",0
+N4,End time,2024-02-02 16:40:00,BSF_CONF_BA,"Site Visit, Stage Reading, Equipment Deployment, Equipment Retrieval, EXO Specific Conductance Calibration, General Field Note",0
+B5,Begin time,2024-02-15 15:20:00,BSF_CONF_BA,"Site Visit, Stage Reading",0
+B6,Begin time,2024-02-15 15:40:00,BSF_CONF_BA,Equipment Adjustment,0
+N6,End time,2024-02-15 15:40:00,BSF_CONF_BA,Equipment Adjustment,0
+N5,End time,2024-02-15 15:40:00,BSF_CONF_BA,"Site Visit, Stage Reading",0
+B7,Begin time,2024-02-15 15:50:00,BSF_CONF_BA,ADCP Discharge,0
+N7,End time,2024-02-15 16:10:00,BSF_CONF_BA,ADCP Discharge,0
+B8,Begin time,2024-02-15 16:10:00,BSF_CONF_BA,WSE survey,0
+N8,End time,2024-02-15 16:20:00,BSF_CONF_BA,WSE survey,0
+B9,Begin time,2024-04-24 12:10:00,BSF_CONF_BA,"Site Visit, ADCP Discharge",0
+N9,End time,2024-04-24 12:50:00,BSF_CONF_BA,"Site Visit, ADCP Discharge",0
+B10,Begin time,2024-05-07 11:40:00,BSF_CONF_BA,"Site Visit, Stage Reading",0
+B11,Begin time,2024-05-07 12:20:00,BSF_CONF_BA,"Stage Reading, General Field Note",0
+N11,End time,2024-05-07 12:40:00,BSF_CONF_BA,"Stage Reading, General Field Note",0
+N10,End time,2024-05-07 12:40:00,BSF_CONF_BA,"Site Visit, Stage Reading",0
+B12,Begin time,2024-05-22 15:10:00,BSF_CONF_BA,"Site Visit, Stage Reading",0
+N12,End time,2024-05-22 16:50:00,BSF_CONF_BA,"Site Visit, Stage Reading",0

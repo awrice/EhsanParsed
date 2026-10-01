@@ -1,0 +1,37 @@
+Event Number,Combined Time,Begin: End time,SiteCode,Method,QC_status
+B1,Begin time,2024-01-25 14:50:00,LR_Mendon_AA,"Site Visit, Change Desiccant, Check color desiccant",1
+B2,Begin time,2024-01-25 15:10:00,LR_Mendon_AA,"Equipment Cleaning, Precipitate Removal - Injection, Stage Reading",1
+N2,End time,2024-01-25 15:20:00,LR_Mendon_AA,"Equipment Cleaning, Precipitate Removal - Injection, Stage Reading",1
+B3,Begin time,2024-01-25 15:20:00,LR_Mendon_AA,Equipment Deployment,1
+N3,End time,2024-01-25 15:40:00,LR_Mendon_AA,Equipment Deployment,1
+N1,End time,2024-01-25 15:40:00,LR_Mendon_AA,"Site Visit, Change Desiccant, Check color desiccant",1
+B4,Begin time,2024-02-01 14:40:00,LR_Mendon_AA,"Site Visit, Stage Reading",1
+N4,End time,2024-02-01 14:50:00,LR_Mendon_AA,"Site Visit, Stage Reading",1
+B5,Begin time,2024-02-22 12:50:00,LR_Mendon_AA,"Site Visit, WSE survey",1
+B6,Begin time,2024-02-22 13:20:00,LR_Mendon_AA,ADCP Discharge,1
+B7,Begin time,2024-02-22 13:50:00,LR_Mendon_AA,WSE survey,1
+N6,End time,2024-02-22 13:50:00,LR_Mendon_AA,ADCP Discharge,1
+N7,End time,2024-02-22 14:10:00,LR_Mendon_AA,WSE survey,1
+N5,End time,2024-02-22 14:10:00,LR_Mendon_AA,"Site Visit, WSE survey",1
+B8,Begin time,2024-02-29 14:20:00,LR_Mendon_AA,Stage Reading,1
+N8,End time,2024-02-29 14:40:00,LR_Mendon_AA,Stage Reading,1
+B9,Begin time,2024-02-29 15:20:00,LR_Mendon_AA,Site Visit,1
+B10,Begin time,2024-02-29 15:50:00,LR_Mendon_AA,"ADCP Discharge, Stage Reading",1
+N9,End time,2024-02-29 16:10:00,LR_Mendon_AA,Site Visit,1
+N10,End time,2024-02-29 16:10:00,LR_Mendon_AA,"ADCP Discharge, Stage Reading",1
+B11,Begin time,2024-04-18 16:20:00,LR_Mendon_AA,"Site Visit, General Field Note",1
+B12,Begin time,2024-04-18 16:40:00,LR_Mendon_AA,Stage Reading,1
+N11,End time,2024-04-18 16:50:00,LR_Mendon_AA,"Site Visit, General Field Note",1
+N12,End time,2024-04-18 16:50:00,LR_Mendon_AA,Stage Reading,1
+B13,Begin time,2024-04-24 10:20:00,LR_Mendon_AA,"Site Visit, ADCP Discharge, Stage Reading",1
+N13,End time,2024-04-24 10:40:00,LR_Mendon_AA,"Site Visit, ADCP Discharge, Stage Reading",1
+B14,Begin time,2024-04-24 11:50:00,LR_Mendon_AA,Stage Reading,0
+N14,End time,2024-04-24 11:50:00,LR_Mendon_AA,Stage Reading,0
+B15,Begin time,2024-05-07 10:10:00,LR_Mendon_AA,"Site Visit, Stage Reading",1
+B16,Begin time,2024-05-07 11:10:00,LR_Mendon_AA,Stage Reading,1
+N16,End time,2024-05-07 11:20:00,LR_Mendon_AA,Stage Reading,1
+N15,End time,2024-05-07 11:20:00,LR_Mendon_AA,"Site Visit, Stage Reading",1
+B17,Begin time,2024-05-22 15:50:00,LR_Mendon_AA,"Site Visit, Stage Reading",0
+B18,Begin time,2024-05-22 16:40:00,LR_Mendon_AA,Stage Reading,0
+N18,End time,2024-05-22 16:50:00,LR_Mendon_AA,Stage Reading,0
+N17,End time,2024-05-22 16:50:00,LR_Mendon_AA,"Site Visit, Stage Reading",0
