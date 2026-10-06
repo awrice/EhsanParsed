@@ -2,6 +2,7 @@ import dataManager as dM
 import directoryManager as dirM
 import anomalyExtractor as anEx
 import pandas as pd
+import sys
 
 settings = dM.Settings("../input_folder/settings.yaml")
 
@@ -15,21 +16,19 @@ def preprocess() -> dM.DataManager:
 def anomaly_extraction(dataMan):
     # Extracting Anomalies #
 
-    extractor = anEx.AnomalyExtractor(dataMan)
+    extractor = anEx.AnomalyExtractor(dataMan, verbose=True)
     extractor.point_by_point_difference()
     extractor.check_field_notes()
     extractor.process_calibration_events()
     extractor.calculate_manual_change_trends()
+    extractor.assign_anomaly_types()
+    extractor.extract_events()
 
-    dataMan.export_to_csv('/Users/a02523625/Documents/HorsburghRA/EhsanData/Results/MEtest2.csv')
-
-
+    
 if __name__ == "__main__":
     dataMan = preprocess()
     anomaly_extraction(dataMan)
-
-    # dataMan.rawDataframes["combinedData"].to_csv("../my_output_folder/combinedData.csv")
-
+    dataMan.export_to_csv(f'/Users/a02523625/Documents/HorsburghRA/EhsanParsed/_test_results/{sys.argv[1]}')
 
 
 

@@ -15,7 +15,7 @@ class Settings:
 class InputDataframe:
     INDEX_NAME = "LocalDateTime"
     REQUIRED_COLUMNS = {
-        "BattVolt", "EXOVolt", "ODO", "Stage", "pH", "SpCond", "WaterTemp_EXO", "TurbMed", "AirTemp_EE08_avg", "ODO_QC1", "QualifierCode"
+        "BattVolt", "EXOVolt", "ODO", "Stage", "pH", "SpCond", "WaterTemp_EXO", "TurbMed", "AirTemp_EE08_avg", "QualifierCode"
     }
 
     def __init__(self, df: pd.DataFrame):
@@ -43,7 +43,6 @@ class InputDataframe:
         self._df[key] = value
     def __len__(self):
         return len(self._df)
-
 
     @property
     def df(self):
@@ -78,11 +77,14 @@ class DataManager:
         self.dataframes[name] = dataframe
 
     # to remove ambiguity of which dataset is the one we're processing, we'll add this simple field of a "main dataset" which can be set anytime
-    def set_main(self, datasetName):
+    def set_main_name(self, datasetName):
         self.main_dataset_name = datasetName
 
     def get_main(self):
         return self.dataframes[self.main_dataset_name]
+
+    def set_main(self, dataframe):
+        self.dataframes[self.main_dataset_name] = dataframe
 
     # exports a dataframe to a CSV file (if dataframe name is not given, exports main)
     def export_to_csv(self, filename, name=None):
@@ -143,7 +145,7 @@ class DataManager:
         self.dataframes[name].drop(columns=[column_name], inplace=True)
 
     # makes sure a dataframe is ready as an input dataframe -- if name=None, just use the main dataset name
-    def validate_as_input(self, name=None, removeUnneededColumns=True):
+    def validate_as_input(self, name=None, removeUnneededColumns=False):
         if name is None: name = self.main_dataset_name
         if name not in self.dataframes:
             raise ValueError(f"Dataframe {name} not found")

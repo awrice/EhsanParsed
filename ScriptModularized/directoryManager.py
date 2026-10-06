@@ -49,7 +49,7 @@ class DirectoryManager:
         if self.verbose: print("Combining Dataframes...")
         dataMan.combine_dataframes(["rawAquatic", "rawClimate", "manuallyCorrected"], name="combinedData", axis=1)
         dataMan.regulate_localDateTime_dataframe("combinedData")
-        dataMan.set_main("combinedData")
+        dataMan.set_main_name("combinedData")
 
         if self.verbose: print("Done!")
         return dataMan

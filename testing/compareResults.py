@@ -1,26 +1,32 @@
+import sys
+
 import pandas as pd
 import numpy as np
 import numbers
 import subprocess
 
 
-subprocess.run("echo \"Running Ehsan's Script...\"", shell=True)
-subprocess.run("cd /Users/a02523625/Documents/HorsburghRA/EhsanData && \
-               python3 Script.py > /dev/null", shell=True)
-subprocess.run("echo \"Running Modularized Script...\"", shell=True)
-subprocess.run("cd /Users/a02523625/Documents/HorsburghRA/EhsanParsed/ScriptModularized && \
-               python3 main.py > /dev/null", shell=True)
-exit()
+must_run_scripts = bool(int(sys.argv[1]))
+if must_run_scripts:
+    subprocess.run("echo \">>> Running Ehsan's Script...\"", shell=True)
+    subprocess.run("cd /Users/a02523625/Documents/HorsburghRA/EhsanData && \
+                python3 Script.py EHSAN.csv > /dev/null 2>&1", shell=True)
+    subprocess.run("echo \">>> Running Modularized Script...\"", shell=True)
+    subprocess.run("cd /Users/a02523625/Documents/HorsburghRA/EhsanParsed/ScriptModularized && \
+                python3 main.py ME.csv", shell=True)
+else:
+    print("Skipping script execution.")
+
+print("\n -- Processed! -- \n")
 
 
-file_a = "./Results/EHSANtest1.csv"
-file_b = "./Results/MEtest1.csv"
+file_a = "../_test_results/EHSAN.csv"
+file_b = "../_test_results/ME.csv"
 
 df_a = pd.read_csv(file_a)
 df_b = pd.read_csv(file_b)
 
 # Define which columns should contain the same values
-
 
 # "LocalDateTime" : "LocalDateTime"
 # "BattVolt_QC0" : "BattVolt"
@@ -59,8 +65,19 @@ column_mapping = {
     # "CalStartTime": "_CalStartTime",
     # "CalEndTime": "_CalEndTime"
 
-    "iMinePrei": "_ChangeTrends"
+    "iMinePrei": "_ChangeTrends",
+    "CorrectionTypeCal": "_CorrectionTypeCal",
+    "AffectedbyCal_Counter": "_CalibrationGroup",
+    # "AffectedCalStartTime": "_CalibrationStart",
+    # "AffectedCalEndTime": "_CalibrationEnd"
+    "Ind_2": "_AnomalyType",
+    "Event_Counter": "_AnomalyEventNumber"
 }
+
+# if we find different rows in these columns, we'll ignore these rows for all comparisons after identifying them
+ignore_different_rows = [
+    "iMinePrei"
+]
 
 # Make sure LocalDateTime is actually treated as a datetime
 df_a["LocalDateTime"] = pd.to_datetime(df_a["LocalDateTime"])
@@ -80,6 +97,8 @@ df_b_common = df_b[
 # Set LocalDateTime as the index so matching happens by timestamp
 df_a_common = df_a_common.set_index("LocalDateTime")
 df_b_common = df_b_common.set_index("LocalDateTime")
+
+bad_rows = []
 
 # Compare each pair of columns
 for col_a, col_b in column_mapping.items():
@@ -102,7 +121,7 @@ for col_a, col_b in column_mapping.items():
         comparison = np.isclose(
             df_a_common[col_a],
             df_b_common[col_b],
-            atol=0.001,
+            atol=0.00001,
             equal_nan=True
         )
         comparison = pd.Series(comparison, index=df_a_common.index)
@@ -115,6 +134,15 @@ for col_a, col_b in column_mapping.items():
     else:
         print(f"\033[91m✗ {col_a} does NOT match {col_b}\033[0m")
         print(f"  Number of differences: {len(differences)}")
+        if col_a in ignore_different_rows:
+            print(f"  \033[91mignoring differences...\033[0m")
+            bad_rows += differences.index.tolist()
+            continue
+
+        max_display = 50
+        if len(differences) > max_display: 
+            print(f"\033[91m  Too many differences to display (>{max_display}). Showing first {max_display} only.\033[0m")
+            differences = differences[:max_display]
 
         for timestamp in differences.index:
             print(
