@@ -23,6 +23,7 @@ def anomaly_extraction(dataMan):
     extractor.calculate_manual_change_trends()
     extractor.assign_anomaly_types()
     extractor.extract_events()
+    dataMan.set_main(extractor.dataframe)
 
     
 if __name__ == "__main__":

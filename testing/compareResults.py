@@ -17,14 +17,20 @@ if must_run_scripts:
 else:
     print("Skipping script execution.")
 
+subprocess.run("echo \">>> Analyzing Csv's...\"", shell=True)
+subprocess.run("cd /Users/a02523625/Documents/HorsburghRA/EhsanParsed/testing && \
+            python3 csvAnalyzer.py ../_test_results/ME.csv ../_test_results/ME_Parsed.csv _IsAnomaly > /dev/null 2>&1", shell=True)
+subprocess.run("cd /Users/a02523625/Documents/HorsburghRA/EhsanParsed/testing && \
+            python3 csvAnalyzer.py ../_test_results/EHSAN.csv ../_test_results/EHSAN_Parsed.csv AnomalyIndex > /dev/null 2>&1", shell=True)
+
 print("\n -- Processed! -- \n")
 
 
 file_a = "../_test_results/EHSAN.csv"
 file_b = "../_test_results/ME.csv"
 
-df_a = pd.read_csv(file_a)
 df_b = pd.read_csv(file_b)
+df_a = pd.read_csv(file_a)
 
 # Define which columns should contain the same values
 
@@ -61,22 +67,27 @@ column_mapping = {
     "Ind_1": "_FieldNoteFlag",
     "Cal_Counter": "_Cal_Counter",
 
-    # These two columns are commented out because of the way we manage our field notes differently -- I believe both programs are doing the same thing with different representations of the field notes... Cal_counter is exactly what it should be
-    # "CalStartTime": "_CalStartTime",
-    # "CalEndTime": "_CalEndTime"
+    # # These two columns are commented out because of the way we manage our field notes differently -- I believe both programs are doing the same thing with different representations of the field notes... Cal_counter is exactly what it should be
+    # # "CalStartTime": "_CalStartTime",
+    # # "CalEndTime": "_CalEndTime"
 
+    # # compares _ManualChangeAmt of row i with row i-1 and stores the value there
     "iMinePrei": "_ChangeTrends",
+    # # Looks at the _ChangeTrends and identifies Constant Shifts (CS) or Linear Drift Correction (LDC)
     "CorrectionTypeCal": "_CorrectionTypeCal",
     "AffectedbyCal_Counter": "_CalibrationGroup",
     # "AffectedCalStartTime": "_CalibrationStart",
     # "AffectedCalEndTime": "_CalibrationEnd"
     "Ind_2": "_AnomalyType",
-    "Event_Counter": "_AnomalyEventNumber"
+    "Event_Counter": "_AnomalyEventNumber",
+
+    "AffectedCalStartTime2": "_AnomalyEventStart",
+    "AffectedCalEndTime2": "_AnomalyEventEnd"
 }
 
 # if we find different rows in these columns, we'll ignore these rows for all comparisons after identifying them
 ignore_different_rows = [
-    "iMinePrei"
+    #"iMinePrei"
 ]
 
 # Make sure LocalDateTime is actually treated as a datetime
@@ -97,6 +108,8 @@ df_b_common = df_b[
 # Set LocalDateTime as the index so matching happens by timestamp
 df_a_common = df_a_common.set_index("LocalDateTime")
 df_b_common = df_b_common.set_index("LocalDateTime")
+df_a_common = df_a_common[df_a_common.index.minute % 15 == 0]
+df_b_common = df_b_common[df_b_common.index.minute % 15 == 0]
 
 bad_rows = []
 

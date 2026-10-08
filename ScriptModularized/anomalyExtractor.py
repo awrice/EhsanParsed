@@ -1,3 +1,4 @@
+from kiwisolver import Variable
 import numpy as np
 import pandas as pd
 import re
@@ -36,7 +37,8 @@ class AnomalyExtractor:
 
         # These columns are titled "RawQCColumn" and "AnomalyIndex" in Ehsan's paper -— I think those names are confusing so I changed them
         self.dataframe['_ManualChangeAmt'] = self.dataframe[qc_col] - self.dataframe[raw_col]
-        self.dataframe['_IsAnomaly'] = (self.dataframe[qc_col] != self.dataframe[raw_col])
+        self.dataframe['_IsAnomaly'] = self.dataframe.apply(lambda row: 0 if row[qc_col] == row[raw_col] else 1, axis=1)
+
 
     """
     Section 3.2.3
@@ -51,10 +53,10 @@ class AnomalyExtractor:
     """
     def check_field_notes(self):
         if self.verbose: print("Checking Field Notes...")
-        fieldNotes = self.dataManager.fieldNotes
+        fieldNotes = self.dataManager.fieldNotes.events
         fieldNotes["BeginTime"] = pd.to_datetime(fieldNotes["BeginTime"])
         fieldNotes["EndTime"] = pd.to_datetime(fieldNotes["EndTime"])
-        
+
         # Main dataframe timestamps
         timestamps = self.dataframe.index
         calibration_list = self.dataManager.settings.settings["CalibrationList"]
@@ -89,6 +91,8 @@ class AnomalyExtractor:
     """
     Section 3.2.3
     This function is run to specifically identify calibration events, their numbering, start time, and end time. Since the next function assesses the ranges of the time series that are affected by the calibration events, knowing the calibration event numbers is useful. This function scans the '_FieldNoteFlag' column in self.dataframe to find contiguous calibration windows ('_FieldNoteFlag = 2'), numbers them in order, and annotates their start and end rows, adding new columns called 'Cal_Counter', 'CalStartTime', and 'CalEndTime'. If the variable is water temperature, this function is skipped.
+
+    These columns are never used beyond this point for any analysis. Use of these columns would likely be for ML algorithms or other extraction algorithms we'd maybe use after the data is processed.
     """
     def process_calibration_events(self):
         if self.verbose: print("Processing Calibration Events...")
@@ -135,8 +139,17 @@ class AnomalyExtractor:
     """
     def calculate_manual_change_trends(self):
         if self.verbose: print("Calculating Manual Change Trends...")
+        #########################
+        # To copy Ehsan's code, we are going to add rows for each field note and then delete them afterwards
+        event_times = pd.to_datetime(self.dataManager.fieldNotes.dataframe['Begin: End time'])
+        event_rows = pd.DataFrame(index=event_times)
+        event_rows.index.name = 'LocalDateTime'
+        self.dataframe = pd.concat([self.dataframe, event_rows])
+        self.dataframe = self.dataframe.sort_index()
+        #########################
 
         self.dataframe['_ChangeTrends'] = self.dataframe['_ManualChangeAmt'].diff()
+
         self.dataframe['_CorrectionTypeCal'] = self.dataframe.apply(AnomalyExtractor.classify_calibration_row, axis=1)
 
         # Propagate classification to the previous row
@@ -222,6 +235,29 @@ class AnomalyExtractor:
             AnomalyExtractor.assign_anomaly_type, axis=1, args=(self.variable_of_interest,)
         )
 
+        #######################################
+        # This section is only necessary if we are injecting field notes into our dataframe
+        mask = self.dataframe.index.minute % 15 != 0
+        self.dataframe.loc[mask, '_AnomalyType'] = np.nan
+
+        event_mask = self.dataframe['_AnomalyType'].isin([1, 2, 3, 4])
+        event_indices = self.dataframe[event_mask].index
+
+        # Iterate over event indices to adjust _AnomalyType for the field note rows before/after events
+        for idx in event_indices:
+            prev_idx = self.dataframe.index.get_loc(idx) - 1
+            next_idx = self.dataframe.index.get_loc(idx) + 1
+
+            # Ensure the previous row exists and has 'Non-standard' TimeInterval
+            if prev_idx >= 0 and self.dataframe.iloc[prev_idx].name.minute % 15 != 0:
+                self.dataframe.iloc[prev_idx, self.dataframe.columns.get_loc('_AnomalyType')] = self.dataframe.loc[idx, '_AnomalyType']
+
+            # Ensure the next row exists and has 'Non-standard' TimeInterval
+            if next_idx < len(self.dataframe) and self.dataframe.iloc[next_idx].name.minute % 15 != 0:
+                self.dataframe.iloc[next_idx, self.dataframe.columns.get_loc('_AnomalyType')] = self.dataframe.loc[idx, '_AnomalyType']
+
+
+
     """
     Section 3.2.3
     The sixth step in anomaly pattern analysis is to count events. After identifying the different patterns associated with anomaly events, this step counts the number of events and saves a number for each event in a new column called '_AnomalyEventNumber'. It turns the per-row '_AnomalyType' labels into numbered events. Scanning down the 'LocalDateTime' column, any contiguous run of event codes increments an '_AnomalyEventNumber' and assigns that ID to all rows in the run (non-event rows get 0).
@@ -247,6 +283,32 @@ class AnomalyExtractor:
             previous_anomaly_type = ind
 
         self.dataframe['_AnomalyEventNumber'] = event_counter_list
+
+        # Start and End Times for each event
+        if self.variable_of_interest == 'WaterTemp_EXO':
+            return # we don't find these values with this variable
+
+        self.dataframe['_AnomalyEventStart'] = None
+        self.dataframe['_AnomalyEventEnd'] = None
+
+        # Initialize tracking variables
+        inside_event = False  # Flag to track ongoing events
+
+        for i in range(len(self.dataframe)):
+            if self.dataframe.iloc[i]['_AnomalyType'] == 5:  # Only process _AnomalyType == 5 events -- rows affected by calibration afterward ('CorrectionTypeCal'= either 'CS' or 'LDC')
+                if not inside_event:  # If entering a new event
+                    inside_event = True
+                    self.dataframe.loc[self.dataframe.index[i], '_AnomalyEventStart'] = f'Starting time of Event {self.dataframe.iloc[i]["_AnomalyEventNumber"]}'
+
+                # If this is the last row of the event
+                if i == len(self.dataframe) - 1 or self.dataframe.iloc[i + 1]['_AnomalyType'] != 5:
+                    self.dataframe.loc[self.dataframe.index[i], '_AnomalyEventEnd'] = f'Ending time of Event {self.dataframe.iloc[i]["_AnomalyEventNumber"]}'
+                    inside_event = False  # Exit the event
+
+
+
+
+
 
 
     """
@@ -304,4 +366,4 @@ class AnomalyExtractor:
             else:
                 return 2  # Default value
 
-        
+

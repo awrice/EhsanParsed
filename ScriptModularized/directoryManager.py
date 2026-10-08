@@ -43,7 +43,7 @@ class DirectoryManager:
         if self.verbose: print("Extracting Field Notes...")
         fieldNotesFile = f"{self.settings.settings['fieldNotesDataset']}/FieldNotes_{variable_of_interest}_{site}_{year}.csv"
         fieldNotes = dM.FieldNotes(fieldNotesFile)
-        dataMan.add_field_notes(fieldNotes.events)
+        dataMan.add_field_notes(fieldNotes)
 
         # Now we'll combine the dataframes into one, and set it as our main dataframe
         if self.verbose: print("Combining Dataframes...")

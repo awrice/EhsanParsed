@@ -192,4 +192,11 @@ class FieldNotes:
         # ret.set_index('LocalDateTime', inplace=True)
         return ret
 
+    def time_in_any_event(self, timestamp):
+        for _, row in self.dataframe.iterrows():
+            if 'BeginTime' in row and 'EndTime' in row:
+                if row['BeginTime'] <= timestamp <= row['EndTime']:
+                    return True
+        return False
+
 
