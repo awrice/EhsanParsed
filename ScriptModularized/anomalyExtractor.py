@@ -5,14 +5,15 @@ import re
 
 class AnomalyExtractor:
     def __init__(self, dataManager, verbose=True):
-        if verbose: print("\033[92m -- Anomaly Extraction -- \033[0m")
         self.dataManager = dataManager
         self.dataframe = dataManager.get_main()
         self.variable_of_interest = dataManager.settings.settings["Variable"]
         self.verbose = verbose
 
     """
-    Each Method in this class follows the steps given in Ehsan's paper. The sections listed above each method correspond to the section numbers in the paper where the method is described. The paper can be found here: https://drive.google.com/file/d/1D81HE6KTDQp2VLNVsigTh60mVpd6u5PM/view?usp=sharing
+    Each Method in this class follows the steps given in Ehsan's paper. The sections listed above each method correspond to the section numbers in the paper where the method is described. The paper can be found here: https://drive.google.com/file/d/1D81HE6KTDQp2VLNVsigTh60mVpd6u5PM/view?usp=sharing.
+
+    Lots of the code below was written by Ehsan Kahrizi, but modularized and vetted by Adam Rice
 
     I have changed the names of the columns from the original paper (because the original names were confusing). Preceeding underscores have been added to the names to denote these are analysis columns, not data columns. The key is given below:
      - RawQCColumn -> _ManualChangeAmt
@@ -22,12 +23,39 @@ class AnomalyExtractor:
      - CalStartTime -> _CalStartTime
      - CalEndTime -> _CalEndTime
      - iMinePrei -> _ChangeTrends
+     - CorrectionTypeCal -> _CorrectionTypeCal
+     - AffectedbyCal_Counter -> _CalibrationGroup
+     - AffectedCalStartTime -> _CalibrationStart
+     - AffectedCalEndTime -> _CalibrationEnd
+     - Ind_2 -> _AnomalyType
+     - Event_Counter -> _AnomalyEventNumber
+     - AffectedCalStartTime2 -> _AnomalyEventStart
+     - AffectedCalEndTime2 -> _AnomalyEventEnd
+     - RepeatedEvent -> _RepeatedEvent
+     - Spike -> _SpikeDetected
+     - AnomalyPattern -> _AnomalyPattern
     """
 
-    ######## 
-
     """
-    Section 3.2.2 
+    Master function processes through the steps in the order they should be done. For more info on each step, look to the comments above each method.
+    """
+    def process(self):
+        if self.verbose: print("\033[92m -- Anomaly Extraction -- \033[0m")
+        self.point_by_point_difference()
+        self.check_field_notes()
+        self.process_calibration_events()
+        self.calculate_manual_change_trends()
+        self.assign_anomaly_types()
+        self.extract_events()
+        self.flag_flatlines()
+        self.detect_spikes()
+        self.assign_anomaly_pattern()
+        if self.verbose: print("Done!")
+
+
+    ### Main Process Functions ###
+    """
+    Section 3.2.2 - Step 1
     Checks to see if there is a difference between our manually changed (QC'ed) data and the raw value we found -- in other words, was this data point manually changed. Adds "_ManualChangeAmt" column which has how far off these values are from each other, as well as a True/False flag in the "_IsAnomaly" column
     """
     def point_by_point_difference(self):
@@ -39,9 +67,8 @@ class AnomalyExtractor:
         self.dataframe['_ManualChangeAmt'] = self.dataframe[qc_col] - self.dataframe[raw_col]
         self.dataframe['_IsAnomaly'] = self.dataframe.apply(lambda row: 0 if row[qc_col] == row[raw_col] else 1, axis=1)
 
-
     """
-    Section 3.2.3
+    Section 3.2.3 - Step 2
     Checks against all the field notes and labels each row with a flag whether or not there was a field visit going on at the time of this data being gathered. 
     This function is equivilant to update_ind1_based_on_events() in Ehsan's paper (which is an absolutely awful name -- I tried to improve it to have anything to do with what the function was actually doing.)
     There was an error in Ehsan's code -- his code did not ever produce a 1 -- every value in this column was either 0 or 2. To get his exact results, you'll need to adjust the logic to always appending 2 to the flags array.
@@ -54,8 +81,8 @@ class AnomalyExtractor:
     def check_field_notes(self):
         if self.verbose: print("Checking Field Notes...")
         fieldNotes = self.dataManager.fieldNotes.events
-        fieldNotes["BeginTime"] = pd.to_datetime(fieldNotes["BeginTime"])
-        fieldNotes["EndTime"] = pd.to_datetime(fieldNotes["EndTime"])
+        fieldNotes["BeginTime"] = pd.to_datetime(fieldNotes["BeginTime"], format="mixed")
+        fieldNotes["EndTime"] = pd.to_datetime(fieldNotes["EndTime"], format="mixed")
 
         # Main dataframe timestamps
         timestamps = self.dataframe.index
@@ -89,14 +116,14 @@ class AnomalyExtractor:
         self.dataframe["_FieldNoteFlag"] = flags
 
     """
-    Section 3.2.3
+    Section 3.2.3 - Step 3
     This function is run to specifically identify calibration events, their numbering, start time, and end time. Since the next function assesses the ranges of the time series that are affected by the calibration events, knowing the calibration event numbers is useful. This function scans the '_FieldNoteFlag' column in self.dataframe to find contiguous calibration windows ('_FieldNoteFlag = 2'), numbers them in order, and annotates their start and end rows, adding new columns called 'Cal_Counter', 'CalStartTime', and 'CalEndTime'. If the variable is water temperature, this function is skipped.
 
     These columns are never used beyond this point for any analysis. Use of these columns would likely be for ML algorithms or other extraction algorithms we'd maybe use after the data is processed.
     """
     def process_calibration_events(self):
-        if self.verbose: print("Processing Calibration Events...")
         if self.variable_of_interest == "WaterTemp_EXO": return
+        if self.verbose: print("Processing Calibration Events...")
 
         # Initialize the calibration counter and lists for annotations
         cal_counter = 0
@@ -134,14 +161,14 @@ class AnomalyExtractor:
         self.dataframe['_CalEndTime'] = cal_end_annotations
 
     """
-    Section 3.2.3
+    Section 3.2.3 - Step 4
     After calibration events are processed, we must identify ranges of data points that are affected by each calibration. This step detects periods outside of the calibration windows (the time period when the field crew was actually at the station) that are likely influenced by the calibration performed by the field crew. The deviation between raw and QC data ('_ManualChangeAmt') and its time-step-to-time-step change (calculated in a column called '_ChangeTrends') is analyzed. For non-water temperature variables, each timestamp with '_FieldNoteFlag = 0' is labeled as 'CS' for “constant shift” and saved in a new column called '_CorrectionTypeCal' when the deviation is nonzero ('_ManualChangeAmt' ≠ 0) and flat ('_ChangeTrends = 0'). Timestamps are labeled as 'LDC' for “linear drift correction” and saved in the '_CorrectionTypeCal' column whenthe deviation is nonzero and changing ('_ChangeTrends ≠ 0'). Consecutive labeled rows aregrouped into a new column called 'AffectedbyCal' events, each assigned an incrementingID called '_CalibrationGroup', with start/end markers added in new columns in the dataframe called '_CalibrationStart' and '_CalibrationEnd', respectively.
     """
     def calculate_manual_change_trends(self):
         if self.verbose: print("Calculating Manual Change Trends...")
         #########################
         # To copy Ehsan's code, we are going to add rows for each field note and then delete them afterwards
-        event_times = pd.to_datetime(self.dataManager.fieldNotes.dataframe['Begin: End time'])
+        event_times = pd.to_datetime(self.dataManager.fieldNotes.dataframe['Begin: End time'], format="mixed")
         event_rows = pd.DataFrame(index=event_times)
         event_rows.index.name = 'LocalDateTime'
         self.dataframe = pd.concat([self.dataframe, event_rows])
@@ -214,7 +241,7 @@ class AnomalyExtractor:
         self.dataManager.set_main(self.dataframe)
 
     """
-    Section 3.2.3
+    Section 3.2.3 - Step 5
     As a fifth step, a function called 'assign_anomaly_types()' is run to flag anomaly events based on different roles to differentiate various patterns. This step defines a column called '_AnomalyType' and assigns a per-row status code by combining site visit flags, calibration periods, and missing data. The class dictionary assigned to the '_AnomalyType' column, is 0, 1, 2, 3, 4, or 5.
     For non-water temperature variables: 
        0 means no discrepancy ('_ManuallyCorrected = 0')
@@ -256,10 +283,8 @@ class AnomalyExtractor:
             if next_idx < len(self.dataframe) and self.dataframe.iloc[next_idx].name.minute % 15 != 0:
                 self.dataframe.iloc[next_idx, self.dataframe.columns.get_loc('_AnomalyType')] = self.dataframe.loc[idx, '_AnomalyType']
 
-
-
     """
-    Section 3.2.3
+    Section 3.2.3 - Step 6 & 7
     The sixth step in anomaly pattern analysis is to count events. After identifying the different patterns associated with anomaly events, this step counts the number of events and saves a number for each event in a new column called '_AnomalyEventNumber'. It turns the per-row '_AnomalyType' labels into numbered events. Scanning down the 'LocalDateTime' column, any contiguous run of event codes increments an '_AnomalyEventNumber' and assigns that ID to all rows in the run (non-event rows get 0).
     """
     def extract_events(self):
@@ -305,16 +330,109 @@ class AnomalyExtractor:
                     self.dataframe.loc[self.dataframe.index[i], '_AnomalyEventEnd'] = f'Ending time of Event {self.dataframe.iloc[i]["_AnomalyEventNumber"]}'
                     inside_event = False  # Exit the event
 
+    """
+    Section 3.2.3 - Step 8
+    We now identify repeated pattern events where the data points are repeated. This step flags flatline behavior within anomaly events by marking rows where the raw data value repeats. After stabilizing float comparisons with a 4-decimal rounding of the QC0 values, the code looks only at rows inside detected events ('_AnomalyEventNumber' > 0), groups them by '_AnomalyEventNumber', and sets '_RepeatedEvent' = 1 for any data values whose numeric value is duplicated anywhere within that event run (ignoring NaNs). Rows without repetition (or outside events) get 0. The goal is to identify 'stuck' or non varying signals (e.g., logger freezes, sensor hold states, or copy-forward artifacts) so they can be summarized separately, used in start/end refinement, or prioritized for QC actions and downstream modeling.
+    """
+    def flag_flatlines(self):
+        if self.verbose: print("Flagging Flatlines...")
+        # Initialize the 'RepeatedEvent' column
+        self.dataframe['_RepeatedEvent'] = np.nan
 
+        # optional but recommended: stabilize float equality (keep if your data are floats)
+        key = self.dataframe[self.variable_of_interest].round(4)
 
+        mask_pos = self.dataframe['_AnomalyEventNumber'] > 0
+        repeats = (
+            self.dataframe.loc[mask_pos]
+            .groupby('_AnomalyEventNumber')[key.name]
+            .transform(lambda s: s.duplicated(keep=False) & s.notna())
+        )
 
-
-
+        self.dataframe.loc[mask_pos, '_RepeatedEvent'] = repeats.fillna(False).astype(int)
 
     """
-    Helper Functions
+    Section 3.2.3 - Step 9
+    Next we identify events where the anomaly is a spike. This step detects isolated spike events (i.e., single-sample anomalies) using a robust local outlier test and saves flags in a new column called '_SpikeDetected'. First, it limits candidates to singleton events ('_AnomalyEventNumber' size = 1) with valid raw values (not NaN/-9999). For each candidate row, it inspects a small temporal neighborhood (±3 samples) and computes a robust z-score (equation below). If MAD is zero, it safely falls back to a std-based z-score (and, if needed, a tiny absolute-difference check). Values exceeding the threshold are flagged with '_SpikeDetected'=1; otherwise '_SpikeDetected'=0. Non-candidates remain NaN. The goal is to separate sudden, one-off outliers from multi-point anomalies, enabling cleaner duration estimates, better pattern labeling, and more targeted QC actions.
+
+    z_score = (x - median) / (1.4826 * MAD)
+    (Where; 'x' is the data point, 'median' is the middle value of the dataset, and 'MAD' is median absolute deviation.)
     """
-    # Checks if x is a valid numeric value (not 0, not NaN, and not -9999).
+    def detect_spikes(self):
+        if self.verbose: print("Detecting Isolated Spike Events...")
+
+        # Build masks: singleton events + valid numeric QC0
+        # event size per row
+        event_size = self.dataframe.groupby('_AnomalyEventNumber')['_AnomalyEventNumber'].transform('size')
+
+        # singleton event rows (and positive event id; drop this if 0/neg are valid)
+        singleton_mask = (event_size == 1) & (self.dataframe['_AnomalyEventNumber'] > 0)
+
+        # make a valid raw value mask (numeric, not NaN, not -9999)
+        valid_raw_value = self.dataframe[self.variable_of_interest].notna() & (self.dataframe[self.variable_of_interest] != -9999)
+        candidates_mask = singleton_mask & valid_raw_value
+
+        self.dataframe['_SpikeDetected'] = np.nan
+        # Default everything remains NaN (as you set). We'll write 0/1 only for candidates.
+        for idx in self.dataframe.index[candidates_mask]:
+            flag = AnomalyExtractor.robust_spike_flag(
+                series=self.dataframe[self.variable_of_interest],
+                center_idx=idx,
+                window=3,          # look 3 rows before and after
+                thresh=6.0,        # robust z-score threshold
+                min_neighbors=2    # need at least 2 neighbors
+            )
+            self.dataframe.at[idx, '_SpikeDetected'] = flag
+
+    """
+    Section 3.2.3 - Step 10
+    The final step (step 10) is to assign the anomaly pattern to each event. This step consolidates multiple anomaly cues into a single, mutually exclusive integer label ('_AnomalyPattern') for every row. It applies a deterministic priority order to resolve overlaps. For variables other than water temperature, calibration corrections take precedence - 'LDC' → 5, 'CS' → 6 - followed by event-code patterns '_AnomalyType'=1 → 1, '_AnomalyType'=3 → 2, then repeated-pattern detectors '_RepeatedEvent'=1 → 3 and '_SpikeDetected'=1 → 4. Anything not captured maps to 7 ('other/none'). For water temperature, calibration classes are intentionally skipped. The final mapping is:
+
+     - '_CorrectionTypeCal' = 'LDC' → 5
+     - '_CorrectionTypeCal' = 'CS' → 6
+     - '_AnomalyType' = 1 (the raw data value is missing/invalid) → 1
+     - '_AnomalyType' = 3 (the manually corrected QC data value is missing/invalid) → 2
+     - '_RepeatedEvent' = 1 → 3
+     - '_SpikeDetected' = 1 → 4
+     - else 7
+    
+    The goal is to produce a single, consistent target variable that encodes the dominant anomaly pattern per timestamp, simplifying downstream aggregation, visualization, and training/evaluation of ML models.
+    """
+    def assign_anomaly_pattern(self):
+        if self.verbose: print("Assigning Anomaly Patterns...")
+        self.dataframe['_AnomalyPattern'] = np.nan
+
+        if self.variable_of_interest == 'WaterTemp_EXO':
+            conds = [
+                self.dataframe['_AnomalyType'].eq(1),
+                self.dataframe['_AnomalyType'].eq(3),
+                self.dataframe['_RepeatedEvent'].eq(1),
+                self.dataframe['_SpikeDetected'].eq(1)
+            ]
+            choices = [1, 2, 3, 4]
+            self.dataframe['_AnomalyPattern'] = np.select(conds, choices, default=7)
+
+        else:
+            # Calibration-related classes come FIRST (highest priority)
+            conds = [
+                self.dataframe['_CorrectionTypeCal'].eq('LDC'),
+                self.dataframe['_CorrectionTypeCal'].eq('CS'),
+                self.dataframe['_AnomalyType'].eq(1),
+                self.dataframe['_AnomalyType'].eq(3),
+                self.dataframe['_RepeatedEvent'].eq(1),
+                self.dataframe['_SpikeDetected'].eq(1)
+            ]
+            choices = [5, 6, 1, 2, 3, 4]
+            self.dataframe['_AnomalyPattern'] = np.select(conds, choices, default=7)
+
+        # integer output
+        self.dataframe['_AnomalyPattern'] = self.dataframe['_AnomalyPattern'].astype('int64')
+
+
+    ### Helper Functions ###
+    """
+    Checks if x is a valid numeric value (not 0, not NaN, and not -9999).
+    """
     @staticmethod
     def is_valid_numeric(x):
         try:
@@ -327,7 +445,9 @@ class AnomalyExtractor:
         except Exception:
             return False
 
-    # Classifies each row into 'CS' or 'LDC'.
+    """
+    Classifies a row into 'CS' or 'LDC'.
+    """
     @staticmethod
     def classify_calibration_row(row):
         if row['_FieldNoteFlag'] == 0:
@@ -365,5 +485,49 @@ class AnomalyExtractor:
                 return 0
             else:
                 return 2  # Default value
+
+    """
+    series: the full column (pd.Series) to compute neighbors from (aligned with df index)
+    center_idx: the index label (not position) of the candidate row
+    window: number of rows to look backward/forward (by position)
+    thresh: threshold for robust z-score (|x - median| / (1.4826*MAD))
+    min_neighbors: require at least this many neighbors to attempt detection
+    """
+    @staticmethod
+    def robust_spike_flag(series, center_idx, window=3, thresh=6.0, min_neighbors=2):
+        # position of center
+        try:
+            pos = series.index.get_loc(center_idx)
+        except KeyError:
+            return np.nan  # index not found
+
+        # slice neighborhood by position
+        start = max(0, pos - window)
+        end   = min(len(series), pos + window + 1)
+
+        neighborhood = series.iloc[start:end].drop(index=center_idx, errors='ignore')
+
+        # need enough neighbors
+        neighborhood = neighborhood.dropna()
+        if len(neighborhood) < min_neighbors:
+            return 0  # not enough context → call it not spike (or return np.nan if you prefer)
+
+        x = series.loc[center_idx]
+
+        med = np.median(neighborhood.values)
+        mad = np.median(np.abs(neighborhood.values - med))
+
+        if mad == 0:
+            # fallback to std-based z-score
+            std = neighborhood.std(ddof=0)
+            if std == 0 or np.isnan(std):
+                # final fallback: absolute diff vs median with a tight epsilon
+                return int(np.abs(x - med) > 1e-6)
+            z = np.abs((x - med) / std)
+            return int(z > 6.0)  # stricter when using std
+        else:
+            # 1.4826 makes MAD comparable to std under normality
+            rzs = np.abs((x - med) / (1.4826 * mad))
+            return int(rzs > thresh)
 
 

@@ -1,0 +1,212 @@
+ -- Processing 25 Configuration(s) -- 
+1/25 : SpCond / LR_TG_BA / 2020  (Processed)  ✓ 
+2/25 : SpCond / LR_TG_BA / 2021  (Processed)  ✓ 
+3/25 : SpCond / LR_TG_BA / 2022  (Processed)  ✓ 
+4/25 : SpCond / LR_TG_BA / 2023  (Processed)  ✓ 
+5/25 : SpCond / LR_TG_BA / 2024  (Processed)  ✓ 
+6/25 : SpCond / LR_WaterLab_AA / 2020  (Processed)  ✓ 
+7/25 : SpCond / LR_WaterLab_AA / 2021  (Processed)  ✓ 
+8/25 : SpCond / LR_WaterLab_AA / 2022  (Processed)  ✓ 
+9/25 : SpCond / LR_WaterLab_AA / 2023  (Processed)  ✓ 
+10/25 : SpCond / LR_WaterLab_AA / 2024  (Processed)  ✓ 
+11/25 : SpCond / LR_MainStreet_BA / 2020  (Processed)  ✓ 
+12/25 : SpCond / LR_MainStreet_BA / 2021  (Processed)  ✓ 
+13/25 : SpCond / LR_MainStreet_BA / 2022  (Processed)  ✓ 
+14/25 : SpCond / LR_MainStreet_BA / 2023  (Processed)  ✓ 
+15/25 : SpCond / LR_MainStreet_BA / 2024  (Processed)  ✓ 
+16/25 : SpCond / BSF_CONF_BA / 2020  (Processed)  ✓ 
+17/25 : SpCond / BSF_CONF_BA / 2021  (Processed)  ✓ 
+18/25 : SpCond / BSF_CONF_BA / 2022  (Processed)  ✓ 
+19/25 : SpCond / BSF_CONF_BA / 2023  (Processed)  ✓ 
+20/25 : SpCond / BSF_CONF_BA / 2024  (Processed)  ✓ 
+21/25 : SpCond / LR_Mendon_AA / 2020  (Processed)  ✓ 
+22/25 : SpCond / LR_Mendon_AA / 2021  (Processed)  ✓ 
+23/25 : SpCond / LR_Mendon_AA / 2022  (Processed)  ✓ 
+24/25 : SpCond / LR_Mendon_AA / 2023  (Processed)  ✓ 
+25/25 : SpCond / LR_Mendon_AA / 2024  (Processed)  ✗ # This one works perfectly when the fieldNotes correctly appends 1 rather than 2 (AnomalyExtractor.check_field_notes() method)
+
+
+ -- Processing 25 Configuration(s) -- 
+1/25 : ODO / LR_TG_BA / 2020 ✓ 
+2/25 : ODO / LR_TG_BA / 2021 ✓ 
+3/25 : ODO / LR_TG_BA / 2022 ✓ 
+4/25 : ODO / LR_TG_BA / 2023 ✓ 
+5/25 : ODO / LR_TG_BA / 2024 ✓ 
+6/25 : ODO / LR_WaterLab_AA / 2020 ✓ 
+7/25 : ODO / LR_WaterLab_AA / 2021 ✓ 
+8/25 : ODO / LR_WaterLab_AA / 2022 ✓ 
+9/25 : ODO / LR_WaterLab_AA / 2023 ✓ 
+10/25 : ODO / LR_WaterLab_AA / 2024 ✓ 
+11/25 : ODO / LR_MainStreet_BA / 2020 ✓ 
+12/25 : ODO / LR_MainStreet_BA / 2021 ✓ 
+13/25 : ODO / LR_MainStreet_BA / 2022 ✓ 
+14/25 : ODO / LR_MainStreet_BA / 2023 ✓ 
+15/25 : ODO / LR_MainStreet_BA / 2024 ✓ 
+16/25 : ODO / BSF_CONF_BA / 2020 ✓ 
+17/25 : ODO / BSF_CONF_BA / 2021 ✓ 
+18/25 : ODO / BSF_CONF_BA / 2022 ✓ 
+19/25 : ODO / BSF_CONF_BA / 2023 ✓ 
+20/25 : ODO / BSF_CONF_BA / 2024 ✓ 
+21/25 : ODO / LR_Mendon_AA / 2020 ✓ 
+22/25 : ODO / LR_Mendon_AA / 2021 ✓ 
+23/25 : ODO / LR_Mendon_AA / 2022 ✓ 
+24/25 : ODO / LR_Mendon_AA / 2023 ✓ 
+25/25 : ODO / LR_Mendon_AA / 2024 ✗ # This one works perfectly when the fieldNotes correctly appends 1 rather than 2 (AnomalyExtractor.check_field_notes() method)
+
+
+ -- Processing 25 Configuration(s) -- 
+1/25 : pH / LR_TG_BA / 2020 ✓ 
+2/25 : pH / LR_TG_BA / 2021 ✓ 
+3/25 : pH / LR_TG_BA / 2022 ✓ 
+4/25 : pH / LR_TG_BA / 2023 ✓ 
+5/25 : pH / LR_TG_BA / 2024 ✓ 
+6/25 : pH / LR_WaterLab_AA / 2020 ✓ 
+7/25 : pH / LR_WaterLab_AA / 2021 ✓ 
+8/25 : pH / LR_WaterLab_AA / 2022 ✓ 
+9/25 : pH / LR_WaterLab_AA / 2023 ✓ 
+10/25 : pH / LR_WaterLab_AA / 2024 ✓ 
+11/25 : pH / LR_MainStreet_BA / 2020 ✓ 
+12/25 : pH / LR_MainStreet_BA / 2021 ✓ 
+13/25 : pH / LR_MainStreet_BA / 2022 ✓ 
+14/25 : pH / LR_MainStreet_BA / 2023 ✓ 
+15/25 : pH / LR_MainStreet_BA / 2024 ✓ 
+16/25 : pH / BSF_CONF_BA / 2020 ✓ 
+17/25 : pH / BSF_CONF_BA / 2021 ✓ 
+18/25 : pH / BSF_CONF_BA / 2022 ✓ 
+19/25 : pH / BSF_CONF_BA / 2023 ✓ 
+20/25 : pH / BSF_CONF_BA / 2024 ✓ 
+21/25 : pH / LR_Mendon_AA / 2020 ✓ 
+22/25 : pH / LR_Mendon_AA / 2021 ✓ 
+23/25 : pH / LR_Mendon_AA / 2022 ✓ 
+24/25 : pH / LR_Mendon_AA / 2023 ✓ 
+25/25 : pH / LR_Mendon_AA / 2024 ✗ # This one works perfectly when the fieldNotes correctly appends 1 rather than 2 (AnomalyExtractor.check_field_notes() method)
+
+
+
+
+ -- Processing 125 Configuration(s) -- 
+1/125 : Stage / LR_TG_BA / 2020  (Processed)  ✓ 
+2/125 : Stage / LR_TG_BA / 2021  (Processed)  ✓ 
+3/125 : Stage / LR_TG_BA / 2022  (Processed)  ✓ 
+4/125 : Stage / LR_TG_BA / 2023  (Processed)  ✓ 
+5/125 : Stage / LR_TG_BA / 2024  (Processed)  ✓ 
+6/125 : Stage / LR_WaterLab_AA / 2020  (Processed)  ✓ 
+7/125 : Stage / LR_WaterLab_AA / 2021  (Processed)  ✓ 
+8/125 : Stage / LR_WaterLab_AA / 2022  (Processed)  ✓ 
+9/125 : Stage / LR_WaterLab_AA / 2023  (Processed)  ✓ 
+10/125 : Stage / LR_WaterLab_AA / 2024  (Processed)  ✓ 
+11/125 : Stage / LR_MainStreet_BA / 2020  (Processed)  ✓ 
+12/125 : Stage / LR_MainStreet_BA / 2021  (Processed)  ✓ 
+13/125 : Stage / LR_MainStreet_BA / 2022  (Processed)  ✓ 
+14/125 : Stage / LR_MainStreet_BA / 2023  (Processed)  ✓ 
+15/125 : Stage / LR_MainStreet_BA / 2024  (Processed)  ✓ 
+16/125 : Stage / BSF_CONF_BA / 2020  (Processed)  ✓ 
+17/125 : Stage / BSF_CONF_BA / 2021  (Processed)  ✓ 
+18/125 : Stage / BSF_CONF_BA / 2022  (Processed)  ✓ 
+19/125 : Stage / BSF_CONF_BA / 2023  (Processed)  ✓ 
+20/125 : Stage / BSF_CONF_BA / 2024  (Processed)  ✓ 
+21/125 : Stage / LR_Mendon_AA / 2020  (Processed)  ✓ 
+22/125 : Stage / LR_Mendon_AA / 2021  (Processed)  ✓ 
+23/125 : Stage / LR_Mendon_AA / 2022  (Processed)  ✓ 
+24/125 : Stage / LR_Mendon_AA / 2023  (Processed)  ✓ 
+25/125 : Stage / LR_Mendon_AA / 2024  (Processed)  ✗ # This one works perfectly when the fieldNotes correctly appends 1 rather than 2 (AnomalyExtractor.check_field_notes() method)
+26/125 : pH / LR_TG_BA / 2020  (Processed)  ✓ 
+27/125 : pH / LR_TG_BA / 2021  (Processed)  ✓ 
+28/125 : pH / LR_TG_BA / 2022  (Processed)  ✓ 
+29/125 : pH / LR_TG_BA / 2023  (Processed)  ✓ 
+30/125 : pH / LR_TG_BA / 2024  (Processed)  ✓ 
+31/125 : pH / LR_WaterLab_AA / 2020  (Processed)  ✓ 
+32/125 : pH / LR_WaterLab_AA / 2021  (Processed)  ✓ 
+33/125 : pH / LR_WaterLab_AA / 2022  (Processed)  ✓ 
+34/125 : pH / LR_WaterLab_AA / 2023  (Processed)  ✓ 
+35/125 : pH / LR_WaterLab_AA / 2024  (Processed)  ✓ 
+36/125 : pH / LR_MainStreet_BA / 2020  (Processed)  ✓ 
+37/125 : pH / LR_MainStreet_BA / 2021  (Processed)  ✓ 
+38/125 : pH / LR_MainStreet_BA / 2022  (Processed)  ✓ 
+39/125 : pH / LR_MainStreet_BA / 2023  (Processed)  ✓ 
+40/125 : pH / LR_MainStreet_BA / 2024  (Processed)  ✓ 
+41/125 : pH / BSF_CONF_BA / 2020  (Processed)  ✓ 
+42/125 : pH / BSF_CONF_BA / 2021  (Processed)  ✓ 
+43/125 : pH / BSF_CONF_BA / 2022  (Processed)  ✓ 
+44/125 : pH / BSF_CONF_BA / 2023  (Processed)  ✓ 
+45/125 : pH / BSF_CONF_BA / 2024  (Processed)  ✓ 
+46/125 : pH / LR_Mendon_AA / 2020  (Processed)  ✓ 
+47/125 : pH / LR_Mendon_AA / 2021  (Processed)  ✓ 
+48/125 : pH / LR_Mendon_AA / 2022  (Processed)  ✓ 
+49/125 : pH / LR_Mendon_AA / 2023  (Processed)  ✓ 
+50/125 : pH / LR_Mendon_AA / 2024  (Processed)  ✗ # This one works perfectly when the fieldNotes correctly appends 1 rather than 2 (AnomalyExtractor.check_field_notes() method)
+51/125 : SpCond / LR_TG_BA / 2020  (Processed)  ✓ 
+52/125 : SpCond / LR_TG_BA / 2021  (Processed)  ✓ 
+53/125 : SpCond / LR_TG_BA / 2022  (Processed)  ✓ 
+54/125 : SpCond / LR_TG_BA / 2023  (Processed)  ✓ 
+55/125 : SpCond / LR_TG_BA / 2024  (Processed)  ✓ 
+56/125 : SpCond / LR_WaterLab_AA / 2020  (Processed)  ✓ 
+57/125 : SpCond / LR_WaterLab_AA / 2021  (Processed)  ✓ 
+58/125 : SpCond / LR_WaterLab_AA / 2022  (Processed)  ✓ 
+59/125 : SpCond / LR_WaterLab_AA / 2023  (Processed)  ✓ 
+60/125 : SpCond / LR_WaterLab_AA / 2024  (Processed)  ✓ 
+61/125 : SpCond / LR_MainStreet_BA / 2020  (Processed)  ✓ 
+62/125 : SpCond / LR_MainStreet_BA / 2021  (Processed)  ✓ 
+63/125 : SpCond / LR_MainStreet_BA / 2022  (Processed)  ✓ 
+64/125 : SpCond / LR_MainStreet_BA / 2023  (Processed)  ✓ 
+65/125 : SpCond / LR_MainStreet_BA / 2024  (Processed)  ✓ 
+66/125 : SpCond / BSF_CONF_BA / 2020  (Processed)  ✓ 
+67/125 : SpCond / BSF_CONF_BA / 2021  (Processed)  ✓ 
+68/125 : SpCond / BSF_CONF_BA / 2022  (Processed)  ✓ 
+69/125 : SpCond / BSF_CONF_BA / 2023  (Processed)  ✓ 
+70/125 : SpCond / BSF_CONF_BA / 2024  (Processed)  ✓ 
+71/125 : SpCond / LR_Mendon_AA / 2020  (Processed)  ✓ 
+72/125 : SpCond / LR_Mendon_AA / 2021  (Processed)  ✓ 
+73/125 : SpCond / LR_Mendon_AA / 2022  (Processed)  ✓ 
+74/125 : SpCond / LR_Mendon_AA / 2023  (Processed)  ✓ 
+75/125 : SpCond / LR_Mendon_AA / 2024  (Processed)  ✗ # This one works perfectly when the fieldNotes correctly appends 1 rather than 2 (AnomalyExtractor.check_field_notes() method)
+76/125 : ODO / LR_TG_BA / 2020  (Processed)  ✓ 
+77/125 : ODO / LR_TG_BA / 2021  (Processed)  ✓ 
+78/125 : ODO / LR_TG_BA / 2022  (Processed)  ✓ 
+79/125 : ODO / LR_TG_BA / 2023  (Processed)  ✓ 
+80/125 : ODO / LR_TG_BA / 2024  (Processed)  ✓ 
+81/125 : ODO / LR_WaterLab_AA / 2020  (Processed)  ✓ 
+82/125 : ODO / LR_WaterLab_AA / 2021  (Processed)  ✓ 
+83/125 : ODO / LR_WaterLab_AA / 2022  (Processed)  ✓ 
+84/125 : ODO / LR_WaterLab_AA / 2023  (Processed)  ✓ 
+85/125 : ODO / LR_WaterLab_AA / 2024  (Processed)  ✓ 
+86/125 : ODO / LR_MainStreet_BA / 2020  (Processed)  ✓ 
+87/125 : ODO / LR_MainStreet_BA / 2021  (Processed)  ✓ 
+88/125 : ODO / LR_MainStreet_BA / 2022  (Processed)  ✓ 
+89/125 : ODO / LR_MainStreet_BA / 2023  (Processed)  ✓ 
+90/125 : ODO / LR_MainStreet_BA / 2024  (Processed)  ✓ 
+91/125 : ODO / BSF_CONF_BA / 2020  (Processed)  ✓ 
+92/125 : ODO / BSF_CONF_BA / 2021  (Processed)  ✓ 
+93/125 : ODO / BSF_CONF_BA / 2022  (Processed)  ✓ 
+94/125 : ODO / BSF_CONF_BA / 2023  (Processed)  ✓ 
+95/125 : ODO / BSF_CONF_BA / 2024  (Processed)  ✓ 
+96/125 : ODO / LR_Mendon_AA / 2020  (Processed)  ✓ 
+97/125 : ODO / LR_Mendon_AA / 2021  (Processed)  ✓ 
+98/125 : ODO / LR_Mendon_AA / 2022  (Processed)  ✓ 
+99/125 : ODO / LR_Mendon_AA / 2023  (Processed)  ✓ 
+100/125 : ODO / LR_Mendon_AA / 2024  (Processed)  ✗ # This one works perfectly when the fieldNotes correctly appends 1 rather than 2 (AnomalyExtractor.check_field_notes() method)
+101/125 : WaterTemp_EXO / LR_TG_BA / 2020  (Processed)  ✓ 
+102/125 : WaterTemp_EXO / LR_TG_BA / 2021  (Processed)  ✓ 
+103/125 : WaterTemp_EXO / LR_TG_BA / 2022  (Processed)  ✓ 
+104/125 : WaterTemp_EXO / LR_TG_BA / 2023  (Processed)  ✓ 
+105/125 : WaterTemp_EXO / LR_TG_BA / 2024  (Processed)  ✓ 
+106/125 : WaterTemp_EXO / LR_WaterLab_AA / 2020  (Processed)  ✗ 
+107/125 : WaterTemp_EXO / LR_WaterLab_AA / 2021  (Processed)  ✓ 
+108/125 : WaterTemp_EXO / LR_WaterLab_AA / 2022  (Processed)  ✓ 
+109/125 : WaterTemp_EXO / LR_WaterLab_AA / 2023  (Processed)  ✓ 
+110/125 : WaterTemp_EXO / LR_WaterLab_AA / 2024  (Processed)  ✗ 
+111/125 : WaterTemp_EXO / LR_MainStreet_BA / 2020  (Processed)  ✓ 
+112/125 : WaterTemp_EXO / LR_MainStreet_BA / 2021  (Processed)  ✓ 
+113/125 : WaterTemp_EXO / LR_MainStreet_BA / 2022  (Processed)  ✓ 
+114/125 : WaterTemp_EXO / LR_MainStreet_BA / 2023  (Processed)  ✓ 
+115/125 : WaterTemp_EXO / LR_MainStreet_BA / 2024  (Processed)  ✓ 
+116/125 : WaterTemp_EXO / BSF_CONF_BA / 2020  (Processed)  ✓ 
+117/125 : WaterTemp_EXO / BSF_CONF_BA / 2021  (Processed)  ✓ 
+118/125 : WaterTemp_EXO / BSF_CONF_BA / 2022  (Processed)  ✓ 
+119/125 : WaterTemp_EXO / BSF_CONF_BA / 2023  (Processed)  ✓ 
+120/125 : WaterTemp_EXO / BSF_CONF_BA / 2024  (Processed)  ✓ 
+121/125 : WaterTemp_EXO / LR_Mendon_AA / 2020  (Processed)  ✓ 
+122/125 : WaterTemp_EXO / LR_Mendon_AA / 2021  (Processed)  ✓ 
+123/125 : WaterTemp_EXO / LR_Mendon_AA / 2022  (Processed)  ✓ 
+124/125 : WaterTemp_EXO / LR_Mendon_AA / 2023  (Processed)  ✓ 
+125/125 : WaterTemp_EXO / LR_Mendon_AA / 2024  (Processed)  ✓ 

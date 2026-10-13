@@ -4,9 +4,14 @@ import yaml
 
 # Setting object holds all required settings to run the analysis
 class Settings:
-    def __init__(self, settingsYaml):
+    def __init__(self, settingsDict: dict):
+        self.settings = settingsDict
+
+    @staticmethod
+    def from_yaml(settingsYaml: str):
         with open(settingsYaml, 'r') as f:
-            self.settings = yaml.load(f, Loader=yaml.FullLoader)
+            settings = yaml.load(f, Loader=yaml.FullLoader)
+        return Settings(settings)
 
     def __str__(self):
         return "[Settings: " + str(self.settings) + "]"
@@ -15,7 +20,7 @@ class Settings:
 class InputDataframe:
     INDEX_NAME = "LocalDateTime"
     REQUIRED_COLUMNS = {
-        "BattVolt", "EXOVolt", "ODO", "Stage", "pH", "SpCond", "WaterTemp_EXO", "TurbMed", "AirTemp_EE08_avg", "QualifierCode"
+        "BattVolt", "EXOVolt", "ODO", "Stage", "pH", "SpCond", "WaterTemp_EXO", "TurbMed", "AirTemp_EE08_avg"#, "QualifierCode"
     }
 
     def __init__(self, df: pd.DataFrame):
@@ -54,6 +59,7 @@ class InputDataframe:
 
     def remove_unneeded_columns(self):
         self._df = self._df.drop(columns=[col for col in self._df.columns if col not in self.REQUIRED_COLUMNS])
+
 
 class DataManager:
     def __init__(self, directoryManager, settings):
@@ -98,11 +104,16 @@ class DataManager:
     def add_field_notes(self, fieldNotes):
         self.fieldNotes = fieldNotes
 
-    # combines multiple dataframes (an array) into a single dataframe. Add this dataframe to the dataframes dictionary under the specified name
+    # Combines multiple dataframes (an array) into a single dataframe. Add this dataframe to the dataframes dictionary under the specified name. Duplicate index values are not allowed for this operation, so we will keep only the first row.
     def combine_dataframes(self, dataframeNames, name, axis=1):
-        newDf = pd.DataFrame()
-        for df in dataframeNames:
-            newDf = pd.concat([newDf, self.dataframes[df]], axis=axis)
+        dfs = []
+        for df_name in dataframeNames:
+            df = self.dataframes[df_name]
+            # Keep only the first row for each duplicate index
+            df = df[~df.index.duplicated(keep='first')]
+            dfs.append(df)
+
+        newDf = pd.concat(dfs, axis=axis)
         self.dataframes[name] = newDf
 
     # Loops through the entire dataframe looking for gaps in the data— rows that are not 15 minute intervals to the next row. Empty rows are added, and the dataframe is updated.
@@ -154,6 +165,59 @@ class DataManager:
             self.dataframes[name].remove_unneeded_columns()
 
 
+class FieldNoteEvent:
+    EVENT_NUMBER_KEY = "Event Number"
+
+    def __init__(self, event_number, begin_time, end_time, site_code, method):
+        self.event_number = event_number
+        self.begin_time = begin_time
+        self.end_time = end_time
+        self.site_code = site_code
+        self.method = method
+
+    def __str__(self):
+        return f"FieldNoteEvent({self.event_number}): {self.begin_time} to {self.end_time}"
+
+    def combine_with(self, other):
+        if self.event_number != other.event_number:
+            raise ValueError("Cannot combine events with different event numbers")
+        begin_time = self.begin_time if self.begin_time is not None else other.begin_time
+        end_time = self.end_time if self.end_time is not None else other.end_time
+        site_code = self.site_code if self.site_code is not None else other.site_code
+        method = self.method if self.method is not None else other.method
+        return FieldNoteEvent(self.event_number, begin_time, end_time, site_code, method)
+
+    def to_series(self):
+        return pd.Series({
+            "BeginTime": self.begin_time,
+            "EventNumber": self.event_number,
+            "SiteCode": self.site_code,
+            "Method": self.method,
+            "EndTime": self.end_time
+            # "QCStatus": self.qc_status
+            # This column is in many of the field notes files, but not all of them. So we will just ignore it for now.
+        })
+
+    @staticmethod
+    def from_series(series):
+        if series[FieldNoteEvent.EVENT_NUMBER_KEY][0] == "B":
+            return FieldNoteEvent(
+                event_number=int(series[FieldNoteEvent.EVENT_NUMBER_KEY][1:]),
+                begin_time=series["Begin: End time"],
+                end_time=None,
+                site_code=series.get("SiteCode", None),
+                method=series.get("Method", None)
+            )
+        else:
+            return FieldNoteEvent(
+                event_number=int(series[FieldNoteEvent.EVENT_NUMBER_KEY][1:]),
+                begin_time=None,
+                end_time=series["Begin: End time"],
+                site_code=series.get("SiteCode", None),
+                method=series.get("Method", None)
+            )
+
+
 class FieldNotes:
     def __init__(self, inputCsvFile):
         self.dataframe = DataManager.create_dataframe_from_csv_static(inputCsvFile)
@@ -163,33 +227,21 @@ class FieldNotes:
     #    Event Number, Begin: End time, SiteCode, Method, QC_status
     # returns a dictionary of events with their start and end times, Site codes, method, and QC status (whether or not this event changed the data at all)
     def extract_events(self):
-        eventNumberKey = "Event Number"
         events = []
         for _, row in self.dataframe.iterrows():
-            eventNumber = int(row[eventNumberKey][1:])
+            row_event = FieldNoteEvent.from_series(row)
+            # Get any other events in the list that have the same event number and are not the current row
+            relevant_indices = [i for i, event in enumerate(events) if event.event_number == row_event.event_number]
 
-            if row[eventNumberKey][0] == "B":
-                # this is a beginning time entry
-                events.append(pd.Series({
-                    "BeginTime": row["Begin: End time"],
-                    "SiteCode": row["SiteCode"],
-                    "Method": row["Method"],
-                    "QCStatus": row["QC_status"]
-                }))
-            elif row[eventNumberKey][0] == "N":
-                # this is an end time entry
-                if eventNumber > len(events):
-                    # this means the beginning of our event is in a row AFTER the end of our event -- likely is just a single minute field note, so we'll just ignore it.
-                    continue
+            if len(relevant_indices) == 0:
+                events.append(row_event)
+            else:
+                # We've seen the other side of this event already, so we need to update it with the new information
+                first_index = relevant_indices[0]
+                events[first_index] = events[first_index].combine_with(row_event)                
 
-                events[eventNumber-1]["EndTime"] = row["Begin: End time"]
-                if events[eventNumber-1]["SiteCode"] != row["SiteCode"] or events[eventNumber-1]["Method"] != row["Method"]:
-                    print(f"\tWARNING: [Event {eventNumber}] Site code/Method mismatch between beginning and end times. Keeping beginning time.")
-                    # raise Warning("Extracting Event Data: Site code mismatch between beginning and end times. Going with the beginning time.")
-        
-        ret = pd.DataFrame(events)
+        ret = pd.DataFrame([event.to_series() for event in events])
         ret.rename(columns={'Begin: End time': 'LocalDateTime'}, inplace=True)
-        # ret.set_index('LocalDateTime', inplace=True)
         return ret
 
     def time_in_any_event(self, timestamp):

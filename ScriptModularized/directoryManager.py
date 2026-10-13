@@ -9,17 +9,17 @@ class DirectoryManager:
         # Get the current working directory and assign it to 'scripts_data_folder'
         self.settings = settings
         self.input_folder = self.settings.settings['input_folder']
-        self.output_folder_name = self.settings.settings['output_folder']
+        # self.output_folder_name = self.settings.settings['output_folder']
 
-        # if output folder name already exists and replace_folder is True, remove it
-        if os.path.exists(self.output_folder_name) and replace_folder:
-            shutil.rmtree(self.output_folder_name)
-        if os.path.exists(self.output_folder_name) and not replace_folder:
-            raise Exception("Output folder already exists!") 
+        # # if output folder name already exists and replace_folder is True, remove it
+        # if os.path.exists(self.output_folder_name) and replace_folder:
+        #     shutil.rmtree(self.output_folder_name)
+        # if os.path.exists(self.output_folder_name) and not replace_folder:
+        #     raise Exception("Output folder already exists!") 
 
-        self.output_folder = os.path.join(self.output_folder_name)
+        # self.output_folder = os.path.join(self.output_folder_name)
         # create directory
-        os.makedirs(self.output_folder)
+        # os.makedirs(self.output_folder)
 
     def get_data_manager(self):
         if self.verbose: print("Assembling Data...")

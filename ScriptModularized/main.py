@@ -4,7 +4,7 @@ import anomalyExtractor as anEx
 import pandas as pd
 import sys
 
-settings = dM.Settings("../input_folder/settings.yaml")
+settings = dM.Settings.from_yaml("../input_folder/settings.yaml")
 
 def preprocess() -> dM.DataManager:
     # Preprocessing #
@@ -15,17 +15,11 @@ def preprocess() -> dM.DataManager:
 
 def anomaly_extraction(dataMan):
     # Extracting Anomalies #
-
     extractor = anEx.AnomalyExtractor(dataMan, verbose=True)
-    extractor.point_by_point_difference()
-    extractor.check_field_notes()
-    extractor.process_calibration_events()
-    extractor.calculate_manual_change_trends()
-    extractor.assign_anomaly_types()
-    extractor.extract_events()
+    extractor.process()
     dataMan.set_main(extractor.dataframe)
 
-    
+
 if __name__ == "__main__":
     dataMan = preprocess()
     anomaly_extraction(dataMan)
