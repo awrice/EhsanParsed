@@ -38,7 +38,7 @@ class BatchProcessor:
                 try:
                     processor = SingleProcessor(config)
                     processor.preprocess()
-                    processor.anomaly_extraction()
+                    processor.anomaly_extraction(save_midpoint=False)
                     processor.export_data(config.output)
                 except Exception as e:
                     # print(f"\033[91m COULDN'T PROCESS - ERRNO: {type(e).__name__} \033[0m", end="")
@@ -83,12 +83,8 @@ def get_all_configs(variables=None, sites=None, years=None):
 
 if __name__ == '__main__':
 
-    configs = get_all_configs(
-        # variables=['WaterTemp_EXO'],
-        # sites=None,
-        # years=None,
-    )
-    
+    configs = get_all_configs()
+
     verbose_level = int(sys.argv[1]) if len(sys.argv) > 1 else 1
     batch_processor = BatchProcessor(configs, output_folder, verbose_level)
     

@@ -6,7 +6,8 @@ Each Method in this class follows the steps given Section 3.2.4 in Ehsan's paper
 
 Lots of the code below was written by Ehsan Kahrizi, but modularized and vetted by Adam Rice
 
-Table 2 List of anomaly event type labels. 
+[Table 2]
+List of anomaly event type labels. 
 1. Anomalies caused by site visits
   - (Code: 1.1 MNT/Class: 1) Maintenance: Routine maintenance by  technicians, causes temporary disruptions in raw data. 
   - (Code: 1.2 CAL/Class: 2) Calibration: Sensor readings are affected during  the calibration process. 
@@ -17,10 +18,6 @@ Table 2 List of anomaly event type labels.
   - (Code: 2.2 SLM/Class: 6) Sensor or logger malfunction: Refers to  malfunctioning hardware issues, where the sensor or data logger fails to operate correctly. 
   - (Code: 2.3 LWL/Class: 7) Low water level: Anomalies where the river's  water level falls below the sensor's installed elevation, which leaves it exposed to air. 
   - (Code: 2.4 VIN/Class: 8) Visual inspection: Anomalies that do not clearly  match any of the above-mentioned categories and require further review or expert judgment.
-
-
-I have changed the names of the columns from the original paper (because the original names were confusing). Preceeding underscores have been added to the names to denote these are analysis columns, not data columns. The key is given below:
-    - EventType -> EventType
 
 """
 class AnomalyClassifier:
@@ -39,7 +36,8 @@ class AnomalyClassifier:
         self._lwl_event_ranges = None
 
     """
-    Master function processes through the steps in the order they should be done. For more info on each step, look to the comments above each method.
+    Master function 
+    Processes through the steps in the order they should be done. For more info on each step, look to the comments above each method.
     """
     def process(self):
         if self.verbose: print("\033[92m -- Anomaly Classification -- \033[0m")
@@ -50,60 +48,25 @@ class AnomalyClassifier:
         self.check_spCond()
         self.compare_temps()
         self.compare_ave_stage()
+        self.ind_5_composite()
+        self.maintenance_issues()
+        self.sensor_and_logger_malfunctioning()
+        self.power_issues()
+        self.reading_during_calibration()
+        self.post_calibration_CS()
+        self.post_calibration_LDC()
+        self.final_labeling()
         if self.verbose: print("Done!")
 
+        self.ending_message()
+
     """
+    Anomaly event type labels are added to each data value within an anomaly event in a new column called 'EventType'. We developed a labeling system through data-driven analysis for use in labeling anomaly events according to their type. This categorization approach is designed to perform a workflow to assign the corresponding label, based on patterns discussed in the previous section and logic described in this section. The identified anomaly event types can be categorized into two main categories, each with various subcategories (Table 2). These eight classes constitute an operational taxonomy derived from LRO field and QC procedures, rather than a universally established taxonomy of aquatic sensor anomalies (see Section 5.4).
+
+    First, some anomaly events are associated with site visits by the technicians. These anomaly events are a result of manual interventions, such as maintenance or calibration, performed by technicians during site visits. For example, anomaly events labeled as Maintenance (MNT) indicate when routine maintenance causes temporary disruptions in raw data. Similarly, Calibration (CAL) anomaly events occur when sensor readings are affected during the calibration process. Furthermore, Linear Drift Correction (LDC) anomaly events indicate retroactive adjustments to earlier data points resulting from sensor drift that was corrected during a subsequent calibration. Another subtype of anomaly event associated with site visits, Constant Shift (CS), is attributed to errors in sensor setup or scaling, which technicians later corrected.
+
+    The second category of anomaly event types includes anomaly events originating from sensor infrastructure issues, environmental conditions, or any other conditions that created an anomaly event. Power Failure (PF) anomaly events are caused by interruptions in the sensor's power supply, such as depleted batteries or voltage fluctuations. Further, Sensor/Logger Malfunction (SLM) anomaly events refer to malfunctioning hardware where the sensor or data logger fails to operate correctly. In some cases, anomaly events are due to natural environmental conditions, like Low Water Level (LWL) events, where the river's water level falls below the sensor's installed  elevation, which leaves it exposed to air. Lastly, the Visual Inspection (VIN) label is used when the anomaly event does not clearly match any of the above-mentioned categories and requires further review or expert judgment. The following text outlines the steps, functions, procedures, and logic implemented as a deterministic protocol to set anomaly event type labels for each anomaly event.
     """
-    def _identifyEventTypes(self):
-        # Step 1: Create a new column 'EventType' initialized as an empty string
-        self.dataframe['EventType'] = ''
-
-        # Step 2: Assign 'EventType' where '_AnomalyType' == 5 (Keep CorrectionTypeCal values)
-        self.dataframe.loc[self.dataframe['_AnomalyType'] == 5, 'EventType'] = self.dataframe.loc[self.dataframe['_AnomalyType'] == 5, '_CorrectionTypeCal']
-
-        # Ensure '_StartTimeEvent' and '_EndTimeEvent' are properly formatted
-        self.dataframe['_StartTimeEvent'] = self.dataframe['_StartTimeEvent'].astype(str).str.strip()
-        self.dataframe['_EndTimeEvent'] = self.dataframe['_EndTimeEvent'].astype(str).str.strip()
-
-        # Step 3: Identify event ranges and assign 'CAL' for '_AnomalyType = 4'
-        event_start_idx = None
-        event_end_idx = None
-
-        for i, row in self.dataframe.iterrows():
-            # Identify the start of an event
-            if isinstance(row['_StartTimeEvent'], str) and 'Starting time of Event' in row['_StartTimeEvent']:
-                event_start_idx = i  # Store the start index
-
-            # Identify the end of the event
-            if isinstance(row['_EndTimeEvent'], str) and 'Ending time of Event' in row['_EndTimeEvent']:
-                event_end_idx = i  # Store the end index
-
-            # If an event start is detected but no explicit end, use the last row in the event
-            if event_start_idx is not None:
-                if event_end_idx is None:
-                    event_end_idx = i  # Use the last detected row if no explicit end is found
-
-                # Apply event type assignment for the detected range
-                print(event_start_idx, event_end_idx)
-
-                for j in range(event_start_idx, event_end_idx + 1):
-                    anomaly_type_value = self.dataframe.at[j, '_AnomalyType']
-                    if anomaly_type_value == 4:
-                        self.dataframe.at[j, 'EventType'] = 'CAL'
-
-                # Reset tracking for the next event *only if* an event fully processed
-                if event_end_idx is not None:
-                    event_start_idx = None
-                    event_end_idx = None
-
-        # Step 4: Ensure 'CAL' is assigned before 'OtherType' --------------------------------------------------
-        self.dataframe.loc[self.dataframe['_AnomalyType'] == 4, 'EventType'] = 'CAL'
-
-        # Step 5: Ensure ALL `_AnomalyType = 3, 2, 1` values are assigned `OtherType`, even if they were missed -------
-        self.dataframe.loc[(self.dataframe['_AnomalyType'].isin([1, 2, 3])) & (self.dataframe['EventType'] == ''), 'EventType'] = 'OtherType'
-
-        # Step 6: Ensure 'CorrectionTypeCal' values remain unchanged where _AnomalyType = 5 ---------------------------
-        self.dataframe.loc[self.dataframe['_AnomalyType'] == 5, 'EventType'] = self.dataframe['CorrectionTypeCal']
     def identifyEventTypes(self):
         if self.verbose: print("Identifying Event Types...")
         df = self.dataframe
@@ -155,7 +118,6 @@ class AnomalyClassifier:
         df.loc[mask5, 'EventType'] = df.loc[mask5, '_CorrectionTypeCal']
 
     """
-    Section 3.2.4 - Step 2
     Second, a new column called 'Ind_3' is calculated to check cross-variable availability. Missing data points can arise from two main causes: 1) a power failure, where all variables are missing for a timestamp, or 2) a sensor/logger malfunction, where only one variable is missing for a timestamp. To distinguish between these, the code assesses data availability using a cross check variable (in the configuration/Settings). For each data row, if the value for the cross check variable is missing at the same timestamp (NaN), 'Ind_3' is set to 1; otherwise, it is set to 0.
     """
     def check_cross_variable(self):
@@ -164,12 +126,10 @@ class AnomalyClassifier:
         self.dataframe['Ind_3'] = np.where(self.dataframe[self.dataManager.settings.settings['crossValidateVariable']].isna(), 1, 0)
 
     """
-    Section 3.2.4 - Step 3
     Third, a column called 'Ind_4' is added to our data frame to check for issues related to ice. The code flags potential ice (ICE) events using water temperature. The 'Ind_4' column is set to 1 wherever the raw water temperature is at or below 0 °C, otherwise 'Ind_4' is set to 0. Then, a new column is created called 'Ind_4.1' to filter out the periods that occurred during site visits, because during site visits negative values of water temperature could be due to the sensor being out of the water and are not valid. 'Ind_4.1' refines that signal by marking 1 only when an ice flag occurs outside any sitevisit window (Ind_1 = 0), and 0 otherwise. In short, 'Ind_4' detects freezing conditions, while 'Ind_4.1' isolates freezing conditions that are not artifacts of site visits.
     """
-    """ Shouldn't we probably just keep the same column that has the better flag? Why do we keep Ind_4? """
     def check_ice(self):
-        if self.verbose: print("Checking Issues with Ice (Ind_4 and 4.1)")
+        if self.verbose: print("Checking Issues with Ice (Ind_4 and Ind_4.1)")
         self.dataframe['Ind_4'] = ''
         self.dataframe['Ind_4'] = np.where(self.dataframe["WaterTemp_EXO"] <= 0, 1, 0)
 
@@ -177,43 +137,11 @@ class AnomalyClassifier:
         self.dataframe['Ind_4.1'] = np.where((self.dataframe['Ind_4'] == 1) & (self.dataframe['_FieldNoteFlag'] == 0), 1, 0)
     
     """
-    This method is called for use on Ind_5
-
-    Ehsan's Comments on this function:
-        Map each event number k to (start_idx, end_idx, event_idx):
-        start_idx: row holding 'Starting time of Event k' (the Standard row just before the event)
-        end_idx:   row holding 'Ending time of Event k' (the Standard row just after the event)
-        event_idx: rows that belong to event k (Event_Counter == k)
-        Events are matched by number (not by scanning for the next start/end marker), because the
-        markers of adjacent events interleave, and because the marker rows themselves are normal rows
-        that must not be filtered out.
-    """
-    def get_lwl_event_ranges(self):
-        if self._lwl_event_ranges != None: return self._lwl_event_ranges
-
-        if self.variable_of_interest == 'WaterTemp_EXO': start_column, end_column= '_StartTimeEvent', '_EndTimeEvent'
-        else: start_column, end_column = '_OtherStartTime', '_OtherEndTime'
-
-        starts = self.dataframe[start_column].astype(str).str.extract(r'Starting time of Event (\d+)', expand=False).dropna().astype(int)
-        ends = self.dataframe[end_column].astype(str).str.extract(r'Ending time of Event (\d+)', expand=False).dropna().astype(int)
-        start_map = {k: idx for idx, k in starts.items()}
-        end_map = {k: idx for idx, k in ends.items()}
-        counter = pd.to_numeric(self.dataframe['_AnomalyEventNumber'], errors='coerce')
-
-        ranges = {}
-        for k in sorted(set(start_map) & set(end_map)):
-            event_idx = self.dataframe.index[counter == k]
-            if len(event_idx) > 0:
-                ranges[k] = (start_map[k], end_map[k], event_idx)
-        return ranges
-
-    """
-    Section 3.2.4 - Step 4
     Fourth, the code checks for issues related to sensor exposure to air. This code uses an 'LWL' flag to identify when the sensor is exposed to air. Four different conditions are checked to verify that a sensor is out of the water and exposed to air or not. 
-     - Checking conditions such as sharp changes in values of specific conductance, comparing air temperature with water temperature, and examining the stage of water can help identify when the sensor is not submerged in the water. A new column called 'Ind_5.1' is created to check the drop changes at the beginning and end of each anomaly event, indicating that the surrounding sensor condition changed. 'Ind_5.1' checks each non-calibration event window and fills all rows for events with a value of 1 if both the start- and end-boundary jumps in the raw data series exceed a threshold, 'ThrV_1'. Otherwise 'Ind_5.1' is set to 0 (Figure 4). 'ThrV_1' is a predefined threshold that is defined in the settings for the object.
+      * Checking conditions such as sharp changes in values of specific conductance, comparing air temperature with water temperature, and examining the stage of water can help identify when the sensor is not submerged in the water. A new column called 'Ind_5.1' is created to check the drop changes at the beginning and end of each anomaly event, indicating that the surrounding sensor condition changed. 'Ind_5.1' checks each non-calibration event window and fills all rows for events with a value of 1 if both the start- and end-boundary jumps in the raw data series exceed a threshold, 'ThrV_1'. Otherwise 'Ind_5.1' is set to 0 (Figure 4). 'ThrV_1' is a predefined threshold that is defined in the settings for the object.
     """
     def delta_start_end(self):
-        if self.verbose: print("Delta Start/End...")
+        if self.verbose: print("Delta Start/End (Ind_5.1)...")
         # Reset index and standardize column names
         self.dataframe.reset_index(inplace=True)
         self.dataframe.columns = self.dataframe.columns.str.strip()
@@ -256,10 +184,10 @@ class AnomalyClassifier:
         return self.dataframe
 
     """
-     - A new column called 'Ind_5.2' is then created to check the specific conductance of water, as conductivity measured by the specific conductance sensor is dramatically reduced when the sensor is exposed to air. The 'Ind_5.2' column is filled with a value of 1 on timesteps outside calibration windows when specific conductance is missing or below a set threshold, 'ThrV_2'. 'ThrV_2' is a predefined threshold that is defined in the 'Initial_Settings.yaml' file. 
+      * A new column called 'Ind_5.2' is then created to check the specific conductance of water, as conductivity measured by the specific conductance sensor is dramatically reduced when the sensor is exposed to air. The 'Ind_5.2' column is filled with a value of 1 on timesteps outside calibration windows when specific conductance is missing or below a set threshold, 'ThrV_2'. 'ThrV_2' is a predefined threshold that is defined in the 'Initial_Settings.yaml' file. 
     """
     def check_spCond(self):
-        if self.verbose: print("Checking Specific Conductance...")
+        if self.verbose: print("Checking Specific Conductance (Ind_5.2)...")
         # Initialize 'Ind_5.2' with None
         self.dataframe['Ind_5.2'] = None
 
@@ -273,10 +201,10 @@ class AnomalyClassifier:
         )
 
     """
-      - Then, a new column called 'Ind_5.3' is created to compare the average water temperature and air temperature for each anomaly event period. The 'Ind_5.3' column is filled with 1 when the average absolute difference between water and air temperature (|Water Temperature - Air Temperature|) over the event is small (below 'ThrV_3' set in the 'Initial_Settings.yaml' file), suggesting the aquatic sensor is exposed to air. 
+      * Then, a new column called 'Ind_5.3' is created to compare the average water temperature and air temperature for each anomaly event period. The 'Ind_5.3' column is filled with 1 when the average absolute difference between water and air temperature (|Water Temperature - Air Temperature|) over the event is small (below 'ThrV_3' set in the 'Initial_Settings.yaml' file), suggesting the aquatic sensor is exposed to air. 
     """
     def compare_temps(self):
-        if self.verbose: print("Checking Water and Air Temperatures...")
+        if self.verbose: print("Checking Water and Air Temperatures (Ind_5.3)...")
         # Absolute calculation
         self.dataframe['delta_Water_DataSetClimate'] = abs(self.dataframe['WaterTemp_EXO'] - self.dataframe['AirTemp_EE08_avg'])
         self.dataframe['delta_Water_DataSetClimate_avg'] = None
@@ -299,10 +227,10 @@ class AnomalyClassifier:
                 self.dataframe.loc[event_idx, 'Ind_5.3'] = 1 if avg_delta < self.ThrV_3 else 0
 
     """
-      - A column called 'Ind_5.4' is then created in the data frame to compare the average water stage within a buffer of time before and after the anomaly event, and to compare the difference with the average water stage during the anomaly event. The code calculates the n-point averages before and after the event (Figure 5). If both are greater than a threshold 'ThrV_4', it indicates that the water level is reduced and the sensor may be exposed to air. In this case, the 'Ind_5.4' column is filled with 1; otherwise, 0. The 'n' and 'ThrV_4' are predefined thresholds that are defined in the 'Initial_Settings.yaml' file. 
+      * A column called 'Ind_5.4' is then created in the data frame to compare the average water stage within a buffer of time before and after the anomaly event, and to compare the difference with the average water stage during the anomaly event. The code calculates the n-point averages before and after the event (Figure 5). If both are greater than a threshold 'ThrV_4', it indicates that the water level is reduced and the sensor may be exposed to air. In this case, the 'Ind_5.4' column is filled with 1; otherwise, 0. The 'n' and 'ThrV_4' are predefined thresholds that are defined in the 'Initial_Settings.yaml' file. 
     """
     def compare_ave_stage(self):
-        if self.verbose: print("Checking Average Stage...")
+        if self.verbose: print("Checking Average Stage (Ind_5.4)...")
         # Initialize columns with None
         self.dataframe['Stage_avg'] = None
         self.dataframe['Stage_backward'] = None
@@ -338,11 +266,187 @@ class AnomalyClassifier:
                 self.dataframe.loc[event_idx, 'delta_Stage_Backward'] = delta_stage_backward
                 self.dataframe.loc[event_idx, 'delta_Stage_Forward'] = delta_stage_forward
                 self.dataframe.loc[event_idx, 'Ind_5.4'] = 1 if (delta_stage_forward > self.ThrV_4 and delta_stage_backward > self.ThrV_4) else 0
-
     
     """
-      - Finally, a new column called 'Ind_5' is created to composite the prior logic. The 'Ind_5' column is set to 1 only if 'Ind_5.4' = 1 and at least one of 'Ind_5.1'/ 'Ind_5.2' / 'Ind_5.3' = 1 (else 0, or None if prerequisites are missing), yielding a robust out of water indicator.
+      * Finally, a new column called 'Ind_5' is created to composite the prior logic. The 'Ind_5' column is set to 1 only if 'Ind_5.4' = 1 and at least one of 'Ind_5.1'/ 'Ind_5.2' / 'Ind_5.3' = 1 (else 0, or None if prerequisites are missing), yielding a robust out of water indicator.
     """
-    """ Again, shouldn't we delete some of the indicies that we don't need? """
+    def ind_5_composite(self):
+        if self.verbose: print("Compositing Ind_5's together...")
+        self.dataframe['Ind_5'] = None
+
+        # Loop through the dataframe and apply the logic for 'Ind_5'
+        for i, row in self.dataframe.iterrows():
+            # Ensure that Ind_5.1, Ind_5.2, Ind_5.3, and Ind_5.4 are not null
+            if pd.notnull(row['Ind_5.1']) and pd.notnull(row['Ind_5.2']) and pd.notnull(row['Ind_5.3']) and pd.notnull(row['Ind_5.4']):
+                # Check the condition for Ind_5.4 (mandatory requirement) and one of Ind_5.1, Ind_5.2, or Ind_5.3
+                if row['Ind_5.4'] == 1 and (row['Ind_5.1'] == 1 or row['Ind_5.2'] == 1 or row['Ind_5.3'] == 1):
+                    self.dataframe.at[i, 'Ind_5'] = 1  # Set 'Ind_5' to 1 if the conditions are met
+                else:
+                    self.dataframe.at[i, 'Ind_5'] = 0  # Set 'Ind_5' to 0 if conditions are not met
+            else:
+                self.dataframe.at[i, 'Ind_5'] = None  # Leave 'Ind_5' as None if any required indicator is missing
+
+    """
+    As a fifth step, a column called 'Ind_6' is added to the data frame to check for issues related to maintenance. The code uses this column to flag maintenance-related site visits that are not calibrations. Specifically, it sets 'Ind_6 = 1' whenever '_FieldNoteFlag = 1' (i.e., a regular site visit window is present) and 'Ind_6 = 0' otherwise. This cleanly separates routine maintenance/inspection periods from calibration events, helping capture times when technicians were on site and non-calibration activities could affect sensor readings.
+    """
+    """ Sooo.... you're literally just setting Ind_6 to be the same as _FieldNoteFlag?? This makes no sense at all... """
+    def maintenance_issues(self):
+        if self.verbose: print("Checking Maintenance Issues (Ind_6)...")
+        self.dataframe['Ind_6'] = np.where((self.dataframe['_FieldNoteFlag'] == 1), 1, 0)
+
+    """
+    Sixth, the code adds column 'Ind_7' to the data frame to check for issues related to sensor and logger malfunctioning. It flags events that appear to be sensor errors and that are not caused by site visits or missing values. The code sets 'Ind_7 = 1' when an anomaly event is present ('Ind_2 ∈ {1, 2}'), it occurs outside any site-visit window ('Ind_1 = 0'), and the chosen cross validation variable is available ('Ind_3 = 0'), which helps confirm that the issue is with the specific variable being processed. Otherwise, 'Ind_7 = 0'.
+    """
+    def sensor_and_logger_malfunctioning(self):
+        if self.verbose: print("Checking Sensor and Logger Malfunctions (Ind_7)...")
+        self.dataframe['Ind_7'] = None
+        self.dataframe['Ind_7'] = np.where(
+            ((self.dataframe['_AnomalyType'] == 1) | (self.dataframe['_AnomalyType'] == 2)) & 
+            (self.dataframe['_FieldNoteFlag'] == 0) & 
+            (self.dataframe['Ind_3'] == 0), 1, 0)
+
+    """
+    Seventh, a new column 'Ind_8' is added to the data frame to check for issues related to power. The code flags anomaly events that occur outside site visits, but where data for the supporting cross validation variable is also missing. Specifically, the code sets 'Ind_8 = 1' when an event is detected ('_AnomalyType ∈ {1, 2}'), there is no site-visit influence ('_FieldNoteFlag = 0'), and the cross validation variable is unavailable ('Ind_3 = 1'). Otherwise, the code assigns 'Ind_8 = 0'. This distinguishes anomaly events caused by potential sensor/logger malfunctions from those caused by power failure.
+    """
+    def power_issues(self):
+        if self.verbose: print("Checking Power Related Issues (Ind_8)...")
+        self.dataframe['Ind_8'] = None
+
+        # Logic:
+        self.dataframe['Ind_8'] = np.where(
+            ((self.dataframe['_AnomalyType'] == 1) | (self.dataframe['_AnomalyType'] == 2)) & 
+            (self.dataframe['_FieldNoteFlag'] == 0) & 
+            (self.dataframe['Ind_3'] == 1), 1, 0)
+
+    """
+    Eighth, the column 'Ind_10' is added to the data frame to help check for events that occur during a calibration. The code identifies rows that occur during a calibration event for all variables except water temperature. It simply sets 'Ind_10 = 1' wherever '_AnomalyType = 4' (denoting calibration-visit periods) and 0 otherwise, allowing for quick isolation of data collected during calibration.
+    """
+    def reading_during_calibration(self):
+        if self.variable_of_interest == 'WaterTemp_EXO': return
+        if self.verbose: print("Checking Readings During Calibration (Ind_10)...")
+
+        # Initialize 'Ind_10' column with None
+        self.dataframe['Ind_10'] = None
+
+        # Loop through the dataframe and apply the logic for 'Ind_10'
+        for i, row in self.dataframe.iterrows():
+            # Ensure that _AnomalyType is not null
+            if pd.notnull(row['_AnomalyType']):
+                if row['_AnomalyType'] == 4:
+                    self.dataframe.at[i, 'Ind_10'] = 1 
+            else:
+                self.dataframe.at[i, 'Ind_10'] = None
+
+    """
+    Ninth, the column 'Ind_11' is added to the dataframe to check for anomaly events that had a post-calibration, constant shift. The code flags rows that are classified as post-calibration constant shift (for all variables except water temperature). The code sets 'Ind_11' = 1 wherever the column '_CorrectionTypeCal' = 'CS' for constant shift (i.e., the raw data - manually corrected data difference is nonzero but constant) otherwise 0. This makes it easy to isolate data values within periods where a fixed bias likely remained after calibration.
+    """
+    def post_calibration_CS(self):
+        if self.variable_of_interest == 'WaterTemp_EXO': return
+        if self.verbose: print("Checking Anomaly Events with Post-Calibration, Constant Shift (Ind_11)...")
+
+        # Initialize 'Ind_11' column with None
+        self.dataframe['Ind_11'] = None
+
+        # Loop through the dataframe and apply the logic for 'Ind_11'
+        for i, row in self.dataframe.iterrows():
+            # Ensure that '_CorrectionTypeCal' is not null
+            if pd.notnull(row['_CorrectionTypeCal']):
+                if row['_CorrectionTypeCal'] == 'CS':
+                    self.dataframe.at[i, 'Ind_11'] = 1 
+            else:
+                self.dataframe.at[i, 'Ind_11'] = None  
+
+    """
+    As a tenth step, the final indicator column, 'Ind_12', is used to check for anomaly events that had a post-calibration, linear drift correction shift. This indicator flags all rows where a linear drift correction was applied to non-water temperature variables. Specifically, for every row, if the column '_CorrectionTypeCal' = 'LDC' for linear drift correction and the variable is not temperature, then 'Ind_12' is set to 1; otherwise, it is set to 0. This helps isolate and track instances where a linear drift adjustment was used during calibration or post-processing, enabling clearer auditing of corrections across variables.
+    """
+    def post_calibration_LDC(self):
+        if self.variable_of_interest == 'WaterTemp_EXO': return
+
+        self.dataframe['Ind_12'] = None
+        # Loop through the dataframe and apply the logic for 'Ind_12'
+        for i, row in self.dataframe.iterrows():
+            # Ensure that `CorrectionTypeCal` is not null
+            if pd.notnull(row['_CorrectionTypeCal']):
+                if row['_CorrectionTypeCal'] == 'LDC':
+                    self.dataframe.at[i, 'Ind_12'] = 1 
+            else:
+                self.dataframe.at[i, 'Ind_12'] = None
+
+    """
+    In the final step, the final label and class are mapped to the dataset. The final event type label accumulates all the previous indicators and steps to assign an event type to each anomaly event. Firstly, the columns named 'Label' and 'Class' are created in our data frame. Then the code assigns a single, final event label to each timestamp by evaluating a prioritized set of indicators. For water temperature, calibration-related logic is omitted. Labels are applied in the order: 'MNT' if a non-calibration site visit is active ('Ind_6=1'), 'PF' if an anomaly coincides with missing cross validation variable data ('Ind_8=1'), 'SLM' if an anomaly occurs with the cross validation variable present ('Ind_7=1'), and 'LWL' if the low-water level composite flag is triggered ('Ind_5=1'); otherwise 'VIN' (meaning that none of the mentioned labels can represent this anomaly event, and it needs visual inspection for further assessment). For other variables, calibration states are prioritized first ('CAL' during calibration ('Ind_10=1'), 'CS' ('Ind_11=1'), and 'LDC' ('Ind_12=1')) followed by 'MNT', 'PF', 'SLM', and 'LWL' as above. Rows that fall within 'Ind_2'∈{1..5} but match none of the higher-priority rules default to 'VIN', while rows outside that set remain unlabeled. Labels are finally mapped to numeric classes ('MNT=1', 'CAL=2', 'LDC=3', 'CS=4', 'PF=5', 'SLM=6', 'LWL=7', 'VIN=8') for convenience in downstream analysis and storage.
+    """
+    def final_labeling(self):
+        if self.verbose: print("Assembling Final Labeling...")
+        conditions, labels = None, None
+        if self.variable_of_interest == "WaterTemp_EXO":
+            conditions = [
+                (self.dataframe['Ind_6'] == 1), # MNT
+                (self.dataframe['Ind_8'] == 1), # PF
+                (self.dataframe['Ind_7'] == 1), # SLM
+                (self.dataframe['Ind_5'] == 1)  # LWL
+            ]
+            labels = ['MNT', 'PF', 'SLM', 'LWL']
+        else:
+            conditions = [
+                (self.dataframe['Ind_10'] == 1), # CAL
+                (self.dataframe['Ind_11'] == 1), # CS
+                (self.dataframe['Ind_12'] == 1), # LDC
+                (self.dataframe['Ind_6'] == 1),  # MNT 
+                (self.dataframe['Ind_8'] == 1),  # PF 
+                (self.dataframe['Ind_7'] == 1),  # SLM
+                (self.dataframe['Ind_5'] == 1),  # LWL
+            ]
+            labels = ['CAL', 'CS', 'LDC', 'MNT', 'PF', 'SLM', 'LWL']
+
+        # Apply labels based on conditions
+        self.dataframe['Label'] = np.where(
+            self.dataframe['_AnomalyType'].isin([1, 2, 3, 4, 5]), 
+            np.select(conditions, labels, default='VIN'), 
+            None
+        )
+
+        # Map the labels to class numbers
+        self.dataframe['class'] = np.select(
+            [self.dataframe['Label'] == label for label in ['MNT', 'CAL', 'LDC', 'CS', 'PF', 'SLM', 'LWL', 'VIN']],
+            [1, 2, 3, 4, 5, 6, 7, 8]
+        )
 
 
+    ### Helper Functions ###
+    """
+    This method is called for use on Ind_5
+
+    Ehsan's Comments on this function:
+        Map each event number k to (start_idx, end_idx, event_idx):
+        start_idx: row holding 'Starting time of Event k' (the Standard row just before the event)
+        end_idx:   row holding 'Ending time of Event k' (the Standard row just after the event)
+        event_idx: rows that belong to event k (Event_Counter == k)
+    Events are matched by number (not by scanning for the next start/end marker), because the markers of adjacent events interleave, and because the marker rows themselves are normal rows that must not be filtered out.
+    """
+    def get_lwl_event_ranges(self):
+        if self._lwl_event_ranges != None: return self._lwl_event_ranges
+
+        if self.variable_of_interest == 'WaterTemp_EXO': start_column, end_column= '_StartTimeEvent', '_EndTimeEvent'
+        else: start_column, end_column = '_OtherStartTime', '_OtherEndTime'
+
+        starts = self.dataframe[start_column].astype(str).str.extract(r'Starting time of Event (\d+)', expand=False).dropna().astype(int)
+        ends = self.dataframe[end_column].astype(str).str.extract(r'Ending time of Event (\d+)', expand=False).dropna().astype(int)
+        start_map = {k: idx for idx, k in starts.items()}
+        end_map = {k: idx for idx, k in ends.items()}
+        counter = pd.to_numeric(self.dataframe['_AnomalyEventNumber'], errors='coerce')
+
+        ranges = {}
+        for k in sorted(set(start_map) & set(end_map)):
+            event_idx = self.dataframe.index[counter == k]
+            if len(event_idx) > 0:
+                ranges[k] = (start_map[k], end_map[k], event_idx)
+        return ranges
+
+    """
+    Prints a simplified version of the final output (if verbose)
+    """
+    def ending_message(self):
+        if not self.verbose: return
+        print("\n\033[92m -- Label Distribution -- \033[0m")
+        print(self.dataframe['Label'].value_counts())
+        print()

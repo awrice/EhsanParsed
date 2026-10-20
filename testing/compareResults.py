@@ -3,13 +3,9 @@ from pathlib import Path
 # Add the parent folder to Python's import path
 parent_dir = Path(__file__).resolve().parent.parent
 sys.path.append(str(parent_dir))
-
-
 import pandas as pd
 import numpy as np
-import numbers
 import subprocess
-
 from ScriptModularized.singleProcessor import Configuration, SingleProcessor
 
 
@@ -59,6 +55,7 @@ class CompareDataframes:
         "RepeatedEvent": "_RepeatedEvent",
         "Spike": "_SpikeDetected",
         "AnomalyPattern": "_AnomalyPattern",
+        
         'EventType': 'EventType',
         "Ind_3": "Ind_3", 
         "Ind_4": "Ind_4", 
@@ -80,6 +77,17 @@ class CompareDataframes:
         "delta_Stage_Backward": "delta_Stage_Backward",
         "delta_Stage_Forward": "delta_Stage_Forward",
         "Ind_5.4": "Ind_5.4",
+
+        "Ind_5": "Ind_5",
+        "Ind_6": "Ind_6",
+        "Ind_7": "Ind_7",
+        "Ind_8": "Ind_8",
+        "Ind_10": "Ind_10",
+        "Ind_11": "Ind_11",
+        "Ind_12": "Ind_12",
+
+        "Label": "Label",
+        "class": "class"
     }
 
     def __init__(self, df_a, df_b, verbose=False):
@@ -179,7 +187,7 @@ class CompareDataframes:
 
 if __name__ == '__main__':
     output_folder = "../_test_results"
-    config = Configuration('ODO', 'LR_TG_BA', 2023)
+    config = Configuration('WaterTemp_EXO', 'LR_TG_BA', 2023)
 
     must_run_scripts = int(sys.argv[1])
     if must_run_scripts >= 2:

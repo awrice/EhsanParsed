@@ -24,7 +24,7 @@ class Settings:
 class InputDataframe:
     INDEX_NAME = "LocalDateTime"
     REQUIRED_COLUMNS = {
-        "BattVolt", "EXOVolt", "ODO", "Stage", "pH", "SpCond", "WaterTemp_EXO", "TurbMed", "AirTemp_EE08_avg"#, "QualifierCode"
+        "BattVolt", "EXOVolt", "ODO", "Stage", "pH", "SpCond", "WaterTemp_EXO", "TurbMed", "AirTemp_EE08_avg"
     }
 
     def __init__(self, df: pd.DataFrame):
@@ -40,7 +40,7 @@ class InputDataframe:
         if missing: raise ValueError(f"DataFrame is missing required columns: {sorted(missing)}")
 
     def round_all(self, ndigits=6):
-        self._df = self._df.round(6)
+        self._df = self._df.round(ndigits)
 
     # these methods make the InputDataframe behave like a pandas DataFrame
     def __getattr__(self, name):
@@ -189,7 +189,6 @@ class DataManager:
             if dt.minute % 15 == 0 and dt.second == 0 and dt.microsecond == 0
             else "Non-Standard"
         )
-
 
     # makes sure a dataframe is ready as an input dataframe -- if name=None, just use the main dataset name
     def validate_as_input(self, name=None, removeUnneededColumns=False, round: Union[bool, int] = False, add_interval=True):

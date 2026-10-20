@@ -72,11 +72,6 @@ class Configuration:
 class SingleProcessor:
     def __init__(self, config: Configuration, verbose: bool = False):
         self.config = config
-        # self.variable_of_interest = config.variable
-        # self.site = config.site
-        # self.climate_site = config.climate_site
-        # self.year = config.year
-        # self.cross_validate_variable = config.cross_validate_variable
         self.verbose = verbose
         self.dataMan = None
 
@@ -109,7 +104,7 @@ class SingleProcessor:
 
         self.dataMan.validate_as_input(round=10)
 
-    def anomaly_extraction(self, skip=False):
+    def anomaly_extraction(self, skip=False, save_midpoint=True):
         if self.dataMan == None:
             raise Exception("dataManager is null: Must preprocess data before running anomaly extraction process.")
 
@@ -118,16 +113,13 @@ class SingleProcessor:
             extractor = anEx.AnomalyExtractor(self.dataMan, verbose=self.verbose)
             extractor.process()
             self.dataMan.set_main(extractor.dataframe)
-            self.dataMan.export_to_csv("_midoutput.csv")
+            if save_midpoint: self.dataMan.export_to_csv("_midoutput.csv")
         else: 
             self.dataMan.create_dataframe_from_csv("_midoutput.csv", "MIDOUT", index_col=0, parse_dates=True, low_memory=False)
             self.dataMan.set_main_from_name("MIDOUT")
 
-
         classifier = anCl.AnomalyClassifier(self.dataMan, verbose=self.verbose)
         classifier.process()
-
-        # self.dataMan.set_main(extractor.dataframe)
 
     def export_data(self, filename):
         self.dataMan.export_to_csv(filename, pretty=False)
@@ -136,8 +128,6 @@ class SingleProcessor:
 if __name__ == '__main__':
     output_folder = Path("../_test_results")
     config = Configuration('ODO', 'LR_TG_BA', 2023)
-    # print(config)
-    # exit()
 
     processor = SingleProcessor(config, verbose=True)
     processor.preprocess()
