@@ -1,6 +1,7 @@
 import pandas as pd
 import directoryManager
 import yaml
+from typing import Union
 
 # Setting object holds all required settings to run the analysis
 class Settings:
@@ -15,6 +16,9 @@ class Settings:
 
     def __str__(self):
         return "[Settings: " + str(self.settings) + "]"
+
+    def __getitem__(self, key):
+        return self.settings[key]
 
 # This class represents a dataframe containing input data needed for the analysis we are performing. The dataframe will be validated against this object to see if they are ready for analysis
 class InputDataframe:
@@ -34,6 +38,9 @@ class InputDataframe:
 
         missing = cls.REQUIRED_COLUMNS - set(df.columns)
         if missing: raise ValueError(f"DataFrame is missing required columns: {sorted(missing)}")
+
+    def round_all(self, ndigits=6):
+        self._df = self._df.round(6)
 
     # these methods make the InputDataframe behave like a pandas DataFrame
     def __getattr__(self, name):
@@ -92,13 +99,30 @@ class DataManager:
     def set_main(self, dataframe):
         self.dataframes[self.main_dataset_name] = dataframe
 
+    def set_main_from_name(self, datasetName):
+        if datasetName not in self.dataframes:
+            raise ValueError(f"Dataframe {datasetName} not found")
+        self.main_dataset_name = datasetName
+
     # exports a dataframe to a CSV file (if dataframe name is not given, exports main)
-    def export_to_csv(self, filename, name=None):
+    def export_to_csv(self, filename, name=None, pretty=False):
         if name is None:
             name = self.main_dataset_name
         if name not in self.dataframes:
             raise ValueError("Dataframe not found")
-        self.dataframes[name].to_csv(filename)
+        if not pretty: self.dataframes[name].to_csv(filename)
+        else: DataManager.export_pretty_to_csv(filename, self.dataframes[name])
+
+    @staticmethod
+    def export_pretty_to_csv(filename, df):
+        data = df.copy()
+        data = data.fillna("").astype(str)
+        # Calculate the maximum width for each column
+        widths = [max(len(str(data.columns[i])), data.iloc[:, i].astype(str).str.len().max()) for i in range(len(data.columns))]
+        with open(filename, "w") as f:
+            f.write(" , ".join(str(col).ljust(width) for col, width in zip(data.columns, widths)) + "\n")
+            for row in data.itertuples(index=False, name=None):
+                f.write(" , ".join(str(value).ljust(width) for value, width in zip(row, widths)) + "\n")
 
     # fieldNotes should be a FieldNotes object
     def add_field_notes(self, fieldNotes):
@@ -155,14 +179,30 @@ class DataManager:
             raise ValueError(f"Column {column_name} not found")
         self.dataframes[name].drop(columns=[column_name], inplace=True)
 
+    def categorize_time_interval(self, name=None):
+        if name is None: name = self.main_dataset_name
+        if name not in self.dataframes:
+            raise ValueError(f"Dataframe {name} not found")
+        
+        self.dataframes[name]['TimeInterval'] = self.dataframes[name].index.map(
+            lambda dt: "Standard"
+            if dt.minute % 15 == 0 and dt.second == 0 and dt.microsecond == 0
+            else "Non-Standard"
+        )
+
+
     # makes sure a dataframe is ready as an input dataframe -- if name=None, just use the main dataset name
-    def validate_as_input(self, name=None, removeUnneededColumns=False):
+    def validate_as_input(self, name=None, removeUnneededColumns=False, round: Union[bool, int] = False, add_interval=True):
         if name is None: name = self.main_dataset_name
         if name not in self.dataframes:
             raise ValueError(f"Dataframe {name} not found")
         self.dataframes[name] = InputDataframe(self.dataframes[name])
         if removeUnneededColumns:
             self.dataframes[name].remove_unneeded_columns()
+        if round != False:
+            self.dataframes[name].round_all(round)
+        if add_interval:
+            self.categorize_time_interval()
 
 
 class FieldNoteEvent:

@@ -1,0 +1,8 @@
+ehsans_results_folder: /Users/a02523625/Documents/HorsburghRA/EhsanData/Results
+
+input_folder: /Users/a02523625/Documents/HorsburghRA/EhsanParsed/input_folder
+output_folder: /Users/a02523625/Documents/HorsburghRA/EhsanParsed/Results
+raw_aquatic_dataset: /Users/a02523625/Documents/HorsburghRA/EhsanParsed/input_folder/rawAquatic
+raw_climate_dataset: /Users/a02523625/Documents/HorsburghRA/EhsanParsed/input_folder/rawClimate
+manually_corrected_dataset: /Users/a02523625/Documents/HorsburghRA/EhsanParsed/input_folder/manuallyCorrected
+field_notes_dataset: /Users/a02523625/Documents/HorsburghRA/EhsanParsed/input_folder/fieldNotes

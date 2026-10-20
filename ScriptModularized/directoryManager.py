@@ -1,6 +1,7 @@
 import os
 import shutil
 import dataManager as dM
+from singleProcessor import Configuration
 
 class DirectoryManager:
     def __init__(self, settings, replace_folder=True, verbose=True):
@@ -36,6 +37,8 @@ class DirectoryManager:
         
         climateFile = f"{self.settings.settings['rawClimateDataset']}/DataSetClimate_{climate_site}_{year}.csv"
         dataMan.create_dataframe_from_csv(climateFile, name="rawClimate", parse_dates=['LocalDateTime'], index_col='LocalDateTime')
+        # if there is a BattVolt column, we'll get rid of it
+        if "BattVolt" in dataMan.dataframes["rawClimate"].columns:  dataMan.dataframes["rawClimate"].drop(columns=['BattVolt'], inplace=True)
 
         manuallyCorrectedFile = f"{self.settings.settings['manuallyCorrectedDataset']}/QC_data_{variable_of_interest}_{site}_{year}.csv"
         dataMan.create_dataframe_from_csv(manuallyCorrectedFile, name="manuallyCorrected", parse_dates=['LocalDateTime'], index_col='LocalDateTime')

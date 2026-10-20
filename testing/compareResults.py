@@ -49,12 +49,37 @@ class CompareDataframes:
         # "AffectedCalEndTime": "_CalibrationEnd"
         "Ind_2": "_AnomalyType",
         "Event_Counter": "_AnomalyEventNumber",
+        "StartTimeEvent": "_StartTimeEvent",
+        "EndTimeEvent": "_EndTimeEvent",
+        "OtherStartTime": "_OtherStartTime",
+        "OtherEndTime": "_OtherEndTime",
 
         "AffectedCalStartTime2": "_AnomalyEventStart",
         "AffectedCalEndTime2": "_AnomalyEventEnd",
         "RepeatedEvent": "_RepeatedEvent",
         "Spike": "_SpikeDetected",
-        "AnomalyPattern": "_AnomalyPattern"
+        "AnomalyPattern": "_AnomalyPattern",
+        'EventType': 'EventType',
+        "Ind_3": "Ind_3", 
+        "Ind_4": "Ind_4", 
+        "Ind_4": "Ind_4", 
+        
+        "delta_Start": "delta_Start",
+        "delta_End": "delta_End",
+        "Ind_5.1": "Ind_5.1",
+        
+        "Ind_5.2": "Ind_5.2",
+        
+        "delta_Water_DataSetClimate": "delta_Water_DataSetClimate",
+        "delta_Water_DataSetClimate_avg": "delta_Water_DataSetClimate_avg",
+        "Ind_5.3": "Ind_5.3",
+        
+        "Stage_QC0_avg": "Stage_avg",
+        "Stage_QC0_backward": "Stage_backward",
+        "Stage_QC0_forward": "Stage_forward",
+        "delta_Stage_Backward": "delta_Stage_Backward",
+        "delta_Stage_Forward": "delta_Stage_Forward",
+        "Ind_5.4": "Ind_5.4",
     }
 
     def __init__(self, df_a, df_b, verbose=False):
@@ -71,20 +96,27 @@ class CompareDataframes:
             if self.verbose: print(f"ERROR: '{col_a}' not found in File A")
             return -1
 
-        # Align the two columns using LocalDateTime
-        is_numeric_a = pd.api.types.is_numeric_dtype(df_a_common[col_a]) and not pd.api.types.is_bool_dtype(df_a_common[col_a])
-        is_numeric_b = pd.api.types.is_numeric_dtype(df_b_common[col_b]) and not pd.api.types.is_bool_dtype(df_b_common[col_b])
+        # Determine whether either column has a numeric dtype
+        is_numeric_a = (pd.api.types.is_numeric_dtype(df_a_common[col_a]) and not pd.api.types.is_bool_dtype(df_a_common[col_a]))
+        is_numeric_b = (pd.api.types.is_numeric_dtype(df_b_common[col_b]) and not pd.api.types.is_bool_dtype(df_b_common[col_b]))
 
         if not is_numeric_a and not is_numeric_b:
+            # Compare non-numeric columns, treating two missing values as equal
             comparison = ((df_a_common[col_a] == df_b_common[col_b]) | (df_a_common[col_a].isna() & df_b_common[col_b].isna()))
         else:
-            comparison = np.isclose(
-                df_a_common[col_a],
-                df_b_common[col_b],
-                atol=0.00001,
-                equal_nan=True
-            )
-            comparison = pd.Series(comparison, index=df_a_common.index)
+            # Convert both columns to numeric before comparing
+            a = pd.to_numeric(df_a_common[col_a], errors='coerce')
+            b = pd.to_numeric(df_b_common[col_b], errors='coerce')
+
+            # Identify values that failed numeric conversion
+            invalid_a = df_a_common[col_a].notna() & a.isna()
+            invalid_b = df_b_common[col_b].notna() & b.isna()
+
+            # Compare numeric values, allowing a small tolerance
+            comparison = pd.Series(np.isclose(a, b, atol=0.00001, equal_nan=True), index=df_a_common.index)
+
+            # Do not silently treat invalid strings as matching NaN values
+            comparison.loc[invalid_a | invalid_b] = False
 
         differences = comparison[~comparison]
 
@@ -97,7 +129,7 @@ class CompareDataframes:
             print(f"\033[91m✗ {col_a} does NOT match {col_b}\033[0m")
             print(f"  Number of differences: {len(differences)}")
 
-            max_display = 50
+            max_display = 10
             if len(differences) > max_display: 
                 print(f"\033[91m  Too many differences to display (>{max_display}). Showing first {max_display} only.\033[0m")
                 differences = differences[:max_display]
@@ -111,6 +143,7 @@ class CompareDataframes:
             return False
 
     def compare(self):
+
         # Make sure LocalDateTime is actually treated as a datetime
         self.df_a["LocalDateTime"] = pd.to_datetime(self.df_a["LocalDateTime"])
         self.df_b["LocalDateTime"] = pd.to_datetime(self.df_b["LocalDateTime"])
@@ -146,26 +179,28 @@ class CompareDataframes:
 
 if __name__ == '__main__':
     output_folder = "../_test_results"
-    config = Configuration('ODO', 'LR_Mendon_AA', 'LR_GC_C', 2022)
+    config = Configuration('ODO', 'LR_TG_BA', 2023)
 
-    must_run_scripts = bool(int(sys.argv[1]))
-    if must_run_scripts:
-        # print(">>> Running Ehsan's Script...")
-        # subprocess.run("cd /Users/a02523625/Documents/HorsburghRA/EhsanData && \
-        #             python3 Script.py EHSAN.csv > /dev/null 2>&1", shell=True)
+    must_run_scripts = int(sys.argv[1])
+    if must_run_scripts >= 2:
+        print(">>> Running Ehsan's Script...")
+        subprocess.run("cd /Users/a02523625/Documents/HorsburghRA/EhsanData && \
+                    python3 Script.py EHSAN.csv > /dev/null 2>&1", shell=True)
+    if must_run_scripts >= 1:
         print(">>> Running Modularized Script...")
         processor = SingleProcessor(config, verbose=True)
         processor.preprocess()
         processor.anomaly_extraction()
-        output_path = f"{output_folder}/ME.csv"
+        output_path = config.get_output_file()
         processor.export_data(output_path)
         config.output = output_path
-
-    else:
+    if must_run_scripts == 0:
         print("Skipping script execution.")
 
     file_a = config.get_compare_to_file()
-    file_b = "../_test_results/ME.csv"
+    file_b = config.get_output_file()
+    # file_a = "../_test_results/EHSAN.csv"
+    # file_b = "../_test_results/ME.csv"
 
     subprocess.run(f"cd /Users/a02523625/Documents/HorsburghRA/EhsanParsed/testing && \
                 python3 csvAnalyzer.py \"{file_b}\" ../_test_results/ME_Parsed.csv _IsAnomaly > /dev/null 2>&1", shell=True)

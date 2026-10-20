@@ -1,40 +1,45 @@
-from kiwisolver import Variable
 import numpy as np
 import pandas as pd
 import re
 
+# This file is designed for to be read with line wrapping - if in VSCode, use the shortcut Alt-Z to toggle line wrapping on/off
+
+"""
+Each Method in this class follows the steps given Section 3.2.2 and 3.2.3 in Ehsan's paper. The paper has not yet been published as of the writing of this code. Contact Adam Rice (adam.w.rice@gmail.com) for the paper and script this was built from.
+
+Lots of the code below was written by Ehsan Kahrizi, but modularized and vetted by Adam Rice
+
+I have changed the names of the columns from the original paper (because the original names were confusing). Preceeding underscores have been added to the names to denote these are analysis columns, not data columns. The key is given below:
+    - RawQCColumn -> _ManualChangeAmt
+    - AnomalyIndex -> _IsAnomaly
+    - Ind_1 -> _FieldNoteFlag
+    - Cal_Counter -> _Cal_Counter
+    - CalStartTime -> _CalStartTime
+    - CalEndTime -> _CalEndTime
+    - iMinePrei -> _ChangeTrends
+    - CorrectionTypeCal -> _CorrectionTypeCal
+    - AffectedbyCal_Counter -> _CalibrationGroup
+    - AffectedCalStartTime -> _CalibrationStart
+    - AffectedCalEndTime -> _CalibrationEnd
+    - Ind_2 -> _AnomalyType
+    - Event_Counter -> _AnomalyEventNumber
+    - AffectedCalStartTime2 -> _AnomalyEventStart
+    - AffectedCalEndTime2 -> _AnomalyEventEnd
+    - RepeatedEvent -> _RepeatedEvent
+    - Spike -> _SpikeDetected
+    - AnomalyPattern -> _AnomalyPattern
+"""
 class AnomalyExtractor:
+
+    # Decimal places used when comparing Raw and QC values, so floating-point noise (e.g. 1e-14) is not treated as a real difference
+    ROUND_DECIMALS = 6
+
+
     def __init__(self, dataManager, verbose=True):
         self.dataManager = dataManager
         self.dataframe = dataManager.get_main()
         self.variable_of_interest = dataManager.settings.settings["Variable"]
         self.verbose = verbose
-
-    """
-    Each Method in this class follows the steps given in Ehsan's paper. The sections listed above each method correspond to the section numbers in the paper where the method is described. The paper can be found here: https://drive.google.com/file/d/1D81HE6KTDQp2VLNVsigTh60mVpd6u5PM/view?usp=sharing.
-
-    Lots of the code below was written by Ehsan Kahrizi, but modularized and vetted by Adam Rice
-
-    I have changed the names of the columns from the original paper (because the original names were confusing). Preceeding underscores have been added to the names to denote these are analysis columns, not data columns. The key is given below:
-     - RawQCColumn -> _ManualChangeAmt
-     - AnomalyIndex -> _IsAnomaly
-     - Ind_1 -> _FieldNoteFlag
-     - Cal_Counter -> _Cal_Counter
-     - CalStartTime -> _CalStartTime
-     - CalEndTime -> _CalEndTime
-     - iMinePrei -> _ChangeTrends
-     - CorrectionTypeCal -> _CorrectionTypeCal
-     - AffectedbyCal_Counter -> _CalibrationGroup
-     - AffectedCalStartTime -> _CalibrationStart
-     - AffectedCalEndTime -> _CalibrationEnd
-     - Ind_2 -> _AnomalyType
-     - Event_Counter -> _AnomalyEventNumber
-     - AffectedCalStartTime2 -> _AnomalyEventStart
-     - AffectedCalEndTime2 -> _AnomalyEventEnd
-     - RepeatedEvent -> _RepeatedEvent
-     - Spike -> _SpikeDetected
-     - AnomalyPattern -> _AnomalyPattern
-    """
 
     """
     Master function processes through the steps in the order they should be done. For more info on each step, look to the comments above each method.
@@ -47,6 +52,7 @@ class AnomalyExtractor:
         self.calculate_manual_change_trends()
         self.assign_anomaly_types()
         self.extract_events()
+        self.event_start_end_times()
         self.flag_flatlines()
         self.detect_spikes()
         self.assign_anomaly_pattern()
@@ -64,7 +70,7 @@ class AnomalyExtractor:
         raw_col = f'{self.variable_of_interest}'
 
         # These columns are titled "RawQCColumn" and "AnomalyIndex" in Ehsan's paper -— I think those names are confusing so I changed them
-        self.dataframe['_ManualChangeAmt'] = self.dataframe[qc_col] - self.dataframe[raw_col]
+        self.dataframe['_ManualChangeAmt'] = (self.dataframe[qc_col] - self.dataframe[raw_col]).round(AnomalyExtractor.ROUND_DECIMALS)
         self.dataframe['_IsAnomaly'] = self.dataframe.apply(lambda row: 0 if row[qc_col] == row[raw_col] else 1, axis=1)
 
     """
@@ -106,7 +112,7 @@ class AnomalyExtractor:
             if contains_calib_words.any():
                 flags.append(2)
             else:
-                flags.append(2) # should be 1
+                flags.append(1) # should be 1
 
         # For calibration, identification is ignored for water temperature by design because for the sensors used in this study water temperature is not calibrated in the field. The value of this field is set to 1 for all temperature rows that occur during a site visit
         if self.variable_of_interest == "WaterTemp_EXO":
@@ -175,7 +181,7 @@ class AnomalyExtractor:
         self.dataframe = self.dataframe.sort_index()
         #########################
 
-        self.dataframe['_ChangeTrends'] = self.dataframe['_ManualChangeAmt'].diff()
+        self.dataframe['_ChangeTrends'] = self.dataframe['_ManualChangeAmt'].diff().round(AnomalyExtractor.ROUND_DECIMALS)
 
         self.dataframe['_CorrectionTypeCal'] = self.dataframe.apply(AnomalyExtractor.classify_calibration_row, axis=1)
 
@@ -249,7 +255,7 @@ class AnomalyExtractor:
        2 is the default anomaly/other
        3 means the manually corrected QC data value is missing/invalid (QC value = NaN/-9999)
        4 marks rows during a calibration visit ('Ind_1=2'), 
-       5 marks rows affected by calibration afterward ('CorrectionTypeCal'= either 'CS' or 'LDC')
+       5 marks rows affected by calibration afterward ('CorrectionTypeCal' = either 'CS' or 'LDC')
     For water temperature, calibration is ignored, and the codes reduce to: 
        0 for no anomaly
        1 for raw data missing
@@ -284,7 +290,7 @@ class AnomalyExtractor:
                 self.dataframe.iloc[next_idx, self.dataframe.columns.get_loc('_AnomalyType')] = self.dataframe.loc[idx, '_AnomalyType']
 
     """
-    Section 3.2.3 - Step 6 & 7
+    Section 3.2.3 - Step 6
     The sixth step in anomaly pattern analysis is to count events. After identifying the different patterns associated with anomaly events, this step counts the number of events and saves a number for each event in a new column called '_AnomalyEventNumber'. It turns the per-row '_AnomalyType' labels into numbered events. Scanning down the 'LocalDateTime' column, any contiguous run of event codes increments an '_AnomalyEventNumber' and assigns that ID to all rows in the run (non-event rows get 0).
     """
     def extract_events(self):
@@ -329,6 +335,198 @@ class AnomalyExtractor:
                 if i == len(self.dataframe) - 1 or self.dataframe.iloc[i + 1]['_AnomalyType'] != 5:
                     self.dataframe.loc[self.dataframe.index[i], '_AnomalyEventEnd'] = f'Ending time of Event {self.dataframe.iloc[i]["_AnomalyEventNumber"]}'
                     inside_event = False  # Exit the event
+
+
+    """
+    Section 3.2.3 - Step 7
+    Following event counting, the seventh step is to identify the start and ending time of each event. This step delineates the temporal boundaries of each anomaly event identified by using the values in the '_AnomalyEventNumber' column. For 'AffectedCal' events (anomaly_type = 5) in non-water temperature variables, it writes 'Starting time of Event ...' at the first row of the contiguous run and 'Ending time of Event ...' at the last row of that run. For all other event types, the start time is anchored to the nearest preceding row labeled 'TimeInterval' = 'Standard', and the end time to the first subsequent 'Standard' row, ensuring boundaries reflect the transition from normal operation into, and back out of, an anomalous event period. A water temperature-specific path applies the same logic to its event set, while skipping 'AffectedCal'. Finally, the procedure merges per-type annotations into unified '_StartTimeEvent' and '_EndTimeEvent' columns. The goal is to produce precise, perevent start/end markers that enable duration calculations, pre/post context extraction, alignment with field notes, and consistent aggregation and visualization of event segments across variables.
+    """
+    """ THIS METHOD MUST MUST MUST BE REFACTORED --- holy crap seriously it's like a horrible horrible mess """
+    def _event_start_end_times(self):
+        if self.verbose: print("Identifying Event Boundaries...")
+
+        if self.variable_of_interest == 'WaterTemp_EXO':            
+            # Reset the index to avoid index misalignment issues and ensure sequential indexing
+            self.dataframe.reset_index(drop=True, inplace=True)
+
+            # Recalculate the total number of rows after resetting the index
+            num_rows = len(self.dataframe)
+
+            # Reinitialize '_StartTimeEvent' and '_EndTimeEvent' columns
+            self.dataframe['_StartTimeEvent'] = None
+            self.dataframe['_EndTimeEvent'] = None
+
+            # Process each row to identify anomaly events
+            for i in range(num_rows):
+                event_counter = self.dataframe.loc[i, '_AnomalyEventNumber']
+                
+                # Only process rows where _AnomalyEventNumber > 0
+                if event_counter > 0:
+                    # Check if this is the start of an event
+                    if i == 0 or self.dataframe.loc[i - 1, '_AnomalyEventNumber'] != event_counter:
+                        start_idx = i - 1
+                        # Search backwards for the exact previous 'Standard' row if possible
+                        while start_idx >= 0 and self.dataframe.iloc[start_idx].name.minute % 15 != 0:
+                            start_idx -= 1
+                        if start_idx < 0:
+                            start_idx = 0  # Edge case: event at the very beginning
+                        self.dataframe.loc[start_idx, '_StartTimeEvent'] = f'Starting time of Event {event_counter}'
+
+                    # Check if this is the end of an event
+                    if i == num_rows - 1 or self.dataframe.loc[i + 1, '_AnomalyEventNumber'] != event_counter:
+                        end_idx = i + 1
+                        # Search forward for the first 'Standard' row after the event if possible
+                        while end_idx < num_rows and self.dataframe.iloc[end_idx].name.minute % 15 != 0:
+                            end_idx += 1
+                        # If we reach the end of the DataFrame, set the last row as the end of the event
+                        if end_idx >= num_rows:
+                            end_idx = num_rows - 1
+                        
+                        # Correctly set the EndTimeEvent with the proper LocalDateTime
+                        self.dataframe.loc[end_idx, '_EndTimeEvent'] = f'Ending time of Event {event_counter}'
+
+        else:
+            # Initialize columns to store start and end time annotations
+            self.dataframe['_OtherStartTime'] = None
+            self.dataframe['_OtherEndTime'] = None
+
+            # Get the total number of rows
+            num_rows = len(self.dataframe)
+
+            # Step 1: Iterate through the DataFrame to find event boundaries
+            for i in range(num_rows):
+                event_counter = self.dataframe.iloc[i]['_AnomalyEventNumber']
+                anomaly_type_value = self.dataframe.iloc[i]['_AnomalyType']
+
+                # Apply only to events where anomaly_type is NOT 5
+                if event_counter > 0 and anomaly_type_value != 5:
+                    
+                    ### Step 2: Find the previous `Standard` row for the start time ###
+                    if i == 0 or self.dataframe.iloc[i - 1]['_AnomalyEventNumber'] != event_counter:
+                        start_idx = i - 1  # Look at the previous row
+                        # Search backward for a `Standard` row
+                        while start_idx >= 0 and self.dataframe.iloc[start_idx].name.minute % 15 != 0:
+                            start_idx -= 1  
+                        # Exception: If at the first row, assign the first row
+                        if start_idx < 0:
+                            start_idx = 0  
+
+                        self.dataframe.at[start_idx, '_OtherStartTime'] = f'Starting time of Event {event_counter}'
+
+                    ### Step 3: Find the next `Standard` row for the end time ###
+                    if i == num_rows - 1 or self.dataframe.iloc[i + 1]['_AnomalyEventNumber'] != event_counter:
+                        end_idx = i + 1  # Look at the next row
+                        
+                        # Search forward for a `Standard` row
+                        while end_idx < num_rows and self.dataframe.iloc[end_idx].name.minute % 15 != 0:
+                            end_idx += 1  
+                        
+                        # Exception: If at the last row, assign the last row
+                        if end_idx >= num_rows:
+                            end_idx = num_rows - 1  
+
+                        self.dataframe.at[end_idx, '_OtherEndTime'] = f'Ending time of Event {event_counter}'
+
+            # Merging Start and Ending Time Columns ---------------------------------------
+            self.dataframe['_StartTimeEvent'] = self.dataframe['_AnomalyEventStart'].combine_first(self.dataframe['_OtherStartTime'])
+            self.dataframe['_EndTimeEvent'] = self.dataframe['_AnomalyEventEnd'].combine_first(self.dataframe['_OtherEndTime'])
+    """ This is a ChatGPT writting refacroization and works the same and is more clean. Not sure I like having fully AI written code here but it'll work for now. """
+    def event_start_end_times(self):
+        if self.verbose: print("Identifying Event Boundaries...")
+
+        df = self.dataframe
+        num_rows = len(df)
+
+        # Initialize output columns without modifying the index.
+        df['_StartTimeEvent'] = None
+        df['_EndTimeEvent'] = None
+        if num_rows == 0: return
+
+        # Use the timestamp index to identify standard 15-minute boundaries.
+        timestamps = df.index
+        is_standard = timestamps.minute % 15 == 0
+
+        is_water_temp = self.variable_of_interest == 'WaterTemp_EXO'
+
+        if not is_water_temp:
+            df['_OtherStartTime'] = None
+            df['_OtherEndTime'] = None
+
+        event_numbers = df['_AnomalyEventNumber'].to_numpy()
+        anomaly_types = (df['_AnomalyType'].to_numpy() if not is_water_temp else None)
+
+        # Find the closest standard row before or after an event.
+        def find_boundary(idx, direction):
+            while 0 <= idx < num_rows and not is_standard[idx]: idx += direction
+
+            if idx < 0: return 0
+            if idx >= num_rows: return num_rows - 1
+            return idx
+
+        # Identify contiguous event runs using changes in event number.
+        run_starts = [0]
+        run_ends = []
+
+        for i in range(1, num_rows):
+            if event_numbers[i] != event_numbers[i - 1]:
+                run_ends.append(i - 1)
+                run_starts.append(i)
+
+        run_ends.append(num_rows - 1)
+
+        # Process each contiguous event run only once.
+        for start, end in zip(run_starts, run_ends):
+            event_number = event_numbers[start]
+
+            # Skip rows that do not belong to an event.
+            if pd.isna(event_number) or event_number <= 0:
+                continue
+
+            # Preserve the original exclusion of anomaly type 5
+            # for non-WaterTemp_EXO variables.
+            if not is_water_temp:
+                if anomaly_types[start] == 5:
+                    continue
+
+            start_idx = find_boundary(start - 1, -1)
+            end_idx = find_boundary(end + 1, 1)
+
+            start_label = f'Starting time of Event {event_number}'
+            end_label = f'Ending time of Event {event_number}'
+
+            if is_water_temp:
+                df.iat[
+                    start_idx, df.columns.get_loc('_StartTimeEvent')
+                ] = start_label
+
+                df.iat[
+                    end_idx, df.columns.get_loc('_EndTimeEvent')
+                ] = end_label
+
+            else:
+                # Match the original behavior: the end of a run is
+                # annotated only if its final row is not type 5.
+                if anomaly_types[end] != 5:
+                    df.iat[
+                        start_idx, df.columns.get_loc('_OtherStartTime')
+                    ] = start_label
+
+                    df.iat[
+                        end_idx, df.columns.get_loc('_OtherEndTime')
+                    ] = end_label
+
+        # Preserve existing anomaly boundary annotations when present.
+        if not is_water_temp:
+            df['_StartTimeEvent'] = (
+                df['_AnomalyEventStart']
+                .combine_first(df['_OtherStartTime'])
+            )
+
+            df['_EndTimeEvent'] = (
+                df['_AnomalyEventEnd']
+                .combine_first(df['_OtherEndTime'])
+            )
+        
 
     """
     Section 3.2.3 - Step 8
@@ -451,13 +649,12 @@ class AnomalyExtractor:
     @staticmethod
     def classify_calibration_row(row):
         if row['_FieldNoteFlag'] == 0:
-            # This data wasn't taken during a field visit
             if row['_ChangeTrends'] == 0 and AnomalyExtractor.is_valid_numeric(row['_ManualChangeAmt']):
-                # This data 
                 return 'CS'
             elif AnomalyExtractor.is_valid_numeric(row['_ChangeTrends']) and AnomalyExtractor.is_valid_numeric(row['_ManualChangeAmt']):
                 return 'LDC'
         return None
+
 
     @staticmethod
     def assign_anomaly_type(row, variable_of_interest):

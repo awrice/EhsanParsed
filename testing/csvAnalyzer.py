@@ -2,6 +2,18 @@ import sys
 import pandas as pd
 
 
+def export_pretty_to_csv(filename, df, index=True):
+    data = df.reset_index() if index else df.copy()
+    data = data.fillna("").astype(str)
+    # Calculate the maximum width for each column
+    widths = [max(len(str(data.columns[i])), data.iloc[:, i].astype(str).str.len().max()) for i in range(len(data.columns))]
+    with open(filename, "w") as f:
+        f.write(" , ".join(str(col).ljust(width) for col, width in zip(data.columns, widths)) + "\n")
+        for row in data.itertuples(index=False, name=None):
+            f.write(" , ".join(str(value).ljust(width) for value, width in zip(row, widths)) + "\n")
+
+
+
 def extract_anomaly_windows(input_file, output_file, anomaly_column, buffer):
     # Read the CSV
     df = pd.read_csv(input_file)
@@ -54,7 +66,7 @@ def extract_anomaly_windows(input_file, output_file, anomaly_column, buffer):
     output_df = pd.concat(output_parts, ignore_index=True)
 
     # Export
-    output_df.to_csv(output_file, index=False)
+    export_pretty_to_csv(output_file, output_df, index=False)
 
     print(f"Found {len(anomaly_positions)} anomalous rows.")
     print(f"Created {len(windows)} anomaly windows.")

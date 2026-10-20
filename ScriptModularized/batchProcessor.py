@@ -35,18 +35,25 @@ class BatchProcessor:
             if not run_all and self.check_if_already_ran(config):
                 if self.verbose_level > 0: print(f" \033[92m (Processed) \033[0m", end="")
             else:
-                processor = SingleProcessor(config)
-                processor.preprocess()
-                processor.anomaly_extraction()
-                processor.export_data(config.output)
+                try:
+                    processor = SingleProcessor(config)
+                    processor.preprocess()
+                    processor.anomaly_extraction()
+                    processor.export_data(config.output)
+                except Exception as e:
+                    # print(f"\033[91m COULDN'T PROCESS - ERRNO: {type(e).__name__} \033[0m", end="")
+                    raise e
 
             if compare_while_running:
                 if self.verbose_level > 1: print()
-                compare = CompareCsvDataframes(config.get_compare_to_file(), config.output, verbose=self.verbose_level > 1)
-                similar = compare.compare()
-                if self.verbose_level > 0:
-                    if similar: print(f"\033[92m ✓ \033[0m", end="")
-                    else: print(f"\033[91m ✗ \033[0m", end="")
+                try:
+                    compare = CompareCsvDataframes(config.get_compare_to_file(), config.output, verbose=self.verbose_level > 1)
+                    similar = compare.compare()
+                    if self.verbose_level > 0:
+                        if similar: print(f"\033[92m ✓ \033[0m", end="")
+                        else: print(f"\033[91m ✗ \033[0m", end="")
+                except Exception as e:
+                    print(f"\033[91m COULDN'T COMPARE - ERRNO: {type(e).__name__} \033[0m", end="")
 
             count += 1
             if self.verbose_level > 0: print()
@@ -70,14 +77,14 @@ def get_all_configs(variables=None, sites=None, years=None):
     for var in variables:
         for site in sites:
             for year in years:
-                configs.append(Configuration(var, site, 'LR_GC_C', year))
+                configs.append(Configuration(var, site, year))
     return configs
 
 
 if __name__ == '__main__':
 
     configs = get_all_configs(
-        variables=['ODO'],
+        # variables=['WaterTemp_EXO'],
         # sites=None,
         # years=None,
     )
